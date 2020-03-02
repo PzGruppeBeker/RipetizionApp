@@ -1,0 +1,2 @@
+rootProject.name='RipetizionApp'
+include ':app'
