@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "212349130714",
+    "firebase_url": "https://ripetizionapp.firebaseio.com",
+    "project_id": "ripetizionapp",
+    "storage_bucket": "ripetizionapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:212349130714:android:61e670dc06db5a576492e3",
+        "android_client_info": {
+          "package_name": "com.example.ripetizionapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "212349130714-0lbdd7u7tu8r17hgp956vtp5ovnkkggm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ripetizionapp",
+            "certificate_hash": "e99e48216919c6436ee53453cd91023973eec5ef"
+          }
+        },
+        {
+          "client_id": "212349130714-btene7b5rv5fbsdu488tcpn06lp0j59i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpdLH3Gkmg_1Vy_0V1eEVXWuSkYECxcHk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "212349130714-btene7b5rv5fbsdu488tcpn06lp0j59i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
