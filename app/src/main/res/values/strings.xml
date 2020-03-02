@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">RipetizionApp</string>
+    <string name="nav_login">Login</string>
+    <string name="nav_registration">Registrazione</string>
+    <string name="nav_options">Opzioni</string>
+    <string name="option_1">Opzione 1</string>
+    <string name="option_2">Opzione 2</string>
 </resources>
