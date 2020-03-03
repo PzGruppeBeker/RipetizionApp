@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+    /**
         //Ottieni riferimeno a database Firebase.
 
         FirebaseDatabase DB = FirebaseDatabase.getInstance();
@@ -46,8 +47,9 @@ public class MainActivity extends AppCompatActivity {
         String m2="ita";
         m.add(m1);
         m.add(m2);
-        Insegnante i = new Insegnante("Bo","Ma",m);
+        Insegnante i = new Insegnante("test.bo@nonsaprei.it","Bo","Ma","quel posto",1010011010,m);
         Ref.child("Prof").setValue(i);
+    */
     }
 
     @Override
