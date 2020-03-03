@@ -8,5 +8,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_string_1">RipetizionApp - Università degli studi dell\'Insubria</string>
+    <string name="fragment_home_string_1">Comincia subito!</string>
+    <string name="fragment_home_string_2">Cerca un insegnante che fa al caso tuo!</string>
 
 </resources>
