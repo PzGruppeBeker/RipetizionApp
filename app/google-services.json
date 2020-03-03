@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "212349130714-o8sivp8i9fl95qhofbhbddvmm49r4qee.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ripetizionapp",
+            "certificate_hash": "5f0d2e2f6c089e126f3e1b6cf42f5f375980e070"
+          }
+        },
+        {
           "client_id": "212349130714-0lbdd7u7tu8r17hgp956vtp5ovnkkggm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
