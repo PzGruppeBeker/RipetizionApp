@@ -41,7 +41,9 @@ public class MainActivity extends AppCompatActivity {
         FirebaseDatabase DB = FirebaseDatabase.getInstance();
         DatabaseReference Ref = DB.getReference();
 
-        //Test DB. ACHTUNG! nella mail, utilizzata come id non è possibile utilizzare il '.', sosotituisco con '.'
+
+
+        //Test DB. ACHTUNG! nella mail, utilizzata come id, non è possibile utilizzare il '.', sosotituisco con ':'.
 
         ArrayList<String> m = new ArrayList<>();
         String email = SupportMethods.mailtoDB("test.bo@nonsaprei.it") ;
