@@ -13,6 +13,6 @@
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
         android:text="E gliel'ho buttato!"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 </LinearLayout>
