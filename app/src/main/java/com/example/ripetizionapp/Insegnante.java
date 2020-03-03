@@ -9,7 +9,7 @@ public class Insegnante {
 
     public Insegnante(){}
 
-    public Insegnante(String nome, String cognome, ArrayList<String>materie){
+    public Insegnante(String nome, String cognome, ArrayList<String> materie){
         this.nome=nome;
         this.cognome=cognome;
         this.materie=materie;
