@@ -41,14 +41,16 @@ public class MainActivity extends AppCompatActivity {
         FirebaseDatabase DB = FirebaseDatabase.getInstance();
         DatabaseReference Ref = DB.getReference();
 
-        //Test aggiunta nodo.
+        //Test DB. ACHTUNG! nella mail, utilizzata come id non è possibile utilizzare il '.', sosotituisco con '.'
+
         ArrayList<String> m = new ArrayList<>();
+        String email = SupportMethods.mailtoDB("test.bo@nonsaprei.it") ;
         String m1="mate";
         String m2="ita";
         m.add(m1);
         m.add(m2);
-        Insegnante i = new Insegnante("test.bo@nonsaprei.it","Bo","Ma","quel posto",1010011010,m);
-        Ref.child("Prof").setValue(i);
+        Insegnante i = new Insegnante("Bo","Ma","quel posto",1010011010,m);
+        Ref.child(email).setValue(i);
     */
     }
 
