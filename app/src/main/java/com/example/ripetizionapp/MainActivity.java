@@ -1,5 +1,6 @@
 package com.example.ripetizionapp;
 
+
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -10,8 +11,11 @@ import android.os.Bundle;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawer;
@@ -36,11 +40,26 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
 
     /**
+
+        //Ottieni riferimento Firestore.
+
+        FirebaseFirestore ff = FirebaseFirestore.getInstance();
+
+        //Aggiungi oggetto.
+
+        String email = "test.bo@nonsaprei.it";
+        HashMap<String, Object> insegnante = new HashMap<>();
+        insegnante.put("password","no");
+        insegnante.put("località","quel paese");
+        ff.collection("insegnanti").document(email).set(insegnante);
+    */
+
+
+    /**
         //Ottieni riferimeno a database Firebase.
 
         FirebaseDatabase DB = FirebaseDatabase.getInstance();
         DatabaseReference Ref = DB.getReference();
-
 
 
         //Test DB. ACHTUNG! nella mail, utilizzata come id, non è possibile utilizzare il '.', sosotituisco con ':'.
