@@ -29,8 +29,4 @@ public class FragmentRegistration extends Fragment {
 
         return rootView;
     }
-
-
-
-
 }
