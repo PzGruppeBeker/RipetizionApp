@@ -43,22 +43,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         /**
-
-         //Ottieni riferimento Firestore.
-
-         FirebaseFirestore ff = FirebaseFirestore.getInstance();
-
-         //Aggiungi oggetto.
-
-         String email = "test.bo@nonsaprei.it";
-         HashMap<String, Object> insegnante = new HashMap<>();
-         insegnante.put("password","no");
-         insegnante.put("località","quel paese");
-         ff.collection("insegnanti").document(email).set(insegnante);
-         */
-
-
-        /**
          //Ottieni riferimeno a database Firebase.
 
          FirebaseDatabase DB = FirebaseDatabase.getInstance();

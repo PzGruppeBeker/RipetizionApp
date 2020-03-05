@@ -21,10 +21,4 @@ public class SupportMethods {
         String n = s.replace(':','.');
         return n;
     }
-
-    public static boolean checkEmail (final String email) {
-        FirebaseFirestore ff = FirebaseFirestore.getInstance();
-        DocumentReference docRef = ff.collection("insegnanti").document(email);
-        if (docRef.get()==null)
-    }
 }
