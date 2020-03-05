@@ -26,17 +26,20 @@ public class FragmentRegistration extends Fragment {
             @Override
             public void onClick(View v) {
 
+                TextInputLayout Viewemail = rootView.findViewById(R.id.text_input_email);
                 TextInputLayout Viewname = rootView.findViewById(R.id.text_input_name);
                 TextInputLayout Viewsurname = rootView.findViewById(R.id.text_input_surname);
-                TextInputLayout Viewemail = rootView.findViewById(R.id.text_input_email);
+                TextInputLayout Viewplace = rootView.findViewById(R.id.text_input_place);//ci siamo dimenticati il luogo.
                 TextInputLayout Viewpassword = rootView.findViewById(R.id.text_input_password);
                 TextInputLayout Viewsubjects = rootView.findViewById(R.id.text_input_subject);
 
+                String email = Viewemail.getEditText().getText().toString().trim();
                 String nome = Viewname.getEditText().getText().toString().trim();
                 String cognome = Viewsurname.getEditText().getText().toString().trim();
-                String email = Viewemail.getEditText().getText().toString().trim();
+                String luogo = Viewplace.getEditText().getText().toString().trim();
                 String password = Viewpassword.getEditText().getText().toString().trim();
                 String materie = Viewsubjects.getEditText().getText().toString().trim();
+
 
 
                 Toast.makeText(getContext(), "CONFIRM INPUT RECEIVED", Toast.LENGTH_SHORT).show();
