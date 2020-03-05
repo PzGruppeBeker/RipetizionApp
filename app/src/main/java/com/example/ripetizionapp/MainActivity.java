@@ -1,6 +1,5 @@
 package com.example.ripetizionapp;
 
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,8 +9,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
@@ -20,7 +17,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
@@ -46,40 +42,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-    /**
+        /**
 
-        //Ottieni riferimento Firestore.
+         //Ottieni riferimento Firestore.
 
-        FirebaseFirestore ff = FirebaseFirestore.getInstance();
+         FirebaseFirestore ff = FirebaseFirestore.getInstance();
 
-        //Aggiungi oggetto.
+         //Aggiungi oggetto.
 
-        String email = "test.bo@nonsaprei.it";
-        HashMap<String, Object> insegnante = new HashMap<>();
-        insegnante.put("password","no");
-        insegnante.put("località","quel paese");
-        ff.collection("insegnanti").document(email).set(insegnante);
-    */
-
-
-    /**
-        //Ottieni riferimeno a database Firebase.
-
-        FirebaseDatabase DB = FirebaseDatabase.getInstance();
-        DatabaseReference Ref = DB.getReference();
+         String email = "test.bo@nonsaprei.it";
+         HashMap<String, Object> insegnante = new HashMap<>();
+         insegnante.put("password","no");
+         insegnante.put("località","quel paese");
+         ff.collection("insegnanti").document(email).set(insegnante);
+         */
 
 
-        //Test DB. ACHTUNG! nella mail, utilizzata come id, non è possibile utilizzare il '.', sosotituisco con ':'.
+        /**
+         //Ottieni riferimeno a database Firebase.
 
-        ArrayList<String> m = new ArrayList<>();
-        String email = SupportMethods.mailtoDB("test.bo@nonsaprei.it") ;
-        String m1="mate";
-        String m2="ita";
-        m.add(m1);
-        m.add(m2);
-        Insegnante i = new Insegnante("Bo","Ma","quel posto",1010011010,m);
-        Ref.child(email).setValue(i);
-    */
+         FirebaseDatabase DB = FirebaseDatabase.getInstance();
+         DatabaseReference Ref = DB.getReference();
+
+
+         //Test DB. ACHTUNG! nella mail, utilizzata come id, non è possibile utilizzare il '.', sosotituisco con ':'.
+
+         ArrayList<String> m = new ArrayList<>();
+         String email = SupportMethods.mailtoDB("test.bo@nonsaprei.it") ;
+         String m1="mate";
+         String m2="ita";
+         m.add(m1);
+         m.add(m2);
+         Insegnante i = new Insegnante("Bo","Ma","quel posto",1010011010,m);
+         Ref.child(email).setValue(i);
+         */
     }
 
     @Override
@@ -93,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.nav_registration:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentRegistration()).commit();
                 break;
@@ -101,9 +97,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    public void confirmInput(View V) {
-        Toast.makeText(this, "Prova input", Toast.LENGTH_SHORT).show();
-    }
-
 }

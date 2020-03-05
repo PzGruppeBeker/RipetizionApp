@@ -2,13 +2,17 @@
     <string name="app_name">RipetizionApp</string>
     <string name="nav_login">Login</string>
     <string name="nav_registration">Registrazione</string>
-    <string name="nav_options">Opzioni</string>
-    <string name="option_1">Opzione 1</string>
-    <string name="option_2">Opzione 2</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_string_1">RipetizionApp - Università degli studi dell\'Insubria</string>
     <string name="fragment_home_string_1">Comincia subito!</string>
     <string name="fragment_home_string_2">Cerca un insegnante che fa al caso tuo!</string>
+    <string name="fragment_registration_title">Registrati come professore e inizia subito a insegnare!</string>
+    <string name="fragment_registration_name">Nome</string>
+    <string name="fragment_registration_surname">Cognome</string>
+    <string name="fragment_registration_email">Email</string>
+    <string name="fragment_registration_password">Password</string>
+    <string name="fragment_registration_subjects">Materie</string>
+    <string name="fragment_registration_button">CONFERMA</string>
 
 </resources>

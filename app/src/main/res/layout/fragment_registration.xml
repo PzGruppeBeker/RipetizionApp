@@ -12,15 +12,15 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Registrati come professore e inizia subito a insegnare!"
-            android:textSize="17dp"
+            android:gravity="center"
             android:padding="16dp"
-            android:gravity="center"/>
+            android:text="@string/fragment_registration_title"
+            android:textSize="17sp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="189dp"
-            android:src="@drawable/teacher_icon" />
+            android:src="@drawable/teacher_icon"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_input_name"
@@ -33,7 +33,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nome"
+                android:hint="@string/fragment_registration_name"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -49,8 +49,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Cognome"
-                android:inputType="text"/>
+                android:hint="@string/fragment_registration_surname"
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -65,8 +65,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
-                android:inputType="textEmailAddress"/>
+                android:hint="@string/fragment_registration_email"
+                android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -82,36 +82,36 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
-                android:inputType="textPassword"/>
+                android:hint="@string/fragment_registration_password"
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_input_subject"
-            android:paddingBottom="16dp"
-            android:paddingLeft="24dp"
-            android:paddingRight="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:paddingBottom="16dp"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Materie"
-                android:scrollHorizontally="false"
+                android:hint="@string/fragment_registration_subjects"
+                android:inputType="textMultiLine"
                 android:scrollbars="vertical"
-                android:inputType="text"/>
+                android:scrollHorizontally="false" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
+            android:id="@+id/button_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button_confirm"
             android:layout_gravity="center"
-            android:text="CONFERMA"/>
+            android:text="@string/fragment_registration_button" />
     </LinearLayout>
 
 </ScrollView>
