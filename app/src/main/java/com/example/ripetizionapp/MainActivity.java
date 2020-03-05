@@ -10,6 +10,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
@@ -99,4 +101,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void confirmInput(View V) {
+        Toast.makeText(this, "Prova input", Toast.LENGTH_SHORT).show();
+    }
+
 }
