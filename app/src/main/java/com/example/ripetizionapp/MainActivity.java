@@ -71,11 +71,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_registration:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentRegistration()).commit();
+                break;
+            case R.id.nav_login:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentLogin()).commit();
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);

@@ -29,14 +29,14 @@ public class FragmentRegistration extends Fragment {
                 TextInputLayout Viewemail = rootView.findViewById(R.id.text_input_email);
                 TextInputLayout Viewname = rootView.findViewById(R.id.text_input_name);
                 TextInputLayout Viewsurname = rootView.findViewById(R.id.text_input_surname);
-                TextInputLayout Viewplace = rootView.findViewById(R.id.text_input_place);//ci siamo dimenticati il luogo.
+                //TextInputLayout Viewplace = rootView.findViewById(R.id.text_input_place);
                 TextInputLayout Viewpassword = rootView.findViewById(R.id.text_input_password);
                 TextInputLayout Viewsubjects = rootView.findViewById(R.id.text_input_subject);
 
                 String email = Viewemail.getEditText().getText().toString().trim();
                 String nome = Viewname.getEditText().getText().toString().trim();
                 String cognome = Viewsurname.getEditText().getText().toString().trim();
-                String luogo = Viewplace.getEditText().getText().toString().trim();
+                //String luogo = Viewplace.getEditText().getText().toString().trim();
                 String password = Viewpassword.getEditText().getText().toString().trim();
                 String materie = Viewsubjects.getEditText().getText().toString().trim();
 
