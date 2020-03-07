@@ -8,6 +8,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -29,6 +30,21 @@ public class SupportMethods {
         return n;
     }
 
+    public static boolean checkEmail(String givenemail) {
+        final String percorsoReg = "insegnanti";
+        final String email = mailtoDB(givenemail);
+
+        DatabaseReference Ref = FirebaseDatabase.getInstance().getReference(percorsoReg);
+        Query query = Ref.equalTo(email);
+
+        if (query.getRef().toString().equals(email)){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
     public static void checkEmail(String givenemail, final String nome, final String cognome, final String luogo, final String password, final String materie){
 
         final String percorsoReg = "insegnanti";
@@ -52,26 +68,29 @@ public class SupportMethods {
             }
         });
     }
+    */
 
-    private static void registrazione(String email, String nome, String conome, String luogo, String password, String materie, DatabaseReference percorsoReg){
+    private static void registrazione(String givenemail, String nome, String conome, String luogo, String password, String materie){
 
-        final String percorsoDati = "Luoghi";
+        String email = mailtoDB(givenemail);
+        final String percorsoReg = "insgnanti"; //Percorso registrazione account.
+        final String percorsoDati = "luoghi"; //Percorso registrazione dati.
 
         //Creazione arraylist materie da stringa.
         ArrayList<String> listamaterie = new ArrayList<String>(Arrays.asList(materie.split(" ")));
 
-        //Creazione oggetti rins eins rispettivamente per registrazione password account e dati.
+        //Creazione oggetti "rins" e "ins" rispettivamente per registrazione password account e dati.
         RegInsegnante rins = new RegInsegnante(password,luogo);
         Insegnante ins = new Insegnante(nome,conome,luogo,0000,listamaterie);
 
-        //Registrazione rins, utilizzando il percorso passato dal metodo di check.
-        percorsoReg.child(email).setValue(rins);
+        //Registrazione rins, usando percorso Reg.
+        DatabaseReference regRef = FirebaseDatabase.getInstance().getReference(percorsoReg);
+        regRef.child(email).setValue(rins);
 
         //Registrazione ins, serve creare nuovo percorso.
         DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference(percorsoDati).child(luogo);
         dataRef.child(email).setValue(ins);
     }
-
 }
 
 
