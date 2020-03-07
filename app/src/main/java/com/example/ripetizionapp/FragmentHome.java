@@ -28,6 +28,7 @@ public class FragmentHome extends Fragment {
                 Toast.makeText(getContext(), "SEARCH INPUT RECEIVED", Toast.LENGTH_SHORT).show();
             }
         });
+
         return rootView;
     }
 }

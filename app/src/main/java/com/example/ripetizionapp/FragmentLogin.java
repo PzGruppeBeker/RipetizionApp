@@ -20,7 +20,7 @@ public class FragmentLogin extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_login, container, false);
 
         //verificare se è necessario cambiare l'id delle view in fragment_login, dato che i campi email
-        //e password hanno lo stesso id di quelle in fragment_registratio
+        //e password hanno lo stesso id di quelle in fragment_registration
 
         Button login = rootView.findViewById(R.id.button_login);
         login.setOnClickListener(new View.OnClickListener() {

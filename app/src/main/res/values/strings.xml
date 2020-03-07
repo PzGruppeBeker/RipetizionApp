@@ -16,5 +16,6 @@
     <string name="fragment_registration_button">CONFERMA</string>
     <string name="fragment_login_title">Accedi ad un account professore esistente</string>
     <string name="fragment_login_button">ACCEDI</string>
+    <string name="fragment_home_place">Luogo</string>
 
 </resources>
