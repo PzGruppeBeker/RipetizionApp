@@ -29,7 +29,7 @@ public class SupportMethods {
         return n;
     }
 
-    public static void checkEmail(String givenemail, final String nome, final String conome, final String luogo, final String password, final String materie){
+    public static void checkEmail(String givenemail, final String nome, final String cognome, final String luogo, final String password, final String materie){
 
         final String percorsoReg = "insegnanti";
         final String email = mailtoDB(givenemail);
@@ -43,7 +43,7 @@ public class SupportMethods {
                 }
                 else {
                     //la mail è libera.
-                    registrazione(email,nome,conome,luogo,password,materie,Ref);
+                    registrazione(email,nome,cognome,luogo,password,materie,Ref);
                 }
             }
             @Override
