@@ -10,10 +10,18 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 public class FragmentRegistration extends Fragment {
@@ -24,6 +32,7 @@ public class FragmentRegistration extends Fragment {
     private TextInputLayout viewPlace;
     private TextInputLayout viewPassword;
     private TextInputLayout viewSubjects;
+    static Boolean freeEmail = true;
 
     public FragmentRegistration() {
     }
@@ -72,10 +81,29 @@ public class FragmentRegistration extends Fragment {
             final String percorsoReg = "insegnanti";
             final String email = SupportMethods.mailtoDB(givenemail);
 
-            DatabaseReference Ref = FirebaseDatabase.getInstance().getReference(percorsoReg);
-            Query query = Ref.equalTo(email);
+            FirebaseDatabase.getInstance().getReference().child(percorsoReg)
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Iterable<DataSnapshot> insegnanti = dataSnapshot.getChildren();
+                            for (DataSnapshot key : insegnanti){
+                               if (key.getKey().equals(email)){
+                                   freeEmail = false;
+                                   return;
+                               }
+                            }
+                        }
 
-            if (query.getRef().toString().equals(email)){
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+            //Toast.makeText(getContext(),arrayList.toString(),Toast.LENGTH_LONG).show();
+
+            if (false){
                 viewEmail.setError("Esiste già un profilo legato a questa mail");
                 return false;
             } else {
