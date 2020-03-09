@@ -32,7 +32,6 @@ public class FragmentRegistration extends Fragment {
     private TextInputLayout viewPlace;
     private TextInputLayout viewPassword;
     private TextInputLayout viewSubjects;
-    private ArrayList<String> test = new ArrayList<>();
 
     public FragmentRegistration() {
     }
@@ -76,6 +75,9 @@ public class FragmentRegistration extends Fragment {
 
     private boolean checkEmail(String givenemail) {
 
+        final boolean[] freeEmail = new boolean[1];
+        freeEmail[0]=true;
+
         if (givenemail.isEmpty()) {
             viewEmail.setError("Il campo non può essere lasciato vuoto");
             return false;
@@ -91,10 +93,9 @@ public class FragmentRegistration extends Fragment {
                             Iterable<DataSnapshot> insegnanti = dataSnapshot.getChildren();
                             for (DataSnapshot nodo : insegnanti){
                                 registered=nodo.getKey();
-                                test.add(registered);
                                 assert registered != null;
                                 if (registered.equals(email)){
-                                    //AIUTOOOOO!
+                                    freeEmail[0]=false;
                                     break;
                                 }
                             }
@@ -105,9 +106,7 @@ public class FragmentRegistration extends Fragment {
                         }
                     });
 
-            Toast.makeText(getContext(),test.toString(),Toast.LENGTH_LONG).show();
-
-            if (test.contains(email)){
+            if (!freeEmail[0]){
                 viewEmail.setError("Esiste già un profilo legato a questa mail");
                 return false;
             } else {
