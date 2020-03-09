@@ -32,7 +32,7 @@ public class FragmentRegistration extends Fragment {
     private TextInputLayout viewPlace;
     private TextInputLayout viewPassword;
     private TextInputLayout viewSubjects;
-    Boolean freeEmail = true;
+    private ArrayList<String> test = new ArrayList<>();
 
     public FragmentRegistration() {
     }
@@ -66,6 +66,8 @@ public class FragmentRegistration extends Fragment {
                     SupportMethods.registrazione(email, name, surname, place, password, subjects);
                 }
 
+
+                //Toast.makeText(getContext(),freeEmail.toString(),Toast.LENGTH_LONG).show();
                 //Toast.makeText(getContext(), "CONFIRM INPUT RECEIVED", Toast.LENGTH_SHORT).show();
             }
         });
@@ -73,6 +75,7 @@ public class FragmentRegistration extends Fragment {
     }
 
     private boolean checkEmail(String givenemail) {
+
         if (givenemail.isEmpty()) {
             viewEmail.setError("Il campo non può essere lasciato vuoto");
             return false;
@@ -80,29 +83,31 @@ public class FragmentRegistration extends Fragment {
             final String percorsoReg = "insegnanti";
             final String email = SupportMethods.mailtoDB(givenemail);
 
-
             FirebaseDatabase.getInstance().getReference().child(percorsoReg).getRef()
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            String registered = null;
+                            String registered;
                             Iterable<DataSnapshot> insegnanti = dataSnapshot.getChildren();
                             for (DataSnapshot nodo : insegnanti){
                                 registered=nodo.getKey();
-                                if (email.equals(registered)){
-                                    freeEmail=false;
-                                    return;
+                                test.add(registered);
+                                assert registered != null;
+                                if (registered.equals(email)){
+                                    //AIUTOOOOO!
+                                    break;
                                 }
                             }
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-
                         }
                     });
 
-            if (!freeEmail){
+            Toast.makeText(getContext(),test.toString(),Toast.LENGTH_LONG).show();
+
+            if (test.contains(email)){
                 viewEmail.setError("Esiste già un profilo legato a questa mail");
                 return false;
             } else {
