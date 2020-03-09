@@ -76,7 +76,7 @@ public class SupportMethods {
     public static void registrazione(String givenemail, String nome, String conome, String luogo, String password, String materie){
 
         String email = mailtoDB(givenemail);
-        final String percorsoReg = "insgnanti"; //Percorso registrazione account.
+        final String percorsoReg = "insegnanti"; //Percorso registrazione account.
         final String percorsoDati = "luoghi"; //Percorso registrazione dati.
 
         //Creazione arraylist materie da stringa.

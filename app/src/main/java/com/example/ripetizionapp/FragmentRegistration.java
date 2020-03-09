@@ -32,14 +32,14 @@ public class FragmentRegistration extends Fragment {
     private TextInputLayout viewPlace;
     private TextInputLayout viewPassword;
     private TextInputLayout viewSubjects;
-    static Boolean freeEmail = true;
+    Boolean freeEmail = true;
+    ArrayList<String> prof = new ArrayList<>();
 
     public FragmentRegistration() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         final View rootView = inflater.inflate(R.layout.fragment_registration, container, false);
 
         Button confirm = rootView.findViewById(R.id.button_confirm);
@@ -81,16 +81,14 @@ public class FragmentRegistration extends Fragment {
             final String percorsoReg = "insegnanti";
             final String email = SupportMethods.mailtoDB(givenemail);
 
-            FirebaseDatabase.getInstance().getReference().child(percorsoReg)
+            /**
+            FirebaseDatabase.getInstance().getReference().child(percorsoReg).getRef()
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             Iterable<DataSnapshot> insegnanti = dataSnapshot.getChildren();
-                            for (DataSnapshot key : insegnanti){
-                               if (key.getKey().equals(email)){
-                                   freeEmail = false;
-                                   return;
-                               }
+                            for (DataSnapshot nodo : insegnanti){
+                                prof.add(nodo.getKey().toString());
                             }
                         }
 
@@ -99,9 +97,9 @@ public class FragmentRegistration extends Fragment {
 
                         }
                     });
+            */
 
-
-            //Toast.makeText(getContext(),arrayList.toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(),prof.toString(),Toast.LENGTH_LONG).show();
 
             if (false){
                 viewEmail.setError("Esiste già un profilo legato a questa mail");
