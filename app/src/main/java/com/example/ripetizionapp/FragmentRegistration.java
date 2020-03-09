@@ -33,7 +33,6 @@ public class FragmentRegistration extends Fragment {
     private TextInputLayout viewPassword;
     private TextInputLayout viewSubjects;
     Boolean freeEmail = true;
-    ArrayList<String> prof = new ArrayList<>();
 
     public FragmentRegistration() {
     }
@@ -81,14 +80,19 @@ public class FragmentRegistration extends Fragment {
             final String percorsoReg = "insegnanti";
             final String email = SupportMethods.mailtoDB(givenemail);
 
-            /**
+
             FirebaseDatabase.getInstance().getReference().child(percorsoReg).getRef()
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            String registered = null;
                             Iterable<DataSnapshot> insegnanti = dataSnapshot.getChildren();
                             for (DataSnapshot nodo : insegnanti){
-                                prof.add(nodo.getKey().toString());
+                                registered=nodo.getKey();
+                                if (email.equals(registered)){
+                                    freeEmail=false;
+                                    return;
+                                }
                             }
                         }
 
@@ -97,11 +101,8 @@ public class FragmentRegistration extends Fragment {
 
                         }
                     });
-            */
 
-            Toast.makeText(getContext(),prof.toString(),Toast.LENGTH_LONG).show();
-
-            if (false){
+            if (!freeEmail){
                 viewEmail.setError("Esiste già un profilo legato a questa mail");
                 return false;
             } else {
