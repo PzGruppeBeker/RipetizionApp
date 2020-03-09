@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -62,7 +63,7 @@ public class FragmentRegistration extends Fragment {
                 if (!checkEmail(email) | !checkName(name) | !checkSurname(surname) | !checkPassword(password) | !checkSubjects(subjects) | !checkPlace(place)) {
                     Toast.makeText(getContext(), "Qualcosa non va, controlla che sia tutto in ordine!", Toast.LENGTH_SHORT).show();
                 } else {
-                    SupportMethods.registrazione(email, name, surname, place, password, subjects);
+                    checkReg(email, name, surname, place, password, subjects);
                 }
 
 
@@ -73,47 +74,48 @@ public class FragmentRegistration extends Fragment {
         return rootView;
     }
 
-    private boolean checkEmail(String givenemail) {
+    private void checkReg(String givenemail, final String name, final String surname, final String place, final String password, final String subjects) {
 
-        final boolean[] freeEmail = new boolean[1];
-        freeEmail[0]=true;
+        final String percorsoReg = "insegnanti";
+        final String email = SupportMethods.mailtoDB(givenemail);
 
-        if (givenemail.isEmpty()) {
-            viewEmail.setError("Il campo non può essere lasciato vuoto");
-            return false;
-        } else {
-            final String percorsoReg = "insegnanti";
-            final String email = SupportMethods.mailtoDB(givenemail);
+        FirebaseDatabase.getInstance().getReference().child(percorsoReg).getRef()
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String registered;
+                        Iterable<DataSnapshot> insegnanti = dataSnapshot.getChildren();
+                        for (DataSnapshot nodo : insegnanti){
+                            registered=nodo.getKey();
+                            assert registered != null;
+                            if (registered.equals(email)){
+                                viewEmail.setError("Esiste già un profilo legato a questa mail");
+                                break;
+                            }
+                            if (!insegnanti.iterator().hasNext()){
+                                //Toast.makeText(getContext(),"Fine array",Toast.LENGTH_LONG).show();
+                                SupportMethods.registrazione(email, name, surname, place, password, subjects);
 
-            FirebaseDatabase.getInstance().getReference().child(percorsoReg).getRef()
-                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            String registered;
-                            Iterable<DataSnapshot> insegnanti = dataSnapshot.getChildren();
-                            for (DataSnapshot nodo : insegnanti){
-                                registered=nodo.getKey();
-                                assert registered != null;
-                                if (registered.equals(email)){
-                                    freeEmail[0]=false;
-                                    break;
-                                }
+                                viewEmail.setError(null);
+                                viewEmail.setErrorEnabled(false);
                             }
                         }
+                    }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                        }
-                    });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
+    }
 
-            if (!freeEmail[0]){
-                viewEmail.setError("Esiste già un profilo legato a questa mail");
-                return false;
-            } else {
-                viewEmail.setError(null);
-                viewEmail.setErrorEnabled(false);
-                return true;
-            }
+    private boolean checkEmail(String email) {
+        if (email.isEmpty()){
+            viewName.setError("Il campo non può essere lasciato vuoto");
+            return false;
+        } else {
+            viewName.setError(null);
+            viewName.setErrorEnabled(false);
+            return true;
         }
     }
 
