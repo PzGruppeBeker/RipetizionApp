@@ -17,5 +17,7 @@
     <string name="fragment_login_title">Accedi ad un account professore esistente</string>
     <string name="fragment_login_button">ACCEDI</string>
     <string name="fragment_home_place">Luogo</string>
+    <string name="fragment_search_string">Cerca subito se c\'è un professore in grado di aiutarti!</string>
+    <string name="fragment_search_button">CERCA</string>
 
 </resources>
