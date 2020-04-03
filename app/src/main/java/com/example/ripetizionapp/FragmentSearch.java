@@ -23,6 +23,13 @@ public class FragmentSearch extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "SEARCH INPUT RECEIVED", Toast.LENGTH_SHORT).show();
+
+                //al click creare la recycler view, tenendo conto che i valori possono essere nulli ma non tutti
+                //e passare le informazioni al database tramite query, per poi creare un array  di oggetti
+                //TeacherItem se possibile, e da lì visualizzarli in elenco
+                //intanto creo un array di prova con nomi e immagine standard su FragmentRecyclerViewTeacher
+
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentRecyclerViewTeacher()).addToBackStack(null).commit();
             }
         });
 
