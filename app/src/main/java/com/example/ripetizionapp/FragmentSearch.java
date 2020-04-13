@@ -9,7 +9,14 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 public class FragmentSearch extends Fragment {
+
+    private TextInputLayout viewName;
+    private TextInputLayout viewSurname;
+    private TextInputLayout viewPlace;
+    private TextInputLayout viewSubjects;
 
     public FragmentSearch() {
     }
@@ -17,7 +24,7 @@ public class FragmentSearch extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_search, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_search, container, false);
         Button search = rootView.findViewById(R.id.button_search_database);
         search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,6 +35,23 @@ public class FragmentSearch extends Fragment {
                 //e passare le informazioni al database tramite query, per poi creare un array  di oggetti
                 //TeacherItem se possibile, e da lì visualizzarli in elenco
                 //intanto creo un array di prova con nomi e immagine standard su FragmentRecyclerViewTeacher
+
+                viewName = rootView.findViewById(R.id.text_input_name);
+                viewSurname = rootView.findViewById(R.id.text_input_surname);
+                viewPlace = rootView.findViewById(R.id.text_input_place);
+                viewSubjects = rootView.findViewById(R.id.text_input_subject);
+
+                String name = viewName.getEditText().getText().toString().trim();
+                String surname = viewSurname.getEditText().getText().toString().trim();
+                String place = viewPlace.getEditText().getText().toString().trim();
+                String subjects = viewSubjects.getEditText().getText().toString().trim();
+
+                if (name.isEmpty() && surname.isEmpty() && subjects.isEmpty() && place.isEmpty()) {
+                    Toast.makeText(getContext(), "Almeno un campo deve contenere delle informazioni di ricerca!", Toast.LENGTH_SHORT).show();
+                } else {
+                    //
+                }
+
 
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentRecyclerViewTeacher()).addToBackStack(null).commit();
             }
