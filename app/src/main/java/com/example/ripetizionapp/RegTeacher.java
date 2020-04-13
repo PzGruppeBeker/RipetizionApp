@@ -1,10 +1,10 @@
 package com.example.ripetizionapp;
 
-public class RegInsegnante {
+public class RegTeacher {
 
     String password,località;
 
-    RegInsegnante (String password, String località) {
+    RegTeacher(String password, String località) {
         this.password=password;
         this.località=località;
     }

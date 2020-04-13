@@ -2,15 +2,15 @@ package com.example.ripetizionapp;
 
 import java.util.ArrayList;
 
-public class Insegnante {
+public class Teacher {
 
     String nome, cognome, località;
     int tel;
     ArrayList<String> materie;
 
-    public Insegnante(){}
+    public Teacher(){}
 
-    public Insegnante(String nome, String cognome, String località, int tel, ArrayList<String> materie){
+    public Teacher(String nome, String cognome, String località, int tel, ArrayList<String> materie){
         this.nome=nome;
         this.cognome=cognome;
         this.località=località;

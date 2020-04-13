@@ -1,24 +1,10 @@
 package com.example.ripetizionapp;
 
-import android.util.Log;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-
-import androidx.annotation.NonNull;
 
 public class SupportMethods {
     public static String mailtoDB (String s){
@@ -83,8 +69,8 @@ public class SupportMethods {
         ArrayList<String> listamaterie = new ArrayList<String>(Arrays.asList(materie.split(" ")));
 
         //Creazione oggetti "rins" e "ins" rispettivamente per registrazione password account e dati.
-        RegInsegnante rins = new RegInsegnante(password,luogo);
-        Insegnante ins = new Insegnante(nome,conome,luogo,0000,listamaterie);
+        RegTeacher rins = new RegTeacher(password,luogo);
+        Teacher ins = new Teacher(nome,conome,luogo,0000,listamaterie);
 
         //Registrazione rins, usando percorso Reg.
         DatabaseReference regRef = FirebaseDatabase.getInstance().getReference(percorsoReg);

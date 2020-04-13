@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
          String m2="ita";
          m.add(m1);
          m.add(m2);
-         Insegnante i = new Insegnante("Bo","Ma","quel posto",1010011010,m);
+         Teacher i = new Teacher("Bo","Ma","quel posto",1010011010,m);
          Ref.child(email).setValue(i);
          */
     }
