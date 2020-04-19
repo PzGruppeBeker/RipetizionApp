@@ -63,6 +63,26 @@ public class SupportMethods {
         DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference(percorsoDati).child(provincia);
         dataRef.child(email).setValue(ins);
     }
+
+    public static boolean checkTeacher (Teacher t, String givenName, String givenSurname, ArrayList<String> givenSubjects){
+        if (t.getNome().equals(givenName)){
+            return true;
+        }
+        if (t.getCognome().equals(givenSurname)){
+            return true;
+        }
+
+        ArrayList<String> subjects = t.materie;
+
+        for (String sub : subjects){
+            for (String givenSub : givenSubjects){
+                if (sub.equals(givenSub)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
 
 
