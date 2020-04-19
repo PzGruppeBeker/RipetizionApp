@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 public class Teacher {
 
-    String nome, cognome, località;
+    String nome, cognome, località, provincia;
     int tel;
     ArrayList<String> materie;
 
     public Teacher(){}
 
-    public Teacher(String nome, String cognome, String località, int tel, ArrayList<String> materie){
+    public Teacher(String nome, String cognome, String provincia, int tel, ArrayList<String> materie){
         this.nome=nome;
         this.cognome=cognome;
-        this.località=località;
+        this.provincia=provincia;
         this.tel=tel;
         this.materie=materie;
     }
@@ -23,12 +23,13 @@ public class Teacher {
     public String getCognome(){
         return cognome;
     }
-    public String getLocalità() {
-        return località;
+    public String getProvincia() {
+        return provincia;
     }
     public int getTel(){
         return tel;
     }
+    public String getLocalità() {return località;}
     public ArrayList<String> getMaterie() {
         return materie;
     }
@@ -38,14 +39,17 @@ public class Teacher {
     public void setCognome(String s){
         cognome=s;
     }
-    public void setLocalità(String s){
-        località=s;
+    public void setProvincia(String s){
+        provincia=s;
     }
     public void setTel(int i){
         tel=i;
     }
     public void setMaterie(ArrayList<String> m){
         materie=m;
+    }
+    public void setLocalità(String s) {
+        località=s;
     }
 }
 

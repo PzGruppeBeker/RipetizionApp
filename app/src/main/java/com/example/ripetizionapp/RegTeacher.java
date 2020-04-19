@@ -2,23 +2,23 @@ package com.example.ripetizionapp;
 
 public class RegTeacher {
 
-    String password,località;
+    String password,provincia;
 
-    RegTeacher(String password, String località) {
+    RegTeacher(String password, String provincia) {
         this.password=password;
-        this.località=località;
+        this.provincia=provincia;
     }
 
     public String getPassword(){
         return password;
     }
-    public String getLocalità(){
-        return località;
+    public String getProvincia(){
+        return provincia;
     }
     public void setPassword(String s){
         password=s;
     }
-    public void setLocalità(String s){
-        località=s;
+    public void setProvincia(String s){
+        provincia=s;
     }
 }

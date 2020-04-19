@@ -16,25 +16,8 @@ public class SupportMethods {
         return n;
     }
 
-    //public static boolean checkEmail(String givenemail) {
-    //    if (givenemail.isEmpty()) {
-    //        Viewemail.setError("Il campo non può essere lasciato vuoto");
-    //    }
-    //   final String percorsoReg = "insegnanti";
-    //    final String email = mailtoDB(givenemail);
-
-    //    DatabaseReference Ref = FirebaseDatabase.getInstance().getReference(percorsoReg);
-    //    Query query = Ref.equalTo(email);
-
-    //    if (query.getRef().toString().equals(email)){
-    //        return false;
-    //    } else {
-    //        return true;
-    //    }
-    //}
-
     /**
-    public static void checkEmail(String givenemail, final String nome, final String cognome, final String luogo, final String password, final String materie){
+    public static void checkEmail(String givenemail, final String nome, final String cognome, final String provincia, final String password, final String materie){
 
         final String percorsoReg = "insegnanti";
         final String email = mailtoDB(givenemail);
@@ -48,7 +31,7 @@ public class SupportMethods {
                 }
                 else {
                     //la mail è libera.
-                    registrazione(email,nome,cognome,luogo,password,materie,Ref);
+                    registrazione(email,nome,cognome,provincia,password,materie,Ref);
                 }
             }
             @Override
@@ -59,25 +42,25 @@ public class SupportMethods {
     }
     */
 
-    public static void registrazione(String givenemail, String nome, String conome, String luogo, String password, String materie){
+    public static void registrazione(String givenemail, String nome, String conome, String provincia, String password, String materie){
 
         String email = mailtoDB(givenemail);
         final String percorsoReg = "insegnanti"; //Percorso registrazione account.
-        final String percorsoDati = "luoghi"; //Percorso registrazione dati.
+        final String percorsoDati = "province"; //Percorso registrazione dati.
 
         //Creazione arraylist materie da stringa.
         ArrayList<String> listamaterie = new ArrayList<String>(Arrays.asList(materie.split(" ")));
 
         //Creazione oggetti "rins" e "ins" rispettivamente per registrazione password account e dati.
-        RegTeacher rins = new RegTeacher(password,luogo);
-        Teacher ins = new Teacher(nome,conome,luogo,0000,listamaterie);
+        RegTeacher rins = new RegTeacher(password,provincia);
+        Teacher ins = new Teacher(nome,conome,provincia,0000,listamaterie);
 
         //Registrazione rins, usando percorso Reg.
         DatabaseReference regRef = FirebaseDatabase.getInstance().getReference(percorsoReg);
         regRef.child(email).setValue(rins);
 
         //Registrazione ins, serve creare nuovo percorso.
-        DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference(percorsoDati).child(luogo);
+        DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference(percorsoDati).child(provincia);
         dataRef.child(email).setValue(ins);
     }
 }
