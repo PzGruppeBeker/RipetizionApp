@@ -13,18 +13,38 @@ import java.util.ArrayList;
 
 public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.TeacherViewHolder> {
 
+    private OnItemClickListener teacherListener;
     private ArrayList<TeacherItem> teacherList;
+
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickedListener(OnItemClickListener listener) {
+        teacherListener = listener;
+    }
 
     public static class TeacherViewHolder extends RecyclerView.ViewHolder {
         public ImageView teacherProfile;
         public TextView teacherName;
         public TextView teacherSubjects;
 
-        public TeacherViewHolder(@NonNull View itemView) {
+        public TeacherViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             teacherProfile = itemView.findViewById(R.id.imageview_profile);
             teacherName = itemView.findViewById(R.id.text_teacher_name);
             teacherSubjects = itemView.findViewById(R.id.text_teacher_subjects);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        listener.onItemClick(position);
+                    }
+
+                }
+            });
         }
     }
 
@@ -36,7 +56,7 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.TeacherV
     @Override
     public TeacherViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.teacher_item, parent, false);
-        TeacherViewHolder teacherViewHolder = new TeacherViewHolder(v);
+        TeacherViewHolder teacherViewHolder = new TeacherViewHolder(v, teacherListener);
         return teacherViewHolder;
     }
 
