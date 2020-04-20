@@ -6,9 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
-
 import com.google.android.material.textfield.TextInputLayout;
 
 public class FragmentSearch extends Fragment {
@@ -29,7 +27,7 @@ public class FragmentSearch extends Fragment {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "SEARCH INPUT RECEIVED", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "SEARCH INPUT RECEIVED", Toast.LENGTH_SHORT).show();
 
                 //al click creare la recycler view, tenendo conto che i valori possono essere nulli ma non tutti
                 //e passare le informazioni al database tramite query, per poi creare un array  di oggetti
@@ -44,16 +42,20 @@ public class FragmentSearch extends Fragment {
                 String name = viewName.getEditText().getText().toString().trim();
                 String surname = viewSurname.getEditText().getText().toString().trim();
                 String place = viewPlace.getEditText().getText().toString().trim();
-                String subjects = viewSubjects.getEditText().getText().toString().trim();
+                String subject = viewSubjects.getEditText().getText().toString().trim();
 
-                if (name.isEmpty() && surname.isEmpty() && subjects.isEmpty() && place.isEmpty()) {
+                if (name.isEmpty() && surname.isEmpty() && subject.isEmpty() && place.isEmpty()) {
                     Toast.makeText(getContext(), "Almeno un campo deve contenere delle informazioni di ricerca!", Toast.LENGTH_SHORT).show();
                 } else {
-                    //
+                    FragmentRecyclerViewTeacher fragment = new FragmentRecyclerViewTeacher();
+                    Bundle args = new Bundle();
+                    args.putString("name", name);
+                    args.putString("surname", surname);
+                    args.putString("place", place);
+                    args.putString("subject", subject);
+                    fragment.setArguments(args);
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
                 }
-
-
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentRecyclerViewTeacher()).addToBackStack(null).commit();
             }
         });
 
