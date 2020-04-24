@@ -63,14 +63,14 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.TeacherV
         Teacher currentItem = teacherList.get(position);
         holder.teacherName.setText(currentItem.getNome() + currentItem.getCognome());
         ArrayList<String> subjectsList  = currentItem.getMaterie();
-        String subjects = "";
+        StringBuilder subjects = new StringBuilder();
         for (int i = 0; i <= subjectsList.size(); i++ ) {
-            subjects += subjectsList.get(i) + ", ";
-            if (i == subjectsList.size()) {
-                subjects += subjectsList.get(i);
+            subjects.append(subjectsList.get(i)).append(", ");
+            if (i == subjectsList.size() - 1) {
+                subjects.append(subjectsList.get(i));
             }
         }
-        holder.teacherSubjects.setText(subjects);
+        holder.teacherSubjects.setText(subjects.toString());
     }
 
     @Override
