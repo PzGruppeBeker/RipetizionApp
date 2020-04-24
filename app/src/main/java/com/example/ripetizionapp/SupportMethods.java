@@ -49,7 +49,7 @@ public class SupportMethods {
         final String percorsoDati = "province"; //Percorso registrazione dati.
 
         //Creazione arraylist materie da stringa.
-        ArrayList<String> listamaterie = new ArrayList<String>(Arrays.asList(materie.split(" ")));
+        ArrayList<String> listamaterie = new ArrayList<String>(Arrays.asList(materie.split("[ \n]")));
 
         //Creazione oggetti "rins" e "ins" rispettivamente per registrazione password account e dati.
         RegTeacher rins = new RegTeacher(password,provincia);
