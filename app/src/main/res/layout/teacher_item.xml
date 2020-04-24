@@ -13,6 +13,7 @@
 
         <ImageView
             android:id="@+id/imageview_profile"
+            android:src="@drawable/ic_person_black_24dp"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:padding="2dp" />

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.TeacherViewHolder> {
 
     private OnItemClickListener teacherListener;
-    private ArrayList<TeacherItem> teacherList;
+    private ArrayList<Teacher> teacherList;
 
     public interface OnItemClickListener{
         void onItemClick(int position);
@@ -25,13 +25,11 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.TeacherV
     }
 
     public static class TeacherViewHolder extends RecyclerView.ViewHolder {
-        public ImageView teacherProfile;
         public TextView teacherName;
         public TextView teacherSubjects;
 
         public TeacherViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
-            teacherProfile = itemView.findViewById(R.id.imageview_profile);
             teacherName = itemView.findViewById(R.id.text_teacher_name);
             teacherSubjects = itemView.findViewById(R.id.text_teacher_subjects);
 
@@ -48,7 +46,7 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.TeacherV
         }
     }
 
-    public TeacherAdapter(ArrayList<TeacherItem> teacher) {
+    public TeacherAdapter(ArrayList<Teacher> teacher) {
         teacherList = teacher;
     }
 
@@ -62,10 +60,17 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.TeacherV
 
     @Override
     public void onBindViewHolder(@NonNull TeacherViewHolder holder, int position) {
-        TeacherItem currentItem = teacherList.get(position);
-        holder.teacherProfile.setImageResource(currentItem.getTeacherProfile());
-        holder.teacherName.setText(currentItem.getTeacherName());
-        holder.teacherSubjects.setText(currentItem.getTeacherSubjects());
+        Teacher currentItem = teacherList.get(position);
+        holder.teacherName.setText(currentItem.getNome() + currentItem.getCognome());
+        ArrayList<String> subjectsList  = currentItem.getMaterie();
+        String subjects = "";
+        for (int i = 0; i <= subjectsList.size(); i++ ) {
+            subjects += subjectsList.get(i) + ", ";
+            if (i == subjectsList.size()) {
+                subjects += subjectsList.get(i);
+            }
+        }
+        holder.teacherSubjects.setText(subjects);
     }
 
     @Override
