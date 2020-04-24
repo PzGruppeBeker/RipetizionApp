@@ -67,8 +67,9 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.TeacherV
         for (int i = 0; i <= subjectsList.size() - 1; i++ ) {
             if (i == subjectsList.size() - 1) {
                 subjects.append(subjectsList.get(i));
+            } else {
+                subjects.append(subjectsList.get(i)).append(", ");
             }
-            subjects.append(subjectsList.get(i)).append(", ");
         }
         holder.teacherSubjects.setText(subjects.toString());
     }
