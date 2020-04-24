@@ -9,10 +9,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -42,24 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        /**
-         //Ottieni riferimeno a database Firebase.
 
-         FirebaseDatabase DB = FirebaseDatabase.getInstance();
-         DatabaseReference Ref = DB.getReference();
-
-
-         //Test DB. ACHTUNG! nella mail, utilizzata come id, non è possibile utilizzare il '.', sosotituisco con ':'.
-
-         ArrayList<String> m = new ArrayList<>();
-         String email = SupportMethods.mailtoDB("test.bo@nonsaprei.it") ;
-         String m1="mate";
-         String m2="ita";
-         m.add(m1);
-         m.add(m2);
-         Teacher i = new Teacher("Bo","Ma","quel posto",1010011010,m);
-         Ref.child(email).setValue(i);
-         */
     }
 
     //gestire onbackpressed per i fragment

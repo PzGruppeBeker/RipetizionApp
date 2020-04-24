@@ -64,7 +64,7 @@ public class SupportMethods {
         dataRef.child(email).setValue(ins);
     }
 
-    public static boolean checkTeacher (Teacher t, String givenName, String givenSurname, ArrayList<String> givenSubjects){
+    public static boolean checkTeacher (Teacher t, String givenName, String givenSurname, String givenSubjects){
         if (t.getNome().equals(givenName)){
             return true;
         }
@@ -75,10 +75,8 @@ public class SupportMethods {
         ArrayList<String> subjects = t.materie;
 
         for (String sub : subjects){
-            for (String givenSub : givenSubjects){
-                if (sub.equals(givenSub)){
-                    return true;
-                }
+            if (sub.equals(givenSubjects)){
+                return true;
             }
         }
         return false;
