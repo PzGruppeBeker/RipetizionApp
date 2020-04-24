@@ -24,7 +24,6 @@ public class FragmentRecyclerViewTeacher extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private TextView notfound;
 
-
     public FragmentRecyclerViewTeacher() {
     }
 
@@ -45,9 +44,9 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                         final ArrayList<Teacher> match = new ArrayList<>(); //Lista degli insegnanti che corrispondono alle caratteristiche.
                         for (DataSnapshot nodo : insegnanti) {
                             Teacher t = nodo.getValue(Teacher.class);
-                            if (SupportMethods.checkTeacher(t,name,surname,subject)){
+                            //if (SupportMethods.checkTeacher(t,name,surname,subject)){
                                 match.add(t);
-                            }
+                            //}
                         }
                         if (match.isEmpty()) {
                             notfound = rootView.findViewById(R.id.text_not_found);
