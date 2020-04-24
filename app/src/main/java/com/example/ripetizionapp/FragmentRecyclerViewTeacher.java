@@ -22,7 +22,6 @@ public class FragmentRecyclerViewTeacher extends Fragment {
     private RecyclerView rView;
     private TeacherAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<TeacherItem> test = new ArrayList<>();
     private TextView notfound;
 
 
@@ -43,7 +42,7 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         Iterable<DataSnapshot> insegnanti = dataSnapshot.getChildren();
-                        ArrayList<Teacher> match = new ArrayList<>(); //Lista degli insegnanti che corrispondono alle caratteristiche.
+                        final ArrayList<Teacher> match = new ArrayList<>(); //Lista degli insegnanti che corrispondono alle caratteristiche.
                         for (DataSnapshot nodo : insegnanti) {
                             Teacher t = nodo.getValue(Teacher.class);
                             if (SupportMethods.checkTeacher(t,name,surname,subject)){
@@ -56,14 +55,14 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                             // gestire eventualmente il backpressed
 
                         } else {
-                            test.add(new TeacherItem(R.drawable.ic_person_black_24dp, "Florestano Pizzaro", "Teologia, Fisica"));
-                            test.add(new TeacherItem(R.drawable.ic_person_black_24dp, "Professor Spannacchiatta", "Approssimativologia"));
-                            test.add(new TeacherItem(R.drawable.ic_person_black_24dp, "Gaetano Maria Barbagli", "Storia del Facismo"));
+                            //test.add(new TeacherItem(R.drawable.ic_person_black_24dp, "Florestano Pizzaro", "Teologia, Fisica"));
+                            //test.add(new TeacherItem(R.drawable.ic_person_black_24dp, "Professor Spannacchiatta", "Approssimativologia"));
+                            //test.add(new TeacherItem(R.drawable.ic_person_black_24dp, "Gaetano Maria Barbagli", "Storia del Facismo"));
 
                             rView = rootView.findViewById(R.id.recyclerview_teacher);
                             rView.setHasFixedSize(true);
                             layoutManager = new LinearLayoutManager(getContext());
-                            adapter = new TeacherAdapter(test);
+                            adapter = new TeacherAdapter(match);
 
                             rView.setLayoutManager(layoutManager);
                             rView.setAdapter(adapter);
@@ -71,7 +70,7 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                             adapter.setOnItemClickedListener(new TeacherAdapter.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(int position) {
-                                    Toast.makeText(getContext(), test.get(position).getTeacherName(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), match.get(position).getNome() + match.get(position).getCognome(), Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
