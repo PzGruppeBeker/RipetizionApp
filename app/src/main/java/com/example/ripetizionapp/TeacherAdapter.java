@@ -64,7 +64,7 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.TeacherV
         holder.teacherName.setText(currentItem.getNome() + currentItem.getCognome());
         ArrayList<String> subjectsList  = currentItem.getMaterie();
         StringBuilder subjects = new StringBuilder();
-        for (int i = 0; i <= subjectsList.size(); i++ ) {
+        for (int i = 0; i <= subjectsList.size() - 1; i++ ) {
             if (i == subjectsList.size() - 1) {
                 subjects.append(subjectsList.get(i));
             }
