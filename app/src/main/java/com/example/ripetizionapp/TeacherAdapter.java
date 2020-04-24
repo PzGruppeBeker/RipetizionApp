@@ -61,7 +61,7 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.TeacherV
     @Override
     public void onBindViewHolder(@NonNull TeacherViewHolder holder, int position) {
         Teacher currentItem = teacherList.get(position);
-        holder.teacherName.setText(currentItem.getNome() + currentItem.getCognome());
+        holder.teacherName.setText(currentItem.getNome() + " " + currentItem.getCognome());
         ArrayList<String> subjectsList  = currentItem.getMaterie();
         StringBuilder subjects = new StringBuilder();
         for (int i = 0; i <= subjectsList.size() - 1; i++ ) {
