@@ -45,11 +45,12 @@ public class SupportMethods {
     public static void registrazione(String givenemail, String nome, String conome, String provincia, String password, String materie){
 
         String email = mailtoDB(givenemail);
+        String materieLC = materie.toLowerCase();
         final String percorsoReg = "insegnanti"; //Percorso registrazione account.
         final String percorsoDati = "province"; //Percorso registrazione dati.
 
         //Creazione arraylist materie da stringa.
-        ArrayList<String> listamaterie = new ArrayList<String>(Arrays.asList(materie.split("[ \n]")));
+        ArrayList<String> listamaterie = new ArrayList<String>(Arrays.asList(materieLC.split("[ \n]")));
 
         //Creazione oggetti "rins" e "ins" rispettivamente per registrazione password account e dati.
         RegTeacher rins = new RegTeacher(password,provincia);
@@ -60,22 +61,23 @@ public class SupportMethods {
         regRef.child(email).setValue(rins);
 
         //Registrazione ins, serve creare nuovo percorso.
-        DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference(percorsoDati).child(provincia);
+        DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference(percorsoDati).child(provincia.toLowerCase());
         dataRef.child(email).setValue(ins);
     }
 
-    public static boolean checkTeacher (Teacher t, String givenName, String givenSurname, String givenSubjects){
-        if (t.getNome().equals(givenName)){
+    public static boolean checkTeacher (Teacher t, String givenName, String givenSurname, String givenSubject){
+
+        if (t.getNome().toLowerCase().equals(givenName.toLowerCase())){
             return true;
         }
-        if (t.getCognome().equals(givenSurname)){
+        if (t.getCognome().toLowerCase().equals(givenSurname.toLowerCase())){
             return true;
         }
 
         ArrayList<String> subjects = t.materie;
 
         for (String sub : subjects){
-            if (sub.equals(givenSubjects)){
+            if (sub.equals(givenSubject)){
                 return true;
             }
         }

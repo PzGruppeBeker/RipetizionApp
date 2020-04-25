@@ -38,18 +38,28 @@ public class FragmentRecyclerViewTeacher extends Fragment {
         String place = this.getArguments().getString("place");
         final String subject = this.getArguments().getString("subject");
 
-        FirebaseDatabase.getInstance().getReference().child("province").child(place).getRef()
+        FirebaseDatabase.getInstance().getReference().child("province").child(place.toLowerCase()).getRef()
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         Iterable<DataSnapshot> insegnanti = dataSnapshot.getChildren();
                         final ArrayList<Teacher> match = new ArrayList<>(); //Lista degli insegnanti che corrispondono alle caratteristiche.
-                        for (DataSnapshot nodo : insegnanti) {
-                            Teacher t = nodo.getValue(Teacher.class);
-                            //if (SupportMethods.checkTeacher(t,name,surname,subject)){
+                        if (name.isEmpty() & surname.isEmpty() & subject.isEmpty()){
+                            for (DataSnapshot nodo : insegnanti) {
+                                Teacher t = nodo.getValue(Teacher.class);
                                 match.add(t);
-                            //}
+                            }
                         }
+                        else {
+                            for (DataSnapshot nodo : insegnanti) {
+                                Teacher t = nodo.getValue(Teacher.class);
+                                if (SupportMethods.checkTeacher(t,name,surname,subject)){
+                                match.add(t);
+                                }
+                            }
+
+                        }
+
                         if (match.isEmpty()) {
                             notfound = rootView.findViewById(R.id.text_not_found);
                             notfound.setText("La ricerca non ha prodotto alcun risultato!");
