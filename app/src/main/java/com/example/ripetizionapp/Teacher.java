@@ -6,7 +6,7 @@ public class Teacher {
 
     String nome, cognome, località, provincia;
     int tel;
-    ArrayList<String> materie;
+    ArrayList<String> materie, recensioni;
 
     public Teacher(){}
 
@@ -33,6 +33,9 @@ public class Teacher {
     public ArrayList<String> getMaterie() {
         return materie;
     }
+    public ArrayList<String> getRecensioni(){
+        return recensioni;
+    }
     public void setNome(String s){
         nome=s;
     }
@@ -50,6 +53,15 @@ public class Teacher {
     }
     public void setLocalità(String s) {
         località=s;
+    }
+    public void setRecensioni(ArrayList<String> r){
+        recensioni=r;
+    }
+    private void addRecensione(String s){
+        recensioni.add(s);
+    }
+    private void deleteRecensione(int i){
+        recensioni.remove(i);
     }
 }
 

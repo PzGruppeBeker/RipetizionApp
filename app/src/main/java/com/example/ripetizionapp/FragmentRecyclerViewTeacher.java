@@ -57,7 +57,6 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                                 match.add(t);
                                 }
                             }
-
                         }
 
                         if (match.isEmpty()) {
