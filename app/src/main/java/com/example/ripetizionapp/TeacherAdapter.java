@@ -40,7 +40,6 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.TeacherV
                         int position = getAdapterPosition();
                         listener.onItemClick(position);
                     }
-
                 }
             });
         }

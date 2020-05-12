@@ -94,7 +94,6 @@ public class FragmentRegistration extends Fragment {
                                 break;
                             }
                             if (!insegnanti.iterator().hasNext()){
-                                ArrayList<TeacherItem> test = new ArrayList<>();
                                 SupportMethods.registrazione(email, name, surname, place, password, subjects);
 
                                 viewEmail.setError(null);

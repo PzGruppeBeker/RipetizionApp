@@ -18,6 +18,7 @@ public class Teacher {
         this.tel=tel;
         this.materie=materie;
     }
+
     public String getEmail(){
         return email;
     }

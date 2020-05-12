@@ -44,17 +44,16 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         Iterable<DataSnapshot> insegnanti = dataSnapshot.getChildren();
                         final ArrayList<Teacher> match = new ArrayList<>(); //Lista degli insegnanti che corrispondono alle caratteristiche.
-                        if (name.isEmpty() & surname.isEmpty() & subject.isEmpty()){
+                        if (name.isEmpty() & surname.isEmpty() & subject.isEmpty()) {
                             for (DataSnapshot nodo : insegnanti) {
                                 Teacher t = nodo.getValue(Teacher.class);
                                 match.add(t);
                             }
-                        }
-                        else {
+                        } else {
                             for (DataSnapshot nodo : insegnanti) {
                                 Teacher t = nodo.getValue(Teacher.class);
-                                if (SupportMethods.checkTeacher(t,name,surname,subject)){
-                                match.add(t);
+                                if (SupportMethods.checkTeacher(t, name, surname, subject)) {
+                                    match.add(t);
                                 }
                             }
                         }
@@ -80,7 +79,19 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                             adapter.setOnItemClickedListener(new TeacherAdapter.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(int position) {
-                                    Toast.makeText(getContext(), match.get(position).getNome() + match.get(position).getCognome(), Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(getContext(), match.get(position).getNome() + match.get(position).getCognome(), Toast.LENGTH_SHORT).show();
+                                    FragmentTeacher fragment = new FragmentTeacher();
+                                    Bundle args = new Bundle();
+                                    args.putString("name", match.get(position).getNome());
+                                    args.putString("surname", match.get(position).getCognome());
+                                    args.putString("place_1", match.get(position).getProvincia());
+                                    args.putString("place_2", match.get(position).getLocalità());
+                                    //args.putString("subject", match.get(position).getMaterie());
+                                    //args.putString("email", match.get(position).getEmail());
+                                    args.putInt("telephone", match.get(position).getTel());
+                                    fragment.setArguments(args);
+
+                                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
                                 }
                             });
                         }
