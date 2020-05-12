@@ -96,34 +96,3 @@ public class FragmentRecyclerViewTeacher extends Fragment {
         return rootView;
     }
 }
-
-/**
-
- final String name="";
- final String surname="";
- String provincia="";
- final ArrayList<String> subjects = null;
-
- FirebaseDatabase.getInstance().getReference().child("province").child(provincia).getRef()
- .addListenerForSingleValueEvent(new ValueEventListener() {
-@Override
-public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-Iterable<DataSnapshot> insegnanti = dataSnapshot.getChildren();
-ArrayList<Teacher> match = new ArrayList<>(); //Lista degli insegnanti che corrispondono alle caratteristiche.
-for (DataSnapshot nodo : insegnanti) {
-Teacher t = nodo.getValue(Teacher.class);
-if (SupportMethods.checkTeacher(t,name,surname,subjects)){
-match.add(t);
-}
-}
-
-//aggiungere codice...
-
-}
-
-@Override
-public void onCancelled(@NonNull DatabaseError databaseError) {
-
-}
-});
- */

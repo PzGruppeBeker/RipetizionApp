@@ -4,18 +4,22 @@ import java.util.ArrayList;
 
 public class Teacher {
 
-    String nome, cognome, località, provincia;
+    String email, nome, cognome, località, provincia;
     int tel;
     ArrayList<String> materie, recensioni;
 
     public Teacher(){}
 
-    public Teacher(String nome, String cognome, String provincia, int tel, ArrayList<String> materie){
+    public Teacher(String email, String nome, String cognome, String provincia, int tel, ArrayList<String> materie){
+        this.email=email;
         this.nome=nome;
         this.cognome=cognome;
         this.provincia=provincia;
         this.tel=tel;
         this.materie=materie;
+    }
+    public String getEmail(){
+        return email;
     }
     public String getNome(){
         return nome;
@@ -35,6 +39,9 @@ public class Teacher {
     }
     public ArrayList<String> getRecensioni(){
         return recensioni;
+    }
+    public void setEmail(String s){
+        email=s;
     }
     public void setNome(String s){
         nome=s;

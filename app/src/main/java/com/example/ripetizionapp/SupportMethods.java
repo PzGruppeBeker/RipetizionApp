@@ -54,7 +54,7 @@ public class SupportMethods {
 
         //Creazione oggetti "rins" e "ins" rispettivamente per registrazione password account e dati.
         RegTeacher rins = new RegTeacher(password,provincia);
-        Teacher ins = new Teacher(nome,conome,provincia,0000,listamaterie);
+        Teacher ins = new Teacher(email,nome,conome,provincia,0000,listamaterie);
 
         //Registrazione rins, usando percorso Reg.
         DatabaseReference regRef = FirebaseDatabase.getInstance().getReference(percorsoReg);
