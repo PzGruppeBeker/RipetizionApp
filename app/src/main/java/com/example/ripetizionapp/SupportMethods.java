@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SupportMethods {
+
     public static String mailtoDB (String s){
         String n = s.replace('.',':');
         return n;
@@ -16,31 +17,6 @@ public class SupportMethods {
         return n;
     }
 
-    /**
-    public static void checkEmail(String givenemail, final String nome, final String cognome, final String provincia, final String password, final String materie){
-
-        final String percorsoReg = "insegnanti";
-        final String email = mailtoDB(givenemail);
-        final DatabaseReference Ref = FirebaseDatabase.getInstance().getReference(percorsoReg);
-
-        Ref.addListenerForSingleValueEvent(new ValueEventListener() {
-
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChild(email)){
-                    //la mail è occupata.
-                }
-                else {
-                    //la mail è libera.
-                    registrazione(email,nome,cognome,provincia,password,materie,Ref);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-    */
 
     public static void registrazione(String givenemail, String nome, String conome, String provincia, String password, String materie){
 
@@ -82,6 +58,20 @@ public class SupportMethods {
             }
         }
         return false;
+    }
+
+    public static String listToString (ArrayList<String> l){
+        StringBuilder subjects=null;
+        for (int i = 0; i <= l.size() - 1; i++ ) {
+            if (i == l.size() - 1) {
+                subjects.append(l.get(i));
+            } else {
+                assert subjects != null;
+                subjects.append(l.get(i)).append(", ");
+            }
+        }
+        String s = subjects.toString();
+        return s;
     }
 }
 
