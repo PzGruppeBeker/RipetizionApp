@@ -61,12 +61,11 @@ public class SupportMethods {
     }
 
     public static String listToString (ArrayList<String> l){
-        StringBuilder subjects=null;
+        StringBuilder subjects = new StringBuilder();
         for (int i = 0; i <= l.size() - 1; i++ ) {
             if (i == l.size() - 1) {
                 subjects.append(l.get(i));
             } else {
-                assert subjects != null;
                 subjects.append(l.get(i)).append(", ");
             }
         }
