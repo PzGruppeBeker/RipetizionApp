@@ -11,6 +11,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EventListener;
 
 import androidx.annotation.NonNull;
 
@@ -48,7 +49,10 @@ public class SupportMethods {
         DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference(percorsoDati).child(provincia.toLowerCase());
         dataRef.child(email).setValue(ins);
     }
-
+    /**
+     * The method "checkTeacher" is useful just when a student need to find a teacher,
+     * NOT for check free-email.
+     */
     public static boolean checkTeacher (Teacher t, String givenName, String givenSurname, String givenSubject){
 
         if (t.getNome().toLowerCase().equals(givenName.toLowerCase())){
@@ -79,6 +83,24 @@ public class SupportMethods {
         }
         String s = subjects.toString();
         return s;
+    }
+
+    public static void addReview(String givenEmail, String provincia, String recensione){
+        String percorsoDati = "province"; //Percorso registrazione dati.
+        String email = mailtoDB(givenEmail);
+        String percorsoRecensioni = "recensioni";
+
+        FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(provincia.toLowerCase())
+                .child(email).child(percorsoRecensioni).setValue(recensione);
+
+    }
+
+    public static void removeReview(String givenEmail, String provincia, String recensione, int nReview){
+        String percorsoDati = "province"; //Percorso registrazione dati.
+        String email = mailtoDB(givenEmail);
+        String percorsoRecensioni = "recensioni";
+        FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(provincia.toLowerCase())
+                .child(email).child(percorsoRecensioni).child(String.valueOf(nReview)).removeValue();
     }
 
     public static void deleteTeacher (String givenEmail){
@@ -115,22 +137,57 @@ public class SupportMethods {
                 });
     }
 
-    public static void addReview(String givenEmail, String provincia, String recensione){
-        String percorsoDati = "province"; //Percorso registrazione dati.
-        String email = mailtoDB(givenEmail);
-        String percorsoRecensioni = "recensioni";
+    //updateTeacher dev'essere terminato!!
 
-        FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(provincia.toLowerCase())
-                .child(email).child(percorsoRecensioni).setValue(recensione);
+    public static void updateTeacher(String givenEmail, String givenNewEmail, String newPassword, final String newLocalità, final String newProvincia, final int newTel, final ArrayList<String> newMaterie){
+        final String percorsoReg = "insegnanti"; //Percorso registrazione account.
+        final String percorsoDati = "province"; //Percorso registrazione dati.
+        final String email = SupportMethods.mailtoDB(givenEmail);
+        String newMail = SupportMethods.mailtoDB(givenNewEmail);
 
-    }
+        FirebaseDatabase.getInstance().getReference().child(percorsoReg).child(email).getRef()
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        RegTeacher rt = dataSnapshot.getValue(RegTeacher.class);
 
-    public static void removeReview(String givenEmail, String provincia, String recensione, int nReview){
-        String percorsoDati = "province"; //Percorso registrazione dati.
-        String email = mailtoDB(givenEmail);
-        String percorsoRecensioni = "recensioni";
-        FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(provincia.toLowerCase())
-                .child(email).child(percorsoRecensioni).child(String.valueOf(nReview)).removeValue();
+                        FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(rt.getProvincia().toLowerCase()).child(email).getRef()
+                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        Teacher t = dataSnapshot.getValue(Teacher.class);
+
+                                        if (!t.località.equals(newLocalità)){
+                                            t.setLocalità(newLocalità);
+                                        }
+                                        if (!t.provincia.equals(newProvincia)){
+                                            t.setProvincia(newProvincia);
+                                        }
+                                        if (t.tel!=newTel){
+                                            t.setTel(newTel);
+                                        }
+                                        if (!t.getMaterie().equals(newMaterie)){
+                                            t.setMaterie(newMaterie);
+                                        }
+
+                                        deleteTeacher(email);
+
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
     }
 }
 
