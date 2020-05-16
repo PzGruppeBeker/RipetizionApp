@@ -9,6 +9,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 public class FragmentTeacher extends Fragment {
 
@@ -17,6 +21,11 @@ public class FragmentTeacher extends Fragment {
     private TextView profilePlace1;
     private TextView profilePlace2;
     private TextView profileNumber;
+
+    private RecyclerView rView;
+    private ReviewAdapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private TextView notfound;
 
     public FragmentTeacher() {
     }
@@ -44,6 +53,20 @@ public class FragmentTeacher extends Fragment {
         profilePlace2.setText(profilePlace2.getText() + place_2);
         profileNumber = rootView.findViewById(R.id.profile_number);
         profileNumber.setText(profileNumber.getText() + String.valueOf(telephone));
+
+        ArrayList<String> reviewList = new ArrayList<>();
+        reviewList.add("Le lezioni di questo professore sono un tot avanti.");
+        reviewList.add("L'abbigliamento del professore è piuttosto gay.");
+        reviewList.add("Un ebreo e un irlandese entrano in una lavanderia cinese... Con un'anatra gay. Chi non sfotte in compagnia... Io penso che ce l'abbia piccolo.");
+
+        rView = rootView.findViewById(R.id.recyclerview_review);
+        rView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getContext());
+        adapter = new ReviewAdapter(reviewList);
+
+        rView.setLayoutManager(layoutManager);
+        rView.setAdapter(adapter);
+
 
         //aggiungere mail e materie scrivendo un metodo di supporto che le renda stringhe
         //creare le risorse text in modo da poter aggiungere "nome: xxxxx"
