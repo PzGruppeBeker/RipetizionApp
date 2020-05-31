@@ -12,6 +12,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EventListener;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 
@@ -27,7 +28,7 @@ public class SupportMethods {
     }
 
 
-    public static void registrazione(String givenemail, String nome, String conome, String provincia, String password, String materie){
+    public static void registrazione(String givenemail, String nome, String conome, String provincia, String orari, String password, String materie){
 
         String email = mailtoDB(givenemail);
         String materieLC = materie.toLowerCase();
@@ -39,7 +40,7 @@ public class SupportMethods {
 
         //Creazione oggetti "rins" e "ins" rispettivamente per registrazione password account e dati.
         RegTeacher rins = new RegTeacher(password,provincia);
-        Teacher ins = new Teacher(email,nome,conome,provincia,0000,listamaterie);
+        Teacher ins = new Teacher(email,nome,conome, orari, provincia,0000,listamaterie);
 
         //Registrazione rins, usando percorso Reg.
         DatabaseReference regRef = FirebaseDatabase.getInstance().getReference(percorsoReg);
@@ -101,6 +102,55 @@ public class SupportMethods {
         String percorsoRecensioni = "recensioni";
         FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(provincia.toLowerCase())
                 .child(email).child(percorsoRecensioni).child(String.valueOf(nReview)).removeValue();
+    }
+
+    public static void loginTeacher (final String givenEmail, final String givenPassword) {
+        final String percorsoReg = "insegnanti"; //Percorso registrazione account.
+        final String percorsoDati = "province"; //Percorso registrazione dati.
+
+
+        FirebaseDatabase.getInstance().getReference().child(percorsoReg).getRef().
+                addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        final Iterable <DataSnapshot> RegTeacherMail = dataSnapshot.getChildren();
+
+                        for (DataSnapshot t : RegTeacherMail) {
+                            if (mailfromDB(Objects.requireNonNull(t.getKey())).equals(givenEmail)) {
+                                RegTeacher regTeacher = t.getValue(RegTeacher.class);
+                                if (regTeacher.getPassword().equals(givenPassword)){
+                                    String Provincia = regTeacher.getProvincia();
+
+                                    FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(Provincia)
+                                            .child(t.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            Teacher teacher = dataSnapshot.getValue(Teacher.class);
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+
+                                }
+                                else {
+                                    // Comunicare che la password inserita è errata.
+                                }
+                            }
+
+                            if (!RegTeacherMail.iterator().hasNext()){
+                                // Comunicare che la mail indicata non è registrata.
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
     }
 
     public static void deleteTeacher (String givenEmail){
