@@ -189,7 +189,7 @@ public class SupportMethods {
 
     //updateTeacher dev'essere terminato!!
 
-    public static void updateTeacher(String givenEmail, String givenNewEmail, String newPassword, final String newLocalità, final String newProvincia, final int newTel, final ArrayList<String> newMaterie){
+    public static void updateTeacher(final String givenEmail, final String givenNewEmail, final String newPassword, final String newLocalità, final String newOrario, final String newProvincia, final int newTel, final ArrayList<String> newMaterie){
         final String percorsoReg = "insegnanti"; //Percorso registrazione account.
         final String percorsoDati = "province"; //Percorso registrazione dati.
         final String email = SupportMethods.mailtoDB(givenEmail);
@@ -199,29 +199,68 @@ public class SupportMethods {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        RegTeacher rt = dataSnapshot.getValue(RegTeacher.class);
+                        final RegTeacher regTeacherMod = dataSnapshot.getValue(RegTeacher.class);
+                        if (!newPassword.isEmpty() & !newPassword.equals(regTeacherMod.password)) {
+                            regTeacherMod.setPassword(newPassword);
+                        }
+                        if (!newProvincia.isEmpty() & !newProvincia.equals(regTeacherMod.provincia)){
+                            regTeacherMod.setProvincia(newProvincia);
+                        }
 
-                        FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(rt.getProvincia().toLowerCase()).child(email).getRef()
+                        FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(regTeacherMod.getProvincia().toLowerCase()).child(email).getRef()
                                 .addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        Teacher t = dataSnapshot.getValue(Teacher.class);
+                                        final Teacher t = dataSnapshot.getValue(Teacher.class);
 
-                                        if (!t.località.equals(newLocalità)){
+                                        assert t != null;
+                                        if (!newLocalità.isEmpty() & !t.località.equals(newLocalità)){
                                             t.setLocalità(newLocalità);
                                         }
-                                        if (!t.provincia.equals(newProvincia)){
+                                        if (!newProvincia.isEmpty() & !t.provincia.equals(newProvincia)){
                                             t.setProvincia(newProvincia);
                                         }
-                                        if (t.tel!=newTel){
+                                        if (newTel!=000 & t.tel!=newTel){
                                             t.setTel(newTel);
                                         }
-                                        if (!t.getMaterie().equals(newMaterie)){
+                                        if (!newOrario.isEmpty() & !t.orario.equals(newOrario)){
+                                            t.setOrario(newOrario);
+                                        }
+                                        if (!newMaterie.isEmpty() & !t.getMaterie().equals(newMaterie)){
                                             t.setMaterie(newMaterie);
                                         }
 
-                                        deleteTeacher(email);
+                                        if (!givenNewEmail.isEmpty() & !t.getEmail().equals(givenNewEmail)) {
+                                            FirebaseDatabase.getInstance().getReference().child(percorsoReg)
+                                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                            Iterable<DataSnapshot> regTeacher = dataSnapshot.getChildren();
 
+                                                            for (DataSnapshot rt : regTeacher) {
+                                                                if (mailfromDB(rt.getKey()).equals(givenNewEmail)){
+                                                                    //comunicare che la nuova mail è già utilizzata.
+                                                                    return;
+                                                                }
+                                                            }
+                                                            t.setEmail(givenNewEmail);
+
+                                                            deleteTeacher(email);
+
+                                                            FirebaseDatabase.getInstance().getReference().child(percorsoReg).child(mailtoDB(givenNewEmail))
+                                                                    .setValue(regTeacherMod);
+
+                                                            FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(t.getProvincia())
+                                                                    .child(mailtoDB(t.getEmail())).setValue(t);
+
+                                                        }
+
+                                                        @Override
+                                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                        }
+                                                    });
+                                        }
 
                                     }
 
