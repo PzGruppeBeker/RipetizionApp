@@ -67,7 +67,7 @@ public class FragmentRegistration extends Fragment {
                 if (!checkEmail(email) | !checkName(name) | !checkSurname(surname) | !checkPassword(password) | !checkSubjects(subjects) | !checkPlace(place) | !checkHours(hours)) {
                     Toast.makeText(getContext(), "Qualcosa non va, controlla che sia tutto in ordine!", Toast.LENGTH_SHORT).show();
                 } else {
-                    checkReg(email, name, surname, place, password, subjects);
+                    checkReg(email, name, surname, place, password, subjects, hours);
                 }
 
 
@@ -78,7 +78,7 @@ public class FragmentRegistration extends Fragment {
         return rootView;
     }
 
-    private void checkReg(String givenemail, final String name, final String surname, final String place, final String password, final String subjects) {
+    private void checkReg(String givenemail, final String name, final String surname, final String place, final String password, final String subjects, final String hours) {
 
         final String percorsoReg = "insegnanti";
         final String email = SupportMethods.mailtoDB(givenemail);
@@ -97,7 +97,7 @@ public class FragmentRegistration extends Fragment {
                                 break;
                             }
                             if (!insegnanti.iterator().hasNext()){
-                                SupportMethods.registrazione(email, name, surname, place, password, subjects);
+                                SupportMethods.registrazione(email, name, surname, place, hours, password, subjects);
 
                                 viewEmail.setError(null);
                                 viewEmail.setErrorEnabled(false);
