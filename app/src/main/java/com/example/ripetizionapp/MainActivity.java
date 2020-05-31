@@ -65,13 +65,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (item.getItemId()) {
             case R.id.nav_home:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).addToBackStack(null).commit();
                 break;
             case R.id.nav_registration:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentRegistration()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentRegistration()).addToBackStack(null).commit();
                 break;
             case R.id.nav_login:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentLogin()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentLogin()).addToBackStack(null).commit();
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
