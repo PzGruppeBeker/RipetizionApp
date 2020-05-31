@@ -20,5 +20,6 @@
     <string name="fragment_search_string">Cerca subito se c\'è un professore in grado di aiutarti!</string>
     <string name="fragment_search_button">CERCA</string>
     <string name="fragment_registration_hours">Orari</string>
+    <string name="nav_home">Home</string>
 
 </resources>
