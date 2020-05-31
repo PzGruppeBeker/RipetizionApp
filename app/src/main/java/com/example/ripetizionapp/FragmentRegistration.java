@@ -34,6 +34,7 @@ public class FragmentRegistration extends Fragment {
     private TextInputLayout viewPlace;
     private TextInputLayout viewPassword;
     private TextInputLayout viewSubjects;
+    private TextInputLayout viewHours;
 
     public FragmentRegistration() {
     }
@@ -53,6 +54,7 @@ public class FragmentRegistration extends Fragment {
                 viewPlace = rootView.findViewById(R.id.text_input_place);
                 viewPassword = rootView.findViewById(R.id.text_input_password);
                 viewSubjects = rootView.findViewById(R.id.text_input_subject);
+                viewHours = rootView.findViewById(R.id.text_input_hours);
 
                 String email = viewEmail.getEditText().getText().toString().trim();
                 String name = viewName.getEditText().getText().toString().trim();
@@ -60,8 +62,9 @@ public class FragmentRegistration extends Fragment {
                 String place = viewPlace.getEditText().getText().toString().trim();
                 String password = viewPassword.getEditText().getText().toString().trim();
                 String subjects = viewSubjects.getEditText().getText().toString().trim();
+                String hours = viewHours.getEditText().getText().toString().trim();
 
-                if (!checkEmail(email) | !checkName(name) | !checkSurname(surname) | !checkPassword(password) | !checkSubjects(subjects) | !checkPlace(place)) {
+                if (!checkEmail(email) | !checkName(name) | !checkSurname(surname) | !checkPassword(password) | !checkSubjects(subjects) | !checkPlace(place) | !checkHours(hours)) {
                     Toast.makeText(getContext(), "Qualcosa non va, controlla che sia tutto in ordine!", Toast.LENGTH_SHORT).show();
                 } else {
                     checkReg(email, name, surname, place, password, subjects);
@@ -165,6 +168,17 @@ public class FragmentRegistration extends Fragment {
 
     private boolean checkPlace(String place) {
         if (place.isEmpty()) {
+            viewPlace.setError("Il campo non può essere lasciato vuoto");
+            return false;
+        } else {
+            viewPlace.setError(null);
+            viewPlace.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private boolean checkHours(String hours) {
+        if (hours.isEmpty()) {
             viewPlace.setError("Il campo non può essere lasciato vuoto");
             return false;
         } else {
