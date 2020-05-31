@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -46,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-
     }
 
     //gestire onbackpressed per i fragment
@@ -63,10 +63,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_registration:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentRegistration()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentRegistration()).addToBackStack(null).commit();
                 break;
             case R.id.nav_login:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentLogin()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentLogin()).addToBackStack(null).commit();
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
