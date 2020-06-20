@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +18,8 @@ import java.util.ArrayList;
 
 public class FragmentTeacher extends Fragment implements ReviewDialog.ReviewDialogListener {
 
+    private String Remail = null;
+    private String Rprovince = null;
     private TextView profileName;
     private TextView profileSurname;
     private TextView profilePlace1;
@@ -40,7 +44,10 @@ public class FragmentTeacher extends Fragment implements ReviewDialog.ReviewDial
         final String place_1 = this.getArguments().getString("place_1");
         final String place_2 = this.getArguments().getString("place_2");
         final int telephone = this.getArguments().getInt("telephone");
-        //final String email = this.getArguments().getString("email");
+        final String email = this.getArguments().getString("email");
+        Remail = this.getArguments().getString("email");
+        Rprovince = this.getArguments().getString("place_1");
+
         //final String subject = this.getArguments().getString("subject");
 
         profileName = rootView.findViewById(R.id.profile_name);
@@ -87,8 +94,17 @@ public class FragmentTeacher extends Fragment implements ReviewDialog.ReviewDial
         revdial.show(getActivity().getSupportFragmentManager(), "review");
     }
 
-    @Override
+
+    //@Override
     public void addReview(String review) {
+
+        String percorsoDati = "province"; //Percorso registrazione dati.
+        String adaptedemail = SupportMethods.mailtoDB(Remail);
+        String percorsoRecensioni = "recensioni";
+
+        FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(Rprovince.toLowerCase())
+                .child(adaptedemail).child(percorsoRecensioni).setValue(review);
+
 
     }
 }

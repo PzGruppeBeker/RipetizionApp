@@ -247,7 +247,7 @@ public class SupportMethods {
 
                                                             deleteTeacher(email);
 
-                                                            FirebaseDatabase.getInstance().getReference().child(percorsoReg).child(mailtoDB(givenNewEmail))
+                                                            FirebaseDatabase.getInstance().getReference().child(percorsoReg).child(mailtoDB(t.getEmail()))
                                                                     .setValue(regTeacherMod);
 
                                                             FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(t.getProvincia())
