@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class FragmentTeacher extends Fragment {
+public class FragmentTeacher extends Fragment implements ReviewDialog.ReviewDialogListener {
 
     private TextView profileName;
     private TextView profileSurname;
@@ -54,6 +54,15 @@ public class FragmentTeacher extends Fragment {
         profileNumber = rootView.findViewById(R.id.profile_number);
         profileNumber.setText(profileNumber.getText() + String.valueOf(telephone));
 
+        Button add = rootView.findViewById(R.id.add_review_button);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialog();
+
+            }
+        });
+
         ArrayList<String> reviewList = new ArrayList<>();
         reviewList.add("Le lezioni di questo professore sono un tot avanti.");
         reviewList.add("L'abbigliamento del professore è piuttosto gay.");
@@ -67,10 +76,19 @@ public class FragmentTeacher extends Fragment {
         rView.setLayoutManager(layoutManager);
         rView.setAdapter(adapter);
 
-
         //aggiungere mail e materie scrivendo un metodo di supporto che le renda stringhe
         //creare le risorse text in modo da poter aggiungere "nome: xxxxx"
 
         return rootView;
+    }
+
+    private void openDialog() {
+        ReviewDialog revdial = new ReviewDialog();
+        revdial.show(getActivity().getSupportFragmentManager(), "review");
+    }
+
+    @Override
+    public void addReview(String review) {
+
     }
 }

@@ -39,7 +39,6 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
     @Override
     public void onBindViewHolder(@NonNull ReviewAdapter.ReviewViewHolder holder, int position) {
         String currentItem = reviewList.get(position);
-
         holder.review.setText(currentItem);
     }
 
