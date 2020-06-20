@@ -13,9 +13,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="32dp"
+            android:padding="16dp"
             android:text="@string/fragment_login_title"
-            android:textSize="17sp" />
+            android:textSize="20dp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -26,7 +26,6 @@
             android:id="@+id/text_input_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="48dp"
             android:paddingLeft="24dp"
             android:paddingRight="24dp"
             app:errorEnabled="true">
@@ -59,6 +58,7 @@
         <Button
             android:id="@+id/button_login"
             android:layout_width="wrap_content"
+            android:textSize="16dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/fragment_login_button" />

@@ -15,12 +15,12 @@
             android:gravity="center"
             android:padding="16dp"
             android:text="@string/fragment_search_string"
-            android:textSize="17sp" />
+            android:textSize="20sp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="170dp"
-            android:src="@drawable/ic_search_database_black" />
+            android:src="@drawable/teacher_icon" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_input_name"
@@ -93,6 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textSize="16dp"
             android:text="@string/fragment_search_button" />
 
     </LinearLayout>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,13 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class FragmentTeacher extends Fragment implements ReviewDialog.ReviewDialogListener {
+public class FragmentTeacher extends Fragment {
 
     private TextView profileName;
     private TextView profileSurname;
     private TextView profilePlace1;
     private TextView profilePlace2;
     private TextView profileNumber;
+
+    private EditText editreview;
 
     private RecyclerView rView;
     private ReviewAdapter adapter;
@@ -33,7 +36,7 @@ public class FragmentTeacher extends Fragment implements ReviewDialog.ReviewDial
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_teacher, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_teacher, container, false);
 
         final String name = this.getArguments().getString("name");
         final String surname = this.getArguments().getString("surname");
@@ -58,8 +61,9 @@ public class FragmentTeacher extends Fragment implements ReviewDialog.ReviewDial
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDialog();
-
+                editreview = rootView.findViewById(R.id.edit_review);
+                String review = editreview.getText().toString();
+                Toast.makeText(getContext(), review, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -82,13 +86,4 @@ public class FragmentTeacher extends Fragment implements ReviewDialog.ReviewDial
         return rootView;
     }
 
-    private void openDialog() {
-        ReviewDialog revdial = new ReviewDialog();
-        revdial.show(getActivity().getSupportFragmentManager(), "review");
-    }
-
-    @Override
-    public void addReview(String review) {
-
-    }
 }
