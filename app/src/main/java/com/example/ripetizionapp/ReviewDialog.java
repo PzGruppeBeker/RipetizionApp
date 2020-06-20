@@ -12,8 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.fragment.app.DialogFragment;
 
-public class ReviewDialog extends AppCompatDialogFragment {
+public class ReviewDialog extends DialogFragment {
 
     private EditText editreview;
     private ReviewDialogListener listener;
