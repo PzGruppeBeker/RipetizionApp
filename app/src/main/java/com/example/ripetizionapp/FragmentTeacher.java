@@ -44,7 +44,7 @@ public class FragmentTeacher extends Fragment {
         final String place_1 = this.getArguments().getString("place_1");
         final String place_2 = this.getArguments().getString("place_2");
         final int telephone = this.getArguments().getInt("telephone");
-        final String email = SupportMethods.mailfromDB(this.getArguments().getString("email"));
+        final String email = this.getArguments().getString("email");
         //final String subject = this.getArguments().getString("subject");
 
         profileName = rootView.findViewById(R.id.profile_name);

@@ -11,7 +11,7 @@ public class Teacher {
     public Teacher(){}
 
     public Teacher(String email, String nome, String cognome, String provincia, String orario,  int tel, ArrayList<String> materie){
-        this.email=email;
+        this.email=SupportMethods.mailfromDB(email);
         this.nome=nome;
         this.cognome=cognome;
         this.provincia=provincia;
