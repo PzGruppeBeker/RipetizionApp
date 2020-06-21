@@ -61,7 +61,6 @@ public class FragmentTeacher extends Fragment {
         profileMail = rootView.findViewById(R.id.profile_email);
         profileMail.setText(profileMail.getText() + email);
 
-
         Button add = rootView.findViewById(R.id.add_review_button);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,16 +70,12 @@ public class FragmentTeacher extends Fragment {
                 Toast.makeText(getContext(), review, Toast.LENGTH_SHORT).show();
                 if (!review.isEmpty()){
                     SupportMethods.addReview(email,place_1,review);
+                    editreview.setText("");
+                    SupportMethods.hideKeyboardFrom(getContext(), rootView);
                     Toast.makeText(getContext(), "Grazie per il tuo tempo, la tua recensione sarà visibile al più presto!", Toast.LENGTH_SHORT).show();
                 } //cambiare l'edittext per far venire fuori l'errore in rosso
             }
         });
-
-        //ArrayList<String> reviewList = new ArrayList<>();
-        //reviewList.add("Le lezioni di questo professore sono un tot avanti.");
-        //reviewList.add("L'abbigliamento del professore è piuttosto gay.");
-        //reviewList.add("Un ebreo e un irlandese entrano in una lavanderia cinese... Con un'anatra gay. Chi non sfotte in compagnia... Io penso che ce l'abbia piccolo.");
-
 
         if (reviews == null) {
             notfound = rootView.findViewById(R.id.text_not_found);

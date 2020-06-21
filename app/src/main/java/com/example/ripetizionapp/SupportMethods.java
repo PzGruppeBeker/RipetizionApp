@@ -1,6 +1,10 @@
 package com.example.ripetizionapp;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.google.android.gms.tasks.Task;
 import com.google.common.base.Optional;
@@ -329,6 +333,11 @@ public class SupportMethods {
                     }
                 });
 
+    }
+
+    public static void hideKeyboardFrom(Context context, View view) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
 
