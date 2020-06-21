@@ -3,6 +3,7 @@ package com.example.ripetizionapp;
 import android.content.Intent;
 
 import com.google.android.gms.tasks.Task;
+import com.google.common.base.Optional;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,7 +41,7 @@ public class SupportMethods {
 
         //Creazione oggetti "rins" e "ins" rispettivamente per registrazione password account e dati.
         RegTeacher rins = new RegTeacher(password,provincia);
-        Teacher ins = new Teacher(email,nome,conome, orari, provincia,0000,listamaterie);
+        Teacher ins = new Teacher(email,nome,conome, provincia, orari,0000,listamaterie);
 
         //Registrazione rins, usando percorso Reg.
         DatabaseReference regRef = FirebaseDatabase.getInstance().getReference(percorsoReg);
@@ -86,13 +87,56 @@ public class SupportMethods {
         return s;
     }
 
-    public static void addReview(String givenEmail, String provincia, String recensione){
-        String percorsoDati = "province"; //Percorso registrazione dati.
-        String email = mailtoDB(givenEmail);
-        String percorsoRecensioni = "recensioni";
+    public static void addReview(final String givenEmail, final String provincia, final String recensione){
+        final String percorsoDati = "province"; //Percorso registrazione dati.
+        final String email = mailtoDB(givenEmail);
+        final String percorsoRecensioni = "recensioni";
 
         FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(provincia.toLowerCase())
-                .child(email).child(percorsoRecensioni).setValue(recensione);
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        final Teacher teacher;
+                        Iterable<DataSnapshot> teachers = dataSnapshot.getChildren();
+                        for (DataSnapshot t : teachers) {
+                            if (t.getKey().equals(email)){
+                                teacher = t.getValue(Teacher.class);
+
+                                FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(provincia.toLowerCase())
+                                        .child(SupportMethods.mailtoDB(givenEmail)).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.hasChild(percorsoRecensioni)){
+                                            ArrayList<String> recensioni = teacher.getRecensioni();
+                                            recensioni.add(recensione);
+                                            teacher.setRecensioni(recensioni);
+                                            FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(provincia.toLowerCase())
+                                                    .child(email).setValue(teacher);
+                                        } else {
+                                            ArrayList<String> recensioni = new ArrayList<>();
+                                            recensioni.add(recensione);
+                                            teacher.setRecensioni(recensioni);
+                                            FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(provincia.toLowerCase())
+                                                    .child(email).setValue(teacher);
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                                break;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
     }
 
@@ -193,7 +237,7 @@ public class SupportMethods {
         final String percorsoReg = "insegnanti"; //Percorso registrazione account.
         final String percorsoDati = "province"; //Percorso registrazione dati.
         final String email = SupportMethods.mailtoDB(givenEmail);
-        String newMail = SupportMethods.mailtoDB(givenNewEmail);
+        //String newMail = SupportMethods.mailtoDB(givenNewEmail);
 
         FirebaseDatabase.getInstance().getReference().child(percorsoReg).child(email).getRef()
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -260,6 +304,14 @@ public class SupportMethods {
 
                                                         }
                                                     });
+                                        } else {
+                                            deleteTeacher(email);
+
+                                            FirebaseDatabase.getInstance().getReference().child(percorsoReg).child(mailtoDB(t.getEmail()))
+                                                    .setValue(regTeacherMod);
+
+                                            FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(t.getProvincia())
+                                                    .child(mailtoDB(t.getEmail())).setValue(t);
                                         }
 
                                     }

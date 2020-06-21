@@ -22,6 +22,7 @@ public class FragmentTeacher extends Fragment {
     private TextView profilePlace1;
     private TextView profilePlace2;
     private TextView profileNumber;
+    private TextView profileMail;
 
     private EditText editreview;
 
@@ -43,7 +44,7 @@ public class FragmentTeacher extends Fragment {
         final String place_1 = this.getArguments().getString("place_1");
         final String place_2 = this.getArguments().getString("place_2");
         final int telephone = this.getArguments().getInt("telephone");
-        //final String email = this.getArguments().getString("email");
+        final String email = SupportMethods.mailfromDB(this.getArguments().getString("email"));
         //final String subject = this.getArguments().getString("subject");
 
         profileName = rootView.findViewById(R.id.profile_name);
@@ -56,6 +57,9 @@ public class FragmentTeacher extends Fragment {
         profilePlace2.setText(profilePlace2.getText() + place_2);
         profileNumber = rootView.findViewById(R.id.profile_number);
         profileNumber.setText(profileNumber.getText() + String.valueOf(telephone));
+        profileMail = rootView.findViewById(R.id.profile_email);
+        profileMail.setText(profileMail.getText() + email);
+
 
         Button add = rootView.findViewById(R.id.add_review_button);
         add.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +68,9 @@ public class FragmentTeacher extends Fragment {
                 editreview = rootView.findViewById(R.id.edit_review);
                 String review = editreview.getText().toString();
                 Toast.makeText(getContext(), review, Toast.LENGTH_SHORT).show();
+                if (!review.isEmpty()){
+                    SupportMethods.addReview(email,place_1,review);
+                }
             }
         });
 
