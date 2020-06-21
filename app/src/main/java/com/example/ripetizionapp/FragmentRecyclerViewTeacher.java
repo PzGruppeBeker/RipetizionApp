@@ -86,6 +86,7 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                                     //args.putString("subject", match.get(position).getMaterie());
                                     args.putString("email", match.get(position).getEmail());
                                     args.putInt("telephone", match.get(position).getTel());
+                                    args.putStringArrayList("reviews", match.get(position).getRecensioni());
                                     fragment.setArguments(args);
 
                                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();

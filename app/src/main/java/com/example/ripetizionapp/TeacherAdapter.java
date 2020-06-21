@@ -63,7 +63,6 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.TeacherV
         holder.teacherName.setText(currentItem.getNome() + " " + currentItem.getCognome());
         ArrayList<String> subjectsList  = currentItem.getMaterie();
         String subjects = SupportMethods.listToString(subjectsList);
-
         holder.teacherSubjects.setText(subjects);
     }
 

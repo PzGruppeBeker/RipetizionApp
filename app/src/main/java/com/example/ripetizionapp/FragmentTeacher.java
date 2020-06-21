@@ -46,6 +46,7 @@ public class FragmentTeacher extends Fragment {
         final int telephone = this.getArguments().getInt("telephone");
         final String email = this.getArguments().getString("email");
         //final String subject = this.getArguments().getString("subject");
+        final ArrayList reviews = this.getArguments().getStringArrayList("reviews");
 
         profileName = rootView.findViewById(R.id.profile_name);
         profileName.setText(profileName.getText() + name);
@@ -70,19 +71,20 @@ public class FragmentTeacher extends Fragment {
                 Toast.makeText(getContext(), review, Toast.LENGTH_SHORT).show();
                 if (!review.isEmpty()){
                     SupportMethods.addReview(email,place_1,review);
-                }
+                    Toast.makeText(getContext(), "Grazie per il tuo tempo, la tua recensione sarà visibile al più presto!", Toast.LENGTH_SHORT).show();
+                } //cambiare l'edittext per far venire fuori l'errore in rosso
             }
         });
 
-        ArrayList<String> reviewList = new ArrayList<>();
-        reviewList.add("Le lezioni di questo professore sono un tot avanti.");
-        reviewList.add("L'abbigliamento del professore è piuttosto gay.");
-        reviewList.add("Un ebreo e un irlandese entrano in una lavanderia cinese... Con un'anatra gay. Chi non sfotte in compagnia... Io penso che ce l'abbia piccolo.");
+        //ArrayList<String> reviewList = new ArrayList<>();
+        //reviewList.add("Le lezioni di questo professore sono un tot avanti.");
+        //reviewList.add("L'abbigliamento del professore è piuttosto gay.");
+        //reviewList.add("Un ebreo e un irlandese entrano in una lavanderia cinese... Con un'anatra gay. Chi non sfotte in compagnia... Io penso che ce l'abbia piccolo.");
 
         rView = rootView.findViewById(R.id.recyclerview_review);
         rView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
-        adapter = new ReviewAdapter(reviewList);
+        adapter = new ReviewAdapter(reviews);
 
         rView.setLayoutManager(layoutManager);
         rView.setAdapter(adapter);
