@@ -81,16 +81,21 @@ public class FragmentTeacher extends Fragment {
         //reviewList.add("L'abbigliamento del professore è piuttosto gay.");
         //reviewList.add("Un ebreo e un irlandese entrano in una lavanderia cinese... Con un'anatra gay. Chi non sfotte in compagnia... Io penso che ce l'abbia piccolo.");
 
-        rView = rootView.findViewById(R.id.recyclerview_review);
-        rView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getContext());
-        adapter = new ReviewAdapter(reviews);
 
-        rView.setLayoutManager(layoutManager);
-        rView.setAdapter(adapter);
+        if (reviews == null) {
+            notfound = rootView.findViewById(R.id.text_not_found);
+            notfound.setText("Non ci sono recensioni per questo professore al momento.");
+        } else {
+            rView = rootView.findViewById(R.id.recyclerview_review);
+            rView.setHasFixedSize(true);
+            layoutManager = new LinearLayoutManager(getContext());
+            adapter = new ReviewAdapter(reviews);
 
-        //aggiungere mail e materie scrivendo un metodo di supporto che le renda stringhe
-        //creare le risorse text in modo da poter aggiungere "nome: xxxxx"
+            rView.setLayoutManager(layoutManager);
+            rView.setAdapter(adapter);
+            //aggiungere mail e materie scrivendo un metodo di supporto che le renda stringhe
+            //creare le risorse text in modo da poter aggiungere "nome: xxxxx"
+        }
 
         return rootView;
     }
