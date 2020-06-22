@@ -49,7 +49,6 @@ public class FragmentTeacherLogin extends Fragment {
                 final String percorsoDati = "province"; //Percorso registrazione dati.
                 final String email = SupportMethods.mailtoDB(givenEmail);
 
-
                 FirebaseDatabase.getInstance().getReference().child(percorsoReg).getRef().
                         addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -67,23 +66,21 @@ public class FragmentTeacherLogin extends Fragment {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                     Teacher teacher = dataSnapshot.getValue(Teacher.class);
-
                                                 }
 
                                                 @Override
                                                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
                                                 }
                                             });
 
                                         }
                                         else {
-                                            // Comunicare che la password inserita è errata.
+                                            Toast.makeText(getContext(), "Attenzione! La password del tuo account è sbagliata!", Toast.LENGTH_SHORT).show();
                                         }
                                     }
 
                                     if (!RegTeacherMail.iterator().hasNext()){
-                                        // Comunicare che la mail indicata non è registrata.
+                                        Toast.makeText(getContext(), "Attenzione! Non esiste alcun account legato a questa email!", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
@@ -93,9 +90,6 @@ public class FragmentTeacherLogin extends Fragment {
 
                             }
                         });
-
-
-
             }
         });
 

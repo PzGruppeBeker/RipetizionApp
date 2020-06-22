@@ -71,8 +71,6 @@ public class FragmentRegistration extends Fragment {
                 }
 
 
-                //Toast.makeText(getContext(),freeEmail.toString(),Toast.LENGTH_LONG).show();
-                //Toast.makeText(getContext(), "CONFIRM INPUT RECEIVED", Toast.LENGTH_SHORT).show();
             }
         });
         return rootView;
