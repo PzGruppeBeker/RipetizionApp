@@ -23,7 +23,7 @@
             android:src="@drawable/teacher_icon" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_input_email"
+            android:id="@+id/text_input_email_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="24dp"
@@ -39,7 +39,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_input_password"
+            android:id="@+id/text_input_password_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="24dp"
