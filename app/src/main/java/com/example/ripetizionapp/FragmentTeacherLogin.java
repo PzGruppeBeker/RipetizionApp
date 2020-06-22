@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -70,19 +71,34 @@ public class FragmentTeacherLogin extends Fragment {
         profileMail = rootView.findViewById(R.id.profile_email_login);
         profileMail.setText(email);
 
-        String subjects = SupportMethods.listToString2(subjectslist);
+        final String subjects = SupportMethods.listToString2(subjectslist);
         profileSubjects = rootView.findViewById(R.id.profile_subjects_login);
         profileSubjects.setText(subjects);
+
+        if (reviewslist == null) {
+            notfound = rootView.findViewById(R.id.text_not_found);
+            notfound.setText("Non ci sono recensioni per questo professore al momento.");
+        } else {
+            rView = rootView.findViewById(R.id.recyclerview_review);
+            rView.setHasFixedSize(true);
+            layoutManager = new LinearLayoutManager(getContext());
+            adapter = new ReviewAdapter(reviewslist);
+
+            rView.setLayoutManager(layoutManager);
+            rView.setAdapter(adapter);
+        }
 
         Button confirm = rootView.findViewById(R.id.button_profile);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getContext(), "Grazie per il tuo tempo, la tua recensione sarà visibile al più presto!", Toast.LENGTH_SHORT).show();
-
-
-
+                if (!profilePlace1.equals(place_1) || !profilePlace2.equals(place_2) || !profileMail.equals(email) || !profileNumber.equals(telephone) || !profileSubjects.equals(subjects)) {
+                    //TODO
+                    Toast.makeText(getContext(), "Informazioni profilo aggiornate.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Non è stato modificato nulla", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
