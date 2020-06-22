@@ -44,6 +44,8 @@ public class FragmentLogin extends Fragment {
 
                 final String email = viewEmail.getEditText().getText().toString().trim();
                 final String password = viewPassword.getEditText().getText().toString().trim();
+                //errore in rosso
+
 
                 final String percorsoReg = "insegnanti"; //Percorso registrazione account.
                 final String percorsoDati = "province"; //Percorso registrazione dati.
