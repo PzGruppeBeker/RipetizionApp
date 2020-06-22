@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,135 +19,142 @@
             android:gravity="center"
             android:text="PROFILO PROFESSORE" />
 
-        <LinearLayout
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:weightSum="3">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="2">
-
-                <TextView
-                    android:id="@+id/profile_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:textSize="16dp"
-                    android:text="Nome: " />
-
-                <TextView
-                    android:id="@+id/profile_surname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:textSize="16dp"
-                    android:text="Cognome: " />
-
-                <TextView
-                    android:id="@+id/profile_email"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:textSize="16dp"
-                    android:text="Email: " />
-
-                <TextView
-                    android:id="@+id/profile_place_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:textSize="16dp"
-                    android:text="Provincia: " />
-
-                <TextView
-                    android:id="@+id/profile_place_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:textSize="16dp"
-                    android:text="Comune: " />
-
-                <TextView
-                    android:id="@+id/profile_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:textSize="16dp"
-                    android:text="Telefono: " />
-
-                <TextView
-                    android:id="@+id/profile_subjects"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:textSize="16dp"
-                    android:text="Materie: " />
-
-            </LinearLayout>
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:weightSum="3">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="NOME"
-                    android:padding="12dp"
-                    android:textSize="16dp"
-                    android:id="@+id/profile_name_login"/>
+                    android:orientation="vertical"
+                    android:layout_weight="2">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="COGNOME"
-                    android:padding="12dp"
-                    android:textSize="16dp"
-                    android:id="@+id/profile_surname_login"/>
+                    <TextView
+                        android:id="@+id/profile_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp"
+                        android:textSize="16dp"
+                        android:text="Nome: " />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:padding="12dp"
-                    android:id="@+id/profile_email_login"/>
+                    <TextView
+                        android:id="@+id/profile_surname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp"
+                        android:textSize="16dp"
+                        android:text="Cognome: " />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:padding="12dp"
-                    android:id="@+id/profile_place_1_login"/>
+                    <TextView
+                        android:id="@+id/profile_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp"
+                        android:textSize="16dp"
+                        android:text="Email: " />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:padding="12dp"
-                    android:id="@+id/profile_place_2_login"/>
+                    <TextView
+                        android:id="@+id/profile_place_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp"
+                        android:textSize="16dp"
+                        android:text="Provincia: " />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:padding="12dp"
-                    android:id="@+id/profile_number_login"/>
+                    <TextView
+                        android:id="@+id/profile_place_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp"
+                        android:textSize="16dp"
+                        android:text="Comune: " />
 
-                <EditText
+                    <TextView
+                        android:id="@+id/profile_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp"
+                        android:textSize="16dp"
+                        android:text="Telefono: " />
+
+                    <TextView
+                        android:id="@+id/profile_subjects"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp"
+                        android:textSize="16dp"
+                        android:text="Materie: " />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:padding="12dp"
-                    android:id="@+id/profile_subjects_login"/>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="NOME"
+                        android:padding="12dp"
+                        android:textSize="16dp"
+                        android:id="@+id/profile_name_login"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="COGNOME"
+                        android:padding="12dp"
+                        android:textSize="16dp"
+                        android:id="@+id/profile_surname_login"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="12dp"
+                        android:id="@+id/profile_email_login"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="12dp"
+                        android:id="@+id/profile_place_1_login"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="12dp"
+                        android:id="@+id/profile_place_2_login"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="12dp"
+                        android:id="@+id/profile_number_login"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="12dp"
+                        android:id="@+id/profile_subjects_login"/>
+
+                </LinearLayout>
 
             </LinearLayout>
-
-        </LinearLayout>
+            
+        </ScrollView>
 
         <Button
             android:id="@+id/button_profile"

@@ -61,6 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingBottom="16dp"
+            android:textSize="18dp"
             android:text="Remember me  "/>
 
         <Button
