@@ -57,9 +57,7 @@ public class FragmentLogin extends Fragment {
                                 Iterable <DataSnapshot> RegTeacherMail = dataSnapshot.getChildren();
 
                                 for (DataSnapshot t : RegTeacherMail) {
-
                                     if (email.equals(SupportMethods.mailfromDB(t.getKey()))) {
-                                        Toast.makeText(getContext(),"accesso", Toast.LENGTH_LONG).show();
                                         RegTeacher regTeacher = t.getValue(RegTeacher.class);
                                         if (regTeacher.getPassword().equals(password)){
                                             String Provincia = regTeacher.getProvincia();
@@ -90,13 +88,14 @@ public class FragmentLogin extends Fragment {
                                                 }
                                             });
 
-                                        }
+                                        break;}
                                         else {
                                             Toast.makeText(getContext(), "Attenzione! La password del tuo account è sbagliata!", Toast.LENGTH_SHORT).show();
+                                            break;
                                         }
                                     }
 
-                                    if (!RegTeacherMail.iterator().hasNext()){
+                                    else if  (!RegTeacherMail.iterator().hasNext()){
                                         Toast.makeText(getContext(), "Attenzione! Non esiste alcun account legato a questa email!", Toast.LENGTH_SHORT).show();
                                     }
                                 }
