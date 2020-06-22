@@ -1,10 +1,13 @@
 package com.example.ripetizionapp;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,6 +25,17 @@ public class FragmentLogin extends Fragment {
 
     private TextInputLayout viewEmail;
     private TextInputLayout viewPassword;
+    private Button login;
+    private Switch switch1;
+
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String EMAIL = "email";
+    public static final String PASSWORD = "password";
+    public static final String SWITCH = "switch";
+
+    private String EMAILSTORED;
+    private String PASSWORDSTORED;
+    private Boolean SWITCHSTORED;
 
     public FragmentLogin() {
     }
@@ -31,16 +45,17 @@ public class FragmentLogin extends Fragment {
 
         final View rootView = inflater.inflate(R.layout.fragment_login, container, false);
 
-        //verificare se è necessario cambiare l'id delle view in fragment_login, dato che i campi email
-        //e password hanno lo stesso id di quelle in fragment_registration
+        login = rootView.findViewById(R.id.button_login);
+        switch1 = rootView.findViewById(R.id.button_switch);
+        viewEmail = rootView.findViewById(R.id.text_input_email_login);
+        viewPassword = rootView.findViewById(R.id.text_input_password_login);
 
-        Button login = rootView.findViewById(R.id.button_login);
+        loadData();
+        updateViews();
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                viewEmail = rootView.findViewById(R.id.text_input_email_login);
-                viewPassword = rootView.findViewById(R.id.text_input_password_login);
 
                 final String email = viewEmail.getEditText().getText().toString().trim();
                 final String password = viewPassword.getEditText().getText().toString().trim();
@@ -80,6 +95,13 @@ public class FragmentLogin extends Fragment {
                                                     args.putStringArrayList("reviews", teacher.getRecensioni());
                                                     fragment.setArguments(args);
 
+                                                    if (switch1.isChecked()) {
+                                                        saveData(email, password);
+                                                    } else {
+                                                        saveData("", "");
+                                                    }
+                                                    saveState();
+
                                                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
                                                 }
 
@@ -111,6 +133,37 @@ public class FragmentLogin extends Fragment {
         });
 
         return rootView;
+    }
+
+    public void saveData(String mail, String psw) {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(EMAIL, mail);
+        editor.putString(PASSWORD, psw);
+        editor.apply();
+        Toast.makeText(getContext(), "SAVED", Toast.LENGTH_SHORT).show();
+    }
+
+    public void saveState() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(SWITCH, switch1.isChecked());
+        editor.apply();
+    }
+
+    public void loadData() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        EMAILSTORED = sharedPreferences.getString(EMAIL, "");
+        PASSWORDSTORED = sharedPreferences.getString(PASSWORD, "");
+        SWITCHSTORED = sharedPreferences.getBoolean(SWITCH, false);
+        //Toast.makeText(getContext(), "LOADED", Toast.LENGTH_SHORT).show();
+    }
+
+    public void updateViews() {
+        viewEmail.getEditText().setText(EMAILSTORED);
+        viewPassword.getEditText().setText(PASSWORDSTORED);
+        switch1.setChecked(SWITCHSTORED);
+        Toast.makeText(getContext(), "VIEW UPDATED", Toast.LENGTH_SHORT).show();
     }
     
 }
