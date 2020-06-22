@@ -42,21 +42,22 @@ public class FragmentLogin extends Fragment {
                 viewEmail = rootView.findViewById(R.id.text_input_email_login);
                 viewPassword = rootView.findViewById(R.id.text_input_password_login);
 
-                String givenEmail = viewEmail.getEditText().getText().toString().trim();
+                final String email = viewEmail.getEditText().getText().toString().trim();
                 final String password = viewPassword.getEditText().getText().toString().trim();
 
                 final String percorsoReg = "insegnanti"; //Percorso registrazione account.
                 final String percorsoDati = "province"; //Percorso registrazione dati.
-                final String email = SupportMethods.mailtoDB(givenEmail);
 
-                FirebaseDatabase.getInstance().getReference().child(percorsoReg).getRef().
-                        addListenerForSingleValueEvent(new ValueEventListener() {
+                FirebaseDatabase.getInstance().getReference().child(percorsoReg).getRef()
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                final Iterable <DataSnapshot> RegTeacherMail = dataSnapshot.getChildren();
+                                Iterable <DataSnapshot> RegTeacherMail = dataSnapshot.getChildren();
 
                                 for (DataSnapshot t : RegTeacherMail) {
-                                    if (SupportMethods.mailfromDB(Objects.requireNonNull(t.getKey())).equals(email)) {
+
+                                    if (email.equals(SupportMethods.mailfromDB(t.getKey()))) {
+                                        Toast.makeText(getContext(),"accesso", Toast.LENGTH_LONG).show();
                                         RegTeacher regTeacher = t.getValue(RegTeacher.class);
                                         if (regTeacher.getPassword().equals(password)){
                                             String Provincia = regTeacher.getProvincia();

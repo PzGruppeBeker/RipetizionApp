@@ -4,6 +4,8 @@ public class RegTeacher {
 
     String password,provincia;
 
+    public RegTeacher(){}
+
     RegTeacher(String password, String provincia) {
         this.password=password;
         this.provincia=provincia;
