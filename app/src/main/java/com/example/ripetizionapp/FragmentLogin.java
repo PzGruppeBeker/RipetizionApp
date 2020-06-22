@@ -141,7 +141,7 @@ public class FragmentLogin extends Fragment {
         editor.putString(EMAIL, mail);
         editor.putString(PASSWORD, psw);
         editor.apply();
-        Toast.makeText(getContext(), "SAVED", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "SAVED", Toast.LENGTH_SHORT).show();
     }
 
     public void saveState() {
@@ -163,7 +163,6 @@ public class FragmentLogin extends Fragment {
         viewEmail.getEditText().setText(EMAILSTORED);
         viewPassword.getEditText().setText(PASSWORDSTORED);
         switch1.setChecked(SWITCHSTORED);
-        Toast.makeText(getContext(), "VIEW UPDATED", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "VIEW UPDATED", Toast.LENGTH_SHORT).show();
     }
-    
 }
