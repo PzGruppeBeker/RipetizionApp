@@ -91,6 +91,19 @@ public class SupportMethods {
         return s;
     }
 
+    public static String listToString2 (ArrayList<String> l){
+        StringBuilder subjects = new StringBuilder();
+        for (int i = 0; i <= l.size() - 1; i++ ) {
+            if (i == l.size() - 1) {
+                subjects.append(l.get(i));
+            } else {
+                subjects.append(l.get(i)).append("\n");
+            }
+        }
+        String s = subjects.toString();
+        return s;
+    }
+
     public static void addReview(final String givenEmail, final String provincia, final String recensione){
         final String percorsoDati = "province"; //Percorso registrazione dati.
         final String email = mailtoDB(givenEmail);
