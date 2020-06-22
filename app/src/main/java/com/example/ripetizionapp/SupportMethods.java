@@ -152,9 +152,11 @@ public class SupportMethods {
                 .child(email).child(percorsoRecensioni).child(String.valueOf(nReview)).removeValue();
     }
 
-    public static void loginTeacher (final String givenEmail, final String givenPassword) {
+    /**
+    public static void loginTeacher (final String givenEmail, final String givenPassword) { //ATTENZIONE da ridefinire!
         final String percorsoReg = "insegnanti"; //Percorso registrazione account.
         final String percorsoDati = "province"; //Percorso registrazione dati.
+        final String email = mailtoDB(givenEmail);
 
 
         FirebaseDatabase.getInstance().getReference().child(percorsoReg).getRef().
@@ -164,7 +166,7 @@ public class SupportMethods {
                         final Iterable <DataSnapshot> RegTeacherMail = dataSnapshot.getChildren();
 
                         for (DataSnapshot t : RegTeacherMail) {
-                            if (mailfromDB(Objects.requireNonNull(t.getKey())).equals(givenEmail)) {
+                            if (mailfromDB(Objects.requireNonNull(t.getKey())).equals(email)) {
                                 RegTeacher regTeacher = t.getValue(RegTeacher.class);
                                 if (regTeacher.getPassword().equals(givenPassword)){
                                     String Provincia = regTeacher.getProvincia();
@@ -200,6 +202,7 @@ public class SupportMethods {
                     }
                 });
     }
+    */
 
     public static void deleteTeacher (String givenEmail){
         final String percorsoReg = "insegnanti"; //Percorso registrazione account.
@@ -237,7 +240,7 @@ public class SupportMethods {
 
     //updateTeacher dev'essere terminato!!
 
-    public static void updateTeacher(final String givenEmail, final String givenNewEmail, final String newPassword, final String newLocalità, final String newOrario, final String newProvincia, final int newTel, final ArrayList<String> newMaterie){
+    public static void updateTeacher (final String givenEmail, final String givenNewEmail, final String newPassword, final String newLocalita, final String newOrario, final String newProvincia, final int newTel, final ArrayList<String> newMaterie){
         final String percorsoReg = "insegnanti"; //Percorso registrazione account.
         final String percorsoDati = "province"; //Percorso registrazione dati.
         final String email = SupportMethods.mailtoDB(givenEmail);
@@ -262,8 +265,8 @@ public class SupportMethods {
                                         final Teacher t = dataSnapshot.getValue(Teacher.class);
 
                                         assert t != null;
-                                        if (!newLocalità.isEmpty() & !t.località.equals(newLocalità)){
-                                            t.setLocalità(newLocalità);
+                                        if (!newLocalita.isEmpty() & !t.località.equals(newLocalita)){
+                                            t.setLocalità(newLocalita);
                                         }
                                         if (!newProvincia.isEmpty() & !t.provincia.equals(newProvincia)){
                                             t.setProvincia(newProvincia);
@@ -334,6 +337,40 @@ public class SupportMethods {
                 });
 
     }
+
+    //Da terminare.
+    public static void loginAdmin(String givenEmail, String password){
+        final String email = mailtoDB(givenEmail);
+        final String percorsoAdmin = "administrators";
+
+        FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.hasChild(percorsoAdmin)){
+                            FirebaseDatabase.getInstance().getReference().child(percorsoAdmin)
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                }
+        );
+    }
+
 
     public static void hideKeyboardFrom(Context context, View view) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
