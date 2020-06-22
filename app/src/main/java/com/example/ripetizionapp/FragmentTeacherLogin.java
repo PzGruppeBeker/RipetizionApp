@@ -66,6 +66,20 @@ public class FragmentTeacherLogin extends Fragment {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                     Teacher teacher = dataSnapshot.getValue(Teacher.class);
+
+                                                    FragmentTeacherLogin fragment = new FragmentTeacherLogin();
+                                                    Bundle args = new Bundle();
+                                                    args.putString("name", teacher.getNome());
+                                                    args.putString("surname", teacher.getCognome());
+                                                    args.putString("place_1", teacher.getProvincia());
+                                                    args.putString("place_2", teacher.getLocalità());
+                                                    args.putStringArrayList("subject", teacher.getMaterie());
+                                                    args.putString("email", teacher.getEmail());
+                                                    args.putInt("telephone", teacher.getTel());
+                                                    args.putStringArrayList("reviews", teacher.getRecensioni());
+                                                    fragment.setArguments(args);
+
+                                                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
                                                 }
 
                                                 @Override
