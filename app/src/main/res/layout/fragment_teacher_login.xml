@@ -99,7 +99,7 @@
                     android:text="NOME"
                     android:padding="12dp"
                     android:textSize="16dp"
-                    android:id="@+id/edit_profile_name"/>
+                    android:id="@+id/profile_name_login"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -107,42 +107,42 @@
                     android:text="COGNOME"
                     android:padding="12dp"
                     android:textSize="16dp"
-                    android:id="@+id/edit_profile_surname"/>
+                    android:id="@+id/profile_surname_login"/>
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16dp"
                     android:padding="12dp"
-                    android:id="@+id/edit_profile_email"/>
+                    android:id="@+id/profile_email_login"/>
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16dp"
                     android:padding="12dp"
-                    android:id="@+id/edit_profile_place_1"/>
+                    android:id="@+id/profile_place_1_login"/>
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16dp"
                     android:padding="12dp"
-                    android:id="@+id/edit_profile_place_2"/>
+                    android:id="@+id/profile_place_2_login"/>
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16dp"
                     android:padding="12dp"
-                    android:id="@+id/edit_profile_number"/>
+                    android:id="@+id/profile_number_login"/>
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16dp"
                     android:padding="12dp"
-                    android:id="@+id/edit_profile_subjects"/>
+                    android:id="@+id/profile_subjects_login"/>
 
             </LinearLayout>
 

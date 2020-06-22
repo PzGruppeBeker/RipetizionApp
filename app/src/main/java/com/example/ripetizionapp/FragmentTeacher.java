@@ -25,6 +25,7 @@ public class FragmentTeacher extends Fragment {
     private TextView profilePlace2;
     private TextView profileNumber;
     private TextView profileMail;
+    //private TextView profileSubjects;
 
     private TextInputLayout editreview;
 
