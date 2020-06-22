@@ -64,11 +64,11 @@ public class FragmentSearch extends Fragment {
 
     private boolean checkPlace(String place) {
         if (place.isEmpty()){
-            viewName.setError("Questo campo non può essere lasciato vuoto");
+            viewPlace.setError("Questo campo non può essere lasciato vuoto");
             return false;
         } else {
-            viewName.setError(null);
-            viewName.setErrorEnabled(false);
+            viewPlace.setError(null);
+            viewPlace.setErrorEnabled(false);
             return true;
         }
     }
