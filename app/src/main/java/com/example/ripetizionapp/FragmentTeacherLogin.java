@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class FragmentTeacherLogin extends Fragment {
@@ -92,9 +93,20 @@ public class FragmentTeacherLogin extends Fragment {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String  newMail, newPassword, newLocalita, newOrario, newProvincia, stringMaterie;
+                int newTel;
+                newMail = profileMail.getText().toString();
+                newLocalita = profilePlace2.getText().toString();
+                newProvincia = profilePlace1.getText().toString();
+                newTel = Integer.parseInt(profileNumber.getText().toString());
+                stringMaterie = profileSubjects.getText().toString();
+                ArrayList<String> newSubjects = new ArrayList<String>(Arrays.asList(stringMaterie.split("[,\n]")));
 
-                if (!profilePlace1.getText().toString().equals(place_1) || !profilePlace2.getText().toString().equals(place_2) || !profileMail.getText().toString().equals(email) || !profileNumber.getText().toString().equals(telephone) || !profileSubjects.getText().toString().equals(subjects)) {
-                    //TODO
+                if (!newProvincia.equals(place_1) || !newLocalita.equals(place_2) || !newMail.equals(email) || newTel!=telephone || !stringMaterie.equals(subjects)) {
+
+
+                    SupportMethods.updateTeacher(email,newMail,newLocalita,newProvincia,newTel,newSubjects);
+
                     Toast.makeText(getContext(), "Informazioni profilo aggiornate.", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getContext(), "Non è stato modificato nulla.", Toast.LENGTH_SHORT).show();

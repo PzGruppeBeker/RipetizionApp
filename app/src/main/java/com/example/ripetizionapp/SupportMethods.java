@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.Task;
 import com.google.common.base.Optional;
@@ -41,11 +42,11 @@ public class SupportMethods {
         final String percorsoDati = "province"; //Percorso registrazione dati.
 
         //Creazione arraylist materie da stringa.
-        ArrayList<String> listamaterie = new ArrayList<String>(Arrays.asList(materieLC.split("[ \n]")));
+        ArrayList<String> listamaterie = new ArrayList<String>(Arrays.asList(materieLC.split("[,\n]")));
 
         //Creazione oggetti "rins" e "ins" rispettivamente per registrazione password account e dati.
         RegTeacher rins = new RegTeacher(password,provincia);
-        Teacher ins = new Teacher(email,nome,conome, provincia, orari,0000,listamaterie);
+        Teacher ins = new Teacher(givenemail,nome,conome, provincia, orari,0000,listamaterie);
 
         //Registrazione rins, usando percorso Reg.
         DatabaseReference regRef = FirebaseDatabase.getInstance().getReference(percorsoReg);
@@ -71,7 +72,7 @@ public class SupportMethods {
         ArrayList<String> subjects = t.materie;
 
         for (String sub : subjects){
-            if (sub.equals(givenSubject)){
+            if (sub.toLowerCase().equals(givenSubject.toLowerCase())){
                 return true;
             }
         }
@@ -251,96 +252,103 @@ public class SupportMethods {
                 });
     }
 
-    //updateTeacher dev'essere terminato!!
+    /**
+    updateTeacher dev'essere RI-AGGIORNATO con newPassword e newOrario quando saranno inseriti.
+    */
 
-    public static void updateTeacher (final String givenEmail, final String givenNewEmail, final String newPassword, final String newLocalita, final String newOrario, final String newProvincia, final int newTel, final ArrayList<String> newMaterie){
-        final String percorsoReg = "insegnanti"; //Percorso registrazione account.
-        final String percorsoDati = "province"; //Percorso registrazione dati.
-        final String email = SupportMethods.mailtoDB(givenEmail);
-        //String newMail = SupportMethods.mailtoDB(givenNewEmail);
+    public static void updateTeacher (final String email, final String newEmail, final String newLocalita, final String newProvincia, final int newTel, final ArrayList<String> newMaterie) {
+        final String percorsoReg, percorsoDati;
+        percorsoReg = "insegnanti";
+        percorsoDati = "province";
 
-        FirebaseDatabase.getInstance().getReference().child(percorsoReg).child(email).getRef()
+        FirebaseDatabase.getInstance().getReference().child(percorsoReg).child(mailtoDB(email))
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        final RegTeacher regTeacherMod = dataSnapshot.getValue(RegTeacher.class);
-                        if (!newPassword.isEmpty() & !newPassword.equals(regTeacherMod.password)) {
-                            regTeacherMod.setPassword(newPassword);
-                        }
-                        if (!newProvincia.isEmpty() & !newProvincia.equals(regTeacherMod.provincia)){
-                            regTeacherMod.setProvincia(newProvincia);
-                        }
+                        final RegTeacher regTeacher = dataSnapshot.getValue(RegTeacher.class);
+                        final String oldProvincia = regTeacher.getProvincia();
 
-                        FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(regTeacherMod.getProvincia().toLowerCase()).child(email).getRef()
-                                .addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        final Teacher t = dataSnapshot.getValue(Teacher.class);
+                        FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(regTeacher.getProvincia().toLowerCase())
+                                .child(mailtoDB(email)).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                final Teacher teacher = dataSnapshot.getValue(Teacher.class);
 
-                                        assert t != null;
-                                        if (!newLocalita.isEmpty() & !t.località.equals(newLocalita)){
-                                            t.setLocalità(newLocalita);
-                                        }
-                                        if (!newProvincia.isEmpty() & !t.provincia.equals(newProvincia)){
-                                            t.setProvincia(newProvincia);
-                                        }
-                                        if (newTel!=000 & t.tel!=newTel){
-                                            t.setTel(newTel);
-                                        }
-                                        if (!newOrario.isEmpty() & !t.orario.equals(newOrario)){
-                                            t.setOrario(newOrario);
-                                        }
-                                        if (!newMaterie.isEmpty() & !t.getMaterie().equals(newMaterie)){
-                                            t.setMaterie(newMaterie);
-                                        }
+                                if (!newLocalita.isEmpty()){
+                                    teacher.setLocalità(newLocalita);
+                                }
 
-                                        if (!givenNewEmail.isEmpty() & !t.getEmail().equals(givenNewEmail)) {
-                                            FirebaseDatabase.getInstance().getReference().child(percorsoReg)
-                                                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                                                        @Override
-                                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                            Iterable<DataSnapshot> regTeacher = dataSnapshot.getChildren();
+                                if (newTel!=teacher.getTel()){
+                                    teacher.setTel(newTel);
+                                }
 
-                                                            for (DataSnapshot rt : regTeacher) {
-                                                                if (mailfromDB(rt.getKey()).equals(givenNewEmail)){
-                                                                    //comunicare che la nuova mail è già utilizzata.
-                                                                    return;
-                                                                }
-                                                            }
-                                                            t.setEmail(givenNewEmail);
+                                if (!newProvincia.isEmpty()){
+                                    teacher.setProvincia(newProvincia);
+                                    regTeacher.setProvincia(newProvincia);
+                                }
 
-                                                            deleteTeacher(email);
+                                if (!newMaterie.isEmpty()){
+                                    teacher.setMaterie(newMaterie);
+                                }
 
-                                                            FirebaseDatabase.getInstance().getReference().child(percorsoReg).child(mailtoDB(t.getEmail()))
-                                                                    .setValue(regTeacherMod);
+                                if (!newEmail.isEmpty() & !newEmail.equals(teacher.getEmail())){
 
-                                                            FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(t.getProvincia())
-                                                                    .child(mailtoDB(t.getEmail())).setValue(t);
+                                    FirebaseDatabase.getInstance().getReference().child(percorsoReg)
+                                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                    if (dataSnapshot.hasChild(mailtoDB(newEmail))) {
+                                                        // La nuova mail è già in uso.
 
-                                                        }
+                                                    } else {
+                                                        // La nuova mail è libera.
 
-                                                        @Override
-                                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                        FirebaseDatabase.getInstance().getReference().child(percorsoReg)
+                                                                .child(mailtoDB(email)).removeValue();
 
-                                                        }
-                                                    });
-                                        } else {
-                                            deleteTeacher(email);
+                                                        FirebaseDatabase.getInstance().getReference().child(percorsoDati)
+                                                                .child(oldProvincia).child(mailtoDB(email)).removeValue();
 
-                                            FirebaseDatabase.getInstance().getReference().child(percorsoReg).child(mailtoDB(t.getEmail()))
-                                                    .setValue(regTeacherMod);
+                                                        teacher.setEmail(newEmail);
 
-                                            FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(t.getProvincia())
-                                                    .child(mailtoDB(t.getEmail())).setValue(t);
-                                        }
+                                                        FirebaseDatabase.getInstance().getReference().child(percorsoReg)
+                                                                .child(mailtoDB(newEmail)).setValue(regTeacher);
 
-                                    }
+                                                        FirebaseDatabase.getInstance().getReference().child(percorsoDati)
+                                                                .child(teacher.getProvincia().toLowerCase()).child(mailtoDB(newEmail))
+                                                                .setValue(teacher);
+                                                    }
+                                                }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                    }
-                                });
+                                                }
+                                            });
+                                } else {
+
+                                    FirebaseDatabase.getInstance().getReference().child(percorsoReg)
+                                            .child(mailtoDB(email)).removeValue();
+
+                                    FirebaseDatabase.getInstance().getReference().child(percorsoDati)
+                                            .child(oldProvincia).child(mailtoDB(email)).removeValue();
+
+                                    FirebaseDatabase.getInstance().getReference().child(percorsoReg)
+                                            .child(mailtoDB(email)).setValue(regTeacher);
+
+                                    FirebaseDatabase.getInstance().getReference().child(percorsoDati)
+                                            .child(teacher.getProvincia().toLowerCase()).child(mailtoDB(email))
+                                            .setValue(teacher);
+
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
                     }
 
                     @Override
@@ -348,8 +356,8 @@ public class SupportMethods {
 
                     }
                 });
-
     }
+
 
     //Da terminare.
     public static void loginAdmin(String givenEmail, String password){

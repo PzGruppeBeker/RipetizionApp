@@ -20,6 +20,17 @@ public class Teacher {
         this.materie=materie;
     }
 
+    public Teacher(String email, String nome, String cognome,String località, String provincia, String orario,  int tel, ArrayList<String> materie){
+        this.email=SupportMethods.mailfromDB(email);
+        this.nome=nome;
+        this.cognome=cognome;
+        this.località=località;
+        this.provincia=provincia;
+        this.orario=orario;
+        this.tel=tel;
+        this.materie=materie;
+    }
+
     public String getEmail(){
         return email;
     }
