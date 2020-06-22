@@ -70,7 +70,7 @@ public class FragmentTeacherLogin extends Fragment {
         profileMail = rootView.findViewById(R.id.profile_email_login);
         profileMail.setText(email);
 
-        String subjects = SupportMethods.listToString(subjectslist);
+        String subjects = SupportMethods.listToString2(subjectslist);
         profileSubjects = rootView.findViewById(R.id.profile_subjects_login);
         profileSubjects.setText(subjects);
 
