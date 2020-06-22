@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.util.ArrayList;
 
 public class FragmentTeacher extends Fragment {
@@ -24,7 +26,7 @@ public class FragmentTeacher extends Fragment {
     private TextView profileNumber;
     private TextView profileMail;
 
-    private EditText editreview;
+    private TextInputLayout editreview;
 
     private RecyclerView rView;
     private ReviewAdapter adapter;
@@ -65,15 +67,19 @@ public class FragmentTeacher extends Fragment {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editreview = rootView.findViewById(R.id.edit_review);
-                String review = editreview.getText().toString();
+                editreview = rootView.findViewById(R.id.text_input_review);
+                String review = editreview.getEditText().getText().toString();
                 Toast.makeText(getContext(), review, Toast.LENGTH_SHORT).show();
                 if (!review.isEmpty()){
                     SupportMethods.addReview(email,place_1,review);
-                    editreview.setText("");
+                    editreview.getEditText().setText("");
                     SupportMethods.hideKeyboardFrom(getContext(), rootView);
                     Toast.makeText(getContext(), "Grazie per il tuo tempo, la tua recensione sarà visibile al più presto!", Toast.LENGTH_SHORT).show();
-                } //cambiare l'edittext per far venire fuori l'errore in rosso
+                    editreview.setError(null);
+                    editreview.setErrorEnabled(false);
+                } else {
+                    editreview.setError("Questo campo non può essere lasciato vuoto");
+                }
             }
         });
 

@@ -44,8 +44,8 @@ public class FragmentSearch extends Fragment {
                 String place = viewPlace.getEditText().getText().toString().trim();
                 String subject = viewSubjects.getEditText().getText().toString().trim();
 
-                if (name.isEmpty() && surname.isEmpty() && subject.isEmpty() && place.isEmpty()) {
-                    Toast.makeText(getContext(), "Almeno un campo deve contenere delle informazioni di ricerca!", Toast.LENGTH_SHORT).show();
+                if (!checkPlace(place)) {
+                    Toast.makeText(getContext(), "Qualcosa non va!", Toast.LENGTH_SHORT).show();
                 } else {
                     FragmentRecyclerViewTeacher fragment = new FragmentRecyclerViewTeacher();
                     Bundle args = new Bundle();
@@ -60,5 +60,16 @@ public class FragmentSearch extends Fragment {
         });
 
         return rootView;
+    }
+
+    private boolean checkPlace(String place) {
+        if (place.isEmpty()){
+            viewName.setError("Questo campo non può essere lasciato vuoto");
+            return false;
+        } else {
+            viewName.setError(null);
+            viewName.setErrorEnabled(false);
+            return true;
+        }
     }
 }

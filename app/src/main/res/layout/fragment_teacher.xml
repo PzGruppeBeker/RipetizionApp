@@ -83,11 +83,21 @@
             android:textSize="20dp"
             android:layout_gravity="center"/>
 
-        <EditText
-            android:id="@+id/edit_review"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_review"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Scrivi qui la tua recensione..."/>
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            app:errorEnabled="true">
+
+             <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Scrivi qui la tua recensione..."
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/add_review_button"
