@@ -93,11 +93,11 @@ public class FragmentTeacherLogin extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (!profilePlace1.equals(place_1) || !profilePlace2.equals(place_2) || !profileMail.equals(email) || !profileNumber.equals(telephone) || !profileSubjects.equals(subjects)) {
+                if (!profilePlace1.getText().toString().equals(place_1) || !profilePlace2.getText().toString().equals(place_2) || !profileMail.getText().toString().equals(email) || !profileNumber.getText().toString().equals(telephone) || !profileSubjects.getText().toString().equals(subjects)) {
                     //TODO
                     Toast.makeText(getContext(), "Informazioni profilo aggiornate.", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getContext(), "Non è stato modificato nulla", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Non è stato modificato nulla.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
