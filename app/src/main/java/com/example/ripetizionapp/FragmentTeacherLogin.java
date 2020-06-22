@@ -80,6 +80,9 @@ public class FragmentTeacherLogin extends Fragment {
             public void onClick(View v) {
 
                 Toast.makeText(getContext(), "Grazie per il tuo tempo, la tua recensione sarà visibile al più presto!", Toast.LENGTH_SHORT).show();
+
+
+
             }
         });
 
