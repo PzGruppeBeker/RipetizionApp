@@ -46,7 +46,7 @@ public class SupportMethods {
 
         //Creazione oggetti "rins" e "ins" rispettivamente per registrazione password account e dati.
         RegTeacher rins = new RegTeacher(password,provincia);
-        Teacher ins = new Teacher(givenemail,nome,conome, provincia, orari,0000,listamaterie);
+        Teacher ins = new Teacher(givenemail,nome,conome, provincia, orari,"0000",listamaterie);
 
         //Registrazione rins, usando percorso Reg.
         DatabaseReference regRef = FirebaseDatabase.getInstance().getReference(percorsoReg);
@@ -256,7 +256,7 @@ public class SupportMethods {
     updateTeacher dev'essere RI-AGGIORNATO con newPassword e newOrario quando saranno inseriti.
     */
 
-    public static void updateTeacher (final String email, final String newEmail, final String newLocalita, final String newProvincia, final int newTel, final ArrayList<String> newMaterie) {
+    public static void updateTeacher (final String email, final String newEmail, final String newLocalita, final String newProvincia, final String newTel, final ArrayList<String> newMaterie) {
         final String percorsoReg, percorsoDati;
         percorsoReg = "insegnanti";
         percorsoDati = "province";
@@ -278,7 +278,7 @@ public class SupportMethods {
                                     teacher.setLocalità(newLocalita);
                                 }
 
-                                if (newTel!=teacher.getTel()){
+                                if (!newTel.isEmpty()){
                                     teacher.setTel(newTel);
                                 }
 

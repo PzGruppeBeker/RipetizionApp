@@ -91,7 +91,7 @@ public class FragmentLogin extends Fragment {
                                                     args.putString("place_2", teacher.getLocalità());
                                                     args.putStringArrayList("subjects", teacher.getMaterie());
                                                     args.putString("email", teacher.getEmail());
-                                                    args.putInt("telephone", teacher.getTel());
+                                                    args.putString("telephone", teacher.getTel());
                                                     args.putStringArrayList("reviews", teacher.getRecensioni());
                                                     fragment.setArguments(args);
 

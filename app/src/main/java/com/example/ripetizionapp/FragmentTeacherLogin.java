@@ -93,16 +93,15 @@ public class FragmentTeacherLogin extends Fragment {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String  newMail, newPassword, newLocalita, newOrario, newProvincia, stringMaterie;
-                int newTel;
+                String  newMail, newPassword, newLocalita, newOrario, newProvincia, stringMaterie, newTel;
                 newMail = profileMail.getText().toString();
                 newLocalita = profilePlace2.getText().toString();
                 newProvincia = profilePlace1.getText().toString();
-                newTel = Integer.parseInt(profileNumber.getText().toString());
+                newTel = profileNumber.getText().toString();
                 stringMaterie = profileSubjects.getText().toString();
                 ArrayList<String> newSubjects = new ArrayList<String>(Arrays.asList(stringMaterie.split("[,\n]")));
 
-                if (!newProvincia.equals(place_1) || !newLocalita.equals(place_2) || !newMail.equals(email) || newTel!=telephone || !stringMaterie.equals(subjects)) {
+                if (!newProvincia.equals(place_1) || !newLocalita.equals(place_2) || !newMail.equals(email) || !newTel.equals(telephone) || !stringMaterie.equals(subjects)) {
 
 
                     SupportMethods.updateTeacher(email,newMail,newLocalita,newProvincia,newTel,newSubjects);

@@ -85,7 +85,7 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                                     args.putString("place_2", match.get(position).getLocalità());
                                     //args.putString("subject", match.get(position).getMaterie());
                                     args.putString("email", match.get(position).getEmail());
-                                    args.putInt("telephone", match.get(position).getTel());
+                                    args.putString("telephone", match.get(position).getTel());
                                     args.putStringArrayList("reviews", match.get(position).getRecensioni());
                                     fragment.setArguments(args);
 
