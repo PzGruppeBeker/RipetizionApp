@@ -54,7 +54,7 @@ public class FragmentTeacherLogin extends Fragment {
         final String surname = this.getArguments().getString("surname");
         final String place_1 = this.getArguments().getString("place_1");
         final String place_2 = this.getArguments().getString("place_2");
-        final int telephone = this.getArguments().getInt("telephone");
+        final String telephone = this.getArguments().getString("telephone");
         final String email = this.getArguments().getString("email");
         final ArrayList subjectslist = this.getArguments().getStringArrayList("subjects");
         final ArrayList reviewslist = this.getArguments().getStringArrayList("reviews");
@@ -68,7 +68,7 @@ public class FragmentTeacherLogin extends Fragment {
         profilePlace2 = rootView.findViewById(R.id.profile_place_2_login);
         profilePlace2.setText(place_2);
         profileNumber = rootView.findViewById(R.id.profile_number_login);
-        profileNumber.setText(String.valueOf(telephone));
+        profileNumber.setText(telephone);
         profileMail = rootView.findViewById(R.id.profile_email_login);
         profileMail.setText(email);
 

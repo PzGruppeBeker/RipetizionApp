@@ -46,7 +46,7 @@ public class FragmentTeacher extends Fragment {
         final String surname = this.getArguments().getString("surname");
         final String place_1 = this.getArguments().getString("place_1");
         final String place_2 = this.getArguments().getString("place_2");
-        final int telephone = this.getArguments().getInt("telephone");
+        final String telephone = this.getArguments().getString("telephone");
         final String email = this.getArguments().getString("email");
         //final String subject = this.getArguments().getString("subject");
         final ArrayList reviews = this.getArguments().getStringArrayList("reviews");
