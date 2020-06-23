@@ -73,7 +73,6 @@ public class FragmentLogin extends Fragment {
                                     if (email.equals(SupportMethods.mailfromDB(t.getKey()))) {
                                         RegTeacher regTeacher = t.getValue(RegTeacher.class);
                                         if (regTeacher.getPassword().equals(password)){
-
                                             if (regTeacher.getAdmin().equals("1")){
 
                                                 FragmentSearch fragment = new FragmentSearch();
@@ -82,49 +81,47 @@ public class FragmentLogin extends Fragment {
                                                 fragment.setArguments(args);
                                                 //remember me
                                                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                                                break;
 
                                             } else {
 
+                                                String Provincia = regTeacher.getProvincia().toLowerCase();
 
+                                                FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(Provincia)
+                                                        .child(t.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                        Teacher teacher = dataSnapshot.getValue(Teacher.class);
 
-                                            }
+                                                        FragmentTeacherLogin fragment = new FragmentTeacherLogin();
+                                                        Bundle args = new Bundle();
+                                                        args.putString("name", teacher.getNome());
+                                                        args.putString("surname", teacher.getCognome());
+                                                        args.putString("place_1", teacher.getProvincia());
+                                                        args.putString("place_2", teacher.getLocalità());
+                                                        args.putStringArrayList("subjects", teacher.getMaterie());
+                                                        args.putString("email", teacher.getEmail());
+                                                        args.putString("telephone", teacher.getTel());
+                                                        args.putStringArrayList("reviews", teacher.getRecensioni());
+                                                        fragment.setArguments(args);
 
-                                            String Provincia = regTeacher.getProvincia().toLowerCase();
+                                                        if (switch1.isChecked()) {
+                                                            saveData(email, password);
+                                                        } else {
+                                                            saveData("", "");
+                                                        }
+                                                        saveState();
 
-                                            FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(Provincia)
-                                                    .child(t.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                    Teacher teacher = dataSnapshot.getValue(Teacher.class);
-
-                                                    FragmentTeacherLogin fragment = new FragmentTeacherLogin();
-                                                    Bundle args = new Bundle();
-                                                    args.putString("name", teacher.getNome());
-                                                    args.putString("surname", teacher.getCognome());
-                                                    args.putString("place_1", teacher.getProvincia());
-                                                    args.putString("place_2", teacher.getLocalità());
-                                                    args.putStringArrayList("subjects", teacher.getMaterie());
-                                                    args.putString("email", teacher.getEmail());
-                                                    args.putString("telephone", teacher.getTel());
-                                                    args.putStringArrayList("reviews", teacher.getRecensioni());
-                                                    fragment.setArguments(args);
-
-                                                    if (switch1.isChecked()) {
-                                                        saveData(email, password);
-                                                    } else {
-                                                        saveData("", "");
+                                                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
                                                     }
-                                                    saveState();
 
-                                                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
-                                                }
-
-                                                @Override
-                                                public void onCancelled(@NonNull DatabaseError databaseError) {
-                                                }
-                                            });
-
-                                        break;}
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                    }
+                                                });
+                                                break;
+                                            }
+                                        }
                                         else {
                                             Toast.makeText(getContext(), "Attenzione! La password del tuo account è sbagliata!", Toast.LENGTH_SHORT).show();
                                             break;
