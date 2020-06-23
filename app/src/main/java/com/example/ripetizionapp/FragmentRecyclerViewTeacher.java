@@ -107,6 +107,8 @@ public class FragmentRecyclerViewTeacher extends Fragment {
 
                                 @Override
                                 public void onDeleteClick(int position) {
+                                    match.remove(position);
+                                    adapterAdmin.notifyItemRemoved(position);
                                     SupportMethods.deleteTeacher(match.get(position).getEmail());
                                 }
                             });
@@ -153,4 +155,5 @@ public class FragmentRecyclerViewTeacher extends Fragment {
 
         return rootView;
     }
+
 }
