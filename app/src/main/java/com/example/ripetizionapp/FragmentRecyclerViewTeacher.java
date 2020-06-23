@@ -104,6 +104,11 @@ public class FragmentRecyclerViewTeacher extends Fragment {
 
                                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
                                 }
+
+                                @Override
+                                public void onDeleteClick(int position) {
+
+                                }
                             });
 
                         } else {

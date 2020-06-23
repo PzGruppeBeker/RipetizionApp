@@ -18,6 +18,8 @@ public class TeacherAdapterAdmin extends RecyclerView.Adapter<TeacherAdapterAdmi
 
     public interface OnItemClickListener{
         void onItemClick(int position);
+        void onDeleteClick(int position);
+
     }
 
     public void setOnItemClickedListener(OnItemClickListener listener) {
@@ -27,11 +29,13 @@ public class TeacherAdapterAdmin extends RecyclerView.Adapter<TeacherAdapterAdmi
     public static class TeacherViewHolder extends RecyclerView.ViewHolder {
         public TextView teacherName;
         public TextView teacherSubjects;
+        public ImageView teacherDelete;
 
         public TeacherViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             teacherName = itemView.findViewById(R.id.text_teacher_name_admin);
             teacherSubjects = itemView.findViewById(R.id.text_teacher_subjects_admin);
+            teacherDelete = itemView.findViewById(R.id.imageview_delete);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -40,6 +44,17 @@ public class TeacherAdapterAdmin extends RecyclerView.Adapter<TeacherAdapterAdmi
                         int position = getAdapterPosition();
                         listener.onItemClick(position);
                     }
+                }
+            });
+
+            teacherDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        listener.onDeleteClick(position);
+                    }
+
                 }
             });
         }
