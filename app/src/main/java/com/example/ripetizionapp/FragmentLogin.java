@@ -76,8 +76,16 @@ public class FragmentLogin extends Fragment {
 
                                             if (regTeacher.getAdmin().equals("1")){
 
+                                                FragmentSearch fragment = new FragmentSearch();
+                                                Bundle args = new Bundle();
+                                                args.putString("admin", "1" );
+                                                fragment.setArguments(args);
+                                                //remember me
+                                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
 
                                             } else {
+
+
 
                                             }
 

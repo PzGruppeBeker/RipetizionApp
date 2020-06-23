@@ -22,8 +22,11 @@ public class FragmentSearch extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        if (this.getArguments() == null) {
-            Toast.makeText(getContext(), "ARGUMENTSNULL", Toast.LENGTH_SHORT).show();
+        if (this.getArguments().getString("admin").equals("1")) {
+            Toast.makeText(getContext(), "EDAIDAIDAI!", Toast.LENGTH_SHORT).show();
+
+        } else {
+            Toast.makeText(getContext(), "NIENTEDAFARE!", Toast.LENGTH_SHORT).show();
         }
 
         final View rootView = inflater.inflate(R.layout.fragment_search, container, false);
@@ -52,12 +55,14 @@ public class FragmentSearch extends Fragment {
                     //se getArguments() è null vuol dire che siamo studenti e cerchiamo il prof, se invece è pieno
                     //siamo admin quindi prendiamo questo valore e lo passiamo alla recycler view
                     //arrivato lì si decide come mostrare i prof, con o senza delete
+
                     FragmentRecyclerViewTeacher fragment = new FragmentRecyclerViewTeacher();
                     Bundle args = new Bundle();
                     args.putString("name", name);
                     args.putString("surname", surname);
                     args.putString("place", place);
                     args.putString("subject", subject);
+
                     fragment.setArguments(args);
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
                 }
