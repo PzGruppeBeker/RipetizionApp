@@ -73,7 +73,15 @@ public class FragmentLogin extends Fragment {
                                     if (email.equals(SupportMethods.mailfromDB(t.getKey()))) {
                                         RegTeacher regTeacher = t.getValue(RegTeacher.class);
                                         if (regTeacher.getPassword().equals(password)){
-                                            String Provincia = regTeacher.getProvincia();
+
+                                            if (regTeacher.getAdmin().equals("1")){
+
+
+                                            } else {
+
+                                            }
+
+                                            String Provincia = regTeacher.getProvincia().toLowerCase();
 
                                             FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(Provincia)
                                                     .child(t.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
