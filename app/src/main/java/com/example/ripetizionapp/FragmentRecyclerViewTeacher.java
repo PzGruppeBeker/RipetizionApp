@@ -83,9 +83,9 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                             adapterAdmin = new TeacherAdapterAdmin(match);//cambiare qui per admin
 
                             rView.setLayoutManager(layoutManager);
-                            rView.setAdapter(adapter);
+                            rView.setAdapter(adapterAdmin);
 
-                            adapter.setOnItemClickedListener(new TeacherAdapter.OnItemClickListener() {
+                            adapterAdmin.setOnItemClickedListener(new TeacherAdapterAdmin.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(int position) {
 
@@ -105,6 +105,7 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
                                 }
                             });
+
                         } else {
 
                             rView = rootView.findViewById(R.id.recyclerview_teacher);
