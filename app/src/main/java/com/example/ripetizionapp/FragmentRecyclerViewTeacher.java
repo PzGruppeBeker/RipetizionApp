@@ -107,7 +107,7 @@ public class FragmentRecyclerViewTeacher extends Fragment {
 
                                 @Override
                                 public void onDeleteClick(int position) {
-
+                                    SupportMethods.deleteTeacher(match.get(position).getEmail());
                                 }
                             });
 
