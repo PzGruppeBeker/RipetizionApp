@@ -3,6 +3,7 @@ package com.example.ripetizionapp;
 public class RegTeacher {
 
     String password,provincia;
+    String admin="0";
 
     public RegTeacher(){}
 
@@ -17,10 +18,16 @@ public class RegTeacher {
     public String getProvincia(){
         return provincia;
     }
+    public String getAdmin() {
+        return admin;
+    }
     public void setPassword(String s){
         password=s;
     }
     public void setProvincia(String s){
         provincia=s;
+    }
+    public void setAdmin(String s) {
+        admin=s;
     }
 }
