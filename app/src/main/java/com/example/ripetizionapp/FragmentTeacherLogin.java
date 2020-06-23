@@ -8,20 +8,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -84,7 +81,6 @@ public class FragmentTeacherLogin extends Fragment {
             rView.setHasFixedSize(true);
             layoutManager = new LinearLayoutManager(getContext());
             adapter = new ReviewAdapter(reviewslist);
-
             rView.setLayoutManager(layoutManager);
             rView.setAdapter(adapter);
         }
@@ -102,7 +98,6 @@ public class FragmentTeacherLogin extends Fragment {
                 ArrayList<String> newSubjects = new ArrayList<String>(Arrays.asList(stringMaterie.split("[,\n]")));
 
                 if (!newProvincia.equals(place_1) || !newLocalita.equals(place_2) || !newMail.equals(email) || !newTel.equals(telephone) || !stringMaterie.equals(subjects)) {
-
 
                     SupportMethods.updateTeacher(email,newMail,newLocalita,newProvincia,newTel,newSubjects);
 

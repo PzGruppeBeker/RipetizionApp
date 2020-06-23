@@ -6,17 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 
 public class FragmentRecyclerViewTeacher extends Fragment {
@@ -37,6 +34,8 @@ public class FragmentRecyclerViewTeacher extends Fragment {
         final String surname = this.getArguments().getString("surname");
         String place = this.getArguments().getString("place");
         final String subject = this.getArguments().getString("subject");
+
+        //verificare se getArguments() ADMIN è null o no
 
         FirebaseDatabase.getInstance().getReference().child("province").child(place.toLowerCase()).getRef()
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -68,7 +67,7 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                             rView = rootView.findViewById(R.id.recyclerview_teacher);
                             rView.setHasFixedSize(true);
                             layoutManager = new LinearLayoutManager(getContext());
-                            adapter = new TeacherAdapter(match);
+                            adapter = new TeacherAdapter(match);//cambiare qui per admin
 
                             rView.setLayoutManager(layoutManager);
                             rView.setAdapter(adapter);
@@ -76,7 +75,7 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                             adapter.setOnItemClickedListener(new TeacherAdapter.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(int position) {
-                                    //Toast.makeText(getContext(), match.get(position).getNome() + match.get(position).getCognome(), Toast.LENGTH_SHORT).show();
+
                                     FragmentTeacher fragment = new FragmentTeacher();
                                     Bundle args = new Bundle();
                                     args.putString("name", match.get(position).getNome());

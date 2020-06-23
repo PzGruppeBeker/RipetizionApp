@@ -22,17 +22,18 @@ public class FragmentSearch extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        if (this.getArguments() == null) {
+            Toast.makeText(getContext(), "ARGUMENTSNULL", Toast.LENGTH_SHORT).show();
+        }
+
         final View rootView = inflater.inflate(R.layout.fragment_search, container, false);
         Button search = rootView.findViewById(R.id.button_search_database);
+
+
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(getContext(), "SEARCH INPUT RECEIVED", Toast.LENGTH_SHORT).show();
-
-                //al click creare la recycler view, tenendo conto che i valori possono essere nulli ma non tutti
-                //e passare le informazioni al database tramite query, per poi creare un array  di oggetti
-                //TeacherItem se possibile, e da lì visualizzarli in elenco
-                //intanto creo un array di prova con nomi e immagine standard su FragmentRecyclerViewTeacher
 
                 viewName = rootView.findViewById(R.id.text_input_name);
                 viewSurname = rootView.findViewById(R.id.text_input_surname);
@@ -47,6 +48,10 @@ public class FragmentSearch extends Fragment {
                 if (!checkPlace(place)) {
                     Toast.makeText(getContext(), "Qualcosa non va!", Toast.LENGTH_SHORT).show();
                 } else {
+
+                    //se getArguments() è null vuol dire che siamo studenti e cerchiamo il prof, se invece è pieno
+                    //siamo admin quindi prendiamo questo valore e lo passiamo alla recycler view
+                    //arrivato lì si decide come mostrare i prof, con o senza delete
                     FragmentRecyclerViewTeacher fragment = new FragmentRecyclerViewTeacher();
                     Bundle args = new Bundle();
                     args.putString("name", name);
