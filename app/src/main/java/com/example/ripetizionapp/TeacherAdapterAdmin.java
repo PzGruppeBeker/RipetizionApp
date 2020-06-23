@@ -30,8 +30,8 @@ public class TeacherAdapterAdmin extends RecyclerView.Adapter<TeacherAdapterAdmi
 
         public TeacherViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
-            teacherName = itemView.findViewById(R.id.text_teacher_name);
-            teacherSubjects = itemView.findViewById(R.id.text_teacher_subjects);
+            teacherName = itemView.findViewById(R.id.text_teacher_name_admin);
+            teacherSubjects = itemView.findViewById(R.id.text_teacher_subjects_admin);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
