@@ -22,17 +22,19 @@ public class FragmentSearch extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        if (this.getArguments().getString("admin").equals("1")) {
-            Toast.makeText(getContext(), "EDAIDAIDAI!", Toast.LENGTH_SHORT).show();
+        String admin = "0";
 
+        if (this.getArguments() != null) {
+            //Toast.makeText(getContext(), "Niente da fare!", Toast.LENGTH_SHORT).show();
+            admin = "1";
         } else {
-            Toast.makeText(getContext(), "NIENTEDAFARE!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), "EDAIDAIDAI!", Toast.LENGTH_SHORT).show();
         }
 
         final View rootView = inflater.inflate(R.layout.fragment_search, container, false);
         Button search = rootView.findViewById(R.id.button_search_database);
 
-
+        final String finalAdmin = admin;
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,6 +64,12 @@ public class FragmentSearch extends Fragment {
                     args.putString("surname", surname);
                     args.putString("place", place);
                     args.putString("subject", subject);
+
+                    if (finalAdmin.equals("1")) {
+                        args.putString("admin", "1");
+                    } else {
+                        args.putString("admin", "0");
+                    }
 
                     fragment.setArguments(args);
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ public class FragmentRecyclerViewTeacher extends Fragment {
 
     private RecyclerView rView;
     private TeacherAdapter adapter;
+    private TeacherAdapterAdmin adapterAdmin;
     private RecyclerView.LayoutManager layoutManager;
     private TextView notfound;
 
@@ -34,6 +36,17 @@ public class FragmentRecyclerViewTeacher extends Fragment {
         final String surname = this.getArguments().getString("surname");
         String place = this.getArguments().getString("place");
         final String subject = this.getArguments().getString("subject");
+
+        String admin = "0";
+
+        if (this.getArguments().getString("admin").equals("1")) {
+            Toast.makeText(getContext(), "DAI CHE CI SIAMO", Toast.LENGTH_SHORT).show();
+            admin = "1";
+        } else {
+            //Toast.makeText(getContext(), "EDAIDAIDAI!", Toast.LENGTH_SHORT).show();
+        }
+
+        final String finalAdmin = admin;
 
         //verificare se getArguments() ADMIN è null o no
 
@@ -62,12 +75,12 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                             notfound.setText("La ricerca non ha prodotto alcun risultato!");
                             // gestire eventualmente il backpressed
 
-                        } else {
+                        } else if (finalAdmin.equals("1")){
 
                             rView = rootView.findViewById(R.id.recyclerview_teacher);
                             rView.setHasFixedSize(true);
                             layoutManager = new LinearLayoutManager(getContext());
-                            adapter = new TeacherAdapter(match);//cambiare qui per admin
+                            adapterAdmin = new TeacherAdapterAdmin(match);//cambiare qui per admin
 
                             rView.setLayoutManager(layoutManager);
                             rView.setAdapter(adapter);
@@ -86,6 +99,37 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                                     args.putString("email", match.get(position).getEmail());
                                     args.putString("telephone", match.get(position).getTel());
                                     args.putStringArrayList("reviews", match.get(position).getRecensioni());
+                                    args.putString("admin", "1");
+                                    fragment.setArguments(args);
+
+                                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                                }
+                            });
+                        } else {
+
+                            rView = rootView.findViewById(R.id.recyclerview_teacher);
+                            rView.setHasFixedSize(true);
+                            layoutManager = new LinearLayoutManager(getContext());
+                            adapter = new TeacherAdapter(match);
+
+                            rView.setLayoutManager(layoutManager);
+                            rView.setAdapter(adapter);
+
+                            adapter.setOnItemClickedListener(new TeacherAdapter.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(int position) {
+
+                                    FragmentTeacher fragment = new FragmentTeacher();
+                                    Bundle args = new Bundle();
+                                    args.putString("name", match.get(position).getNome());
+                                    args.putString("surname", match.get(position).getCognome());
+                                    args.putString("place_1", match.get(position).getProvincia());
+                                    args.putString("place_2", match.get(position).getLocalità());
+                                    //args.putString("subject", match.get(position).getMaterie());
+                                    args.putString("email", match.get(position).getEmail());
+                                    args.putString("telephone", match.get(position).getTel());
+                                    args.putStringArrayList("reviews", match.get(position).getRecensioni());
+                                    args.putString("admin", "0");
                                     fragment.setArguments(args);
 
                                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
