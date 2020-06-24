@@ -109,20 +109,20 @@ public class FragmentTeacherLogin extends Fragment {
                         !newPassword.equals(password) || !newOrario.equals(hours)) {
 
                     String percorsoReg = "insegnanti";
-
-                    if (!newMail.equals(email)) {
-                        if (newMail.isEmpty()){
-                            Toast.makeText(getContext(), "Non puoi lasciare vuoto il campo e-mail.", Toast.LENGTH_SHORT).show();
-                        } else {
-                            FirebaseDatabase.getInstance().getReference().child(percorsoReg)
-                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                    if (newMail.isEmpty()){
+                        Toast.makeText(getContext(), "Non puoi lasciare vuoto il campo e-mail.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (!newMail.equals(email)) {
+                            FirebaseDatabase.getInstance().getReference().child(percorsoReg).addListenerForSingleValueEvent(
+                                    new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            if (dataSnapshot.hasChild(SupportMethods.mailtoDB(newMail))){
-                                                Toast.makeText(getContext(), "La mail indicata è già in uso.", Toast.LENGTH_SHORT).show();
+                                            if (dataSnapshot.hasChild(SupportMethods.mailtoDB(newMail))) {
+                                                Toast.makeText(getContext(), "Esiste già un profilo legato aquesta e-mail.", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                SupportMethods.updateTeacher(email,newMail,newLocalita,newProvincia,newTel,newSubjects, newPassword, newOrario);
+                                                SupportMethods.updateTeacher(email, newMail, newLocalita, newProvincia, newTel, newSubjects, newPassword, newOrario);
                                                 Toast.makeText(getContext(), "Informazioni profilo aggiornate.", Toast.LENGTH_SHORT).show();
+                                                getActivity().getSupportFragmentManager().popBackStack();
                                             }
                                         }
 
@@ -130,12 +130,13 @@ public class FragmentTeacherLogin extends Fragment {
                                         public void onCancelled(@NonNull DatabaseError databaseError) {
 
                                         }
-                                    });
+                                    }
+                            );
+                        } else {
+                            SupportMethods.updateTeacher(email, newMail, newLocalita, newProvincia, newTel, newSubjects, newPassword, newOrario);
+                            Toast.makeText(getContext(), "Informazioni profilo aggiornate.", Toast.LENGTH_SHORT).show();
+                            getActivity().getSupportFragmentManager().popBackStack();
                         }
-
-                    } else {
-                        SupportMethods.updateTeacher(email,newMail,newLocalita,newProvincia,newTel,newSubjects, newPassword, newOrario);
-                        Toast.makeText(getContext(), "Informazioni profilo aggiornate.", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(getContext(), "Non è stato modificato nulla.", Toast.LENGTH_SHORT).show();
