@@ -103,6 +103,7 @@ public class FragmentLogin extends Fragment {
                                                         args.putString("email", teacher.getEmail());
                                                         args.putString("telephone", teacher.getTel());
                                                         args.putStringArrayList("reviews", teacher.getRecensioni());
+                                                        args.putString("hours", teacher.getOrario());
                                                         fragment.setArguments(args);
 
                                                         if (switch1.isChecked()) {
