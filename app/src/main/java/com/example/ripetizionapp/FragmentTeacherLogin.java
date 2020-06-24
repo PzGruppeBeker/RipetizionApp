@@ -83,7 +83,7 @@ public class FragmentTeacherLogin extends Fragment {
 
         if (reviewslist == null) {
             notfound = rootView.findViewById(R.id.text_not_found);
-            notfound.setText("Non ci sono recensioni per questo professore al momento.");
+            notfound.setText("Nessuna recensione");
         } else {
             rView = rootView.findViewById(R.id.recyclerview_review);
             rView.setHasFixedSize(true);

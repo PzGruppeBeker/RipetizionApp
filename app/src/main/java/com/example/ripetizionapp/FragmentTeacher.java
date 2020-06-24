@@ -25,7 +25,8 @@ public class FragmentTeacher extends Fragment {
     private TextView profilePlace2;
     private TextView profileNumber;
     private TextView profileMail;
-    //private TextView profileSubjects;
+    private TextView profileSubjects;
+    private TextView profileHours;
 
     private TextInputLayout editreview;
 
@@ -49,8 +50,9 @@ public class FragmentTeacher extends Fragment {
         final String place_2 = this.getArguments().getString("place_2");
         final String telephone = this.getArguments().getString("telephone");
         final String email = this.getArguments().getString("email");
-        //final String subject = this.getArguments().getString("subject");
-        final ArrayList reviews = this.getArguments().getStringArrayList("reviews");
+        final String hours = this.getArguments().getString("hours");
+        final ArrayList subjectsList = this.getArguments().getStringArrayList("subjects");
+        final ArrayList reviewsList = this.getArguments().getStringArrayList("reviews");
 
         String admin = "0";
 
@@ -75,6 +77,12 @@ public class FragmentTeacher extends Fragment {
         profileNumber.setText(telephone);
         profileMail = rootView.findViewById(R.id.profile_email_view);
         profileMail.setText(email);
+        profileHours = rootView.findViewById(R.id.profile_hours_view);
+        profileHours.setText(hours);
+
+        final String subjects = SupportMethods.listToString2(subjectsList);
+        profileSubjects = rootView.findViewById(R.id.profile_subjects_view);
+        profileSubjects.setText(subjects);
 
         Button add = rootView.findViewById(R.id.add_review_button);
         add.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +104,7 @@ public class FragmentTeacher extends Fragment {
             }
         });
 
-        if (reviews == null) {
+        if (reviewsList == null) {
             notfound = rootView.findViewById(R.id.text_not_found);
             notfound.setText("Nessuna recensione");
         } else if (finalAdmin.equals("1")){
@@ -106,7 +114,7 @@ public class FragmentTeacher extends Fragment {
             rView = rootView.findViewById(R.id.recyclerview_review);
             rView.setHasFixedSize(true);
             layoutManager = new LinearLayoutManager(getContext());
-            adapterAdmin = new ReviewAdapterAdmin(reviews);
+            adapterAdmin = new ReviewAdapterAdmin(reviewsList);
 
             rView.setLayoutManager(layoutManager);
             rView.setAdapter(adapterAdmin);
@@ -116,7 +124,7 @@ public class FragmentTeacher extends Fragment {
                 @Override
                 public void onDeleteClickReview(int position) {
                     SupportMethods.removeReview(email,place_1,position);
-                    reviews.remove(position);
+                    reviewsList.remove(position);
                     adapterAdmin.notifyItemRemoved(position);
                 }
             });
@@ -126,7 +134,7 @@ public class FragmentTeacher extends Fragment {
             rView = rootView.findViewById(R.id.recyclerview_review);
             rView.setHasFixedSize(true);
             layoutManager = new LinearLayoutManager(getContext());
-            adapter = new ReviewAdapter(reviews);
+            adapter = new ReviewAdapter(reviewsList);
 
             rView.setLayoutManager(layoutManager);
             rView.setAdapter(adapter);
