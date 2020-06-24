@@ -8,11 +8,11 @@
     <string name="fragment_home_string_1">Comincia subito!</string>
     <string name="fragment_home_string_2">Cerca un insegnante che fa al caso tuo!</string>
     <string name="fragment_registration_title">Registrati come professore e inizia subito a insegnare!</string>
-    <string name="fragment_registration_name">Nome</string>
-    <string name="fragment_registration_surname">Cognome</string>
+    <string name="fragment_registration_name">Nome (non potrà essere modificato)</string>
+    <string name="fragment_registration_surname">Cognome (non potrà essere modificato)</string>
     <string name="fragment_registration_email">Email</string>
     <string name="fragment_registration_password">Password</string>
-    <string name="fragment_registration_subjects">Materie</string>
+    <string name="fragment_registration_subjects">Materie (separarle andando a capo)</string>
     <string name="fragment_registration_button">CONFERMA</string>
     <string name="fragment_login_title">Accedi ad un account professore esistente</string>
     <string name="fragment_login_button">ACCEDI</string>

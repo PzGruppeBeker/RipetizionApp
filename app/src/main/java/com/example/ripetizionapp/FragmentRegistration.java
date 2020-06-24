@@ -174,11 +174,11 @@ public class FragmentRegistration extends Fragment {
 
     private boolean checkHours(String hours) {
         if (hours.isEmpty()) {
-            viewPlace.setError("Il campo non può essere lasciato vuoto");
+            viewHours.setError("Il campo non può essere lasciato vuoto");
             return false;
         } else {
-            viewPlace.setError(null);
-            viewPlace.setErrorEnabled(false);
+            viewHours.setError(null);
+            viewHours.setErrorEnabled(false);
             return true;
         }
     }

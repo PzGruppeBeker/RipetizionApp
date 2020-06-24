@@ -285,7 +285,6 @@ public class SupportMethods {
                                                                 .child(teacher.getProvincia().toLowerCase()).child(mailtoDB(newEmail))
                                                                 .setValue(teacher);
 
-
                                                     }
                                                 }
 
@@ -310,7 +309,6 @@ public class SupportMethods {
                                             .setValue(teacher);
 
                                 }
-
                             }
 
                             @Override
