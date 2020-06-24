@@ -114,7 +114,8 @@ public class FragmentTeacher extends Fragment {
             adapterAdmin.setOnItemClickedListener(new ReviewAdapterAdmin.OnItemClickListener() {
                 @Override
                 public void onDeleteClickReview(int position) {
-
+                    reviews.remove(position);
+                    adapterAdmin.notifyItemRemoved(position);
                 }
             });
 
