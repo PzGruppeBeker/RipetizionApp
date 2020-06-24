@@ -21,5 +21,8 @@
     <string name="fragment_search_button">CERCA</string>
     <string name="fragment_registration_hours">Orari</string>
     <string name="nav_home">Home</string>
+    <string name="fragment_search_name">Nome</string>
+    <string name="fragment_search_surname">Cognome</string>
+    <string name="fragment_search_subjects">Materie</string>
 
 </resources>
