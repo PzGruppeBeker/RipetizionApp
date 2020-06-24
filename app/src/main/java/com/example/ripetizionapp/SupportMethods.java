@@ -227,7 +227,7 @@ public class SupportMethods {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         final RegTeacher regTeacher = dataSnapshot.getValue(RegTeacher.class);
-                        final String oldProvincia = regTeacher.getProvincia();
+                        final String oldProvincia = regTeacher.getProvincia().toLowerCase();
 
                         FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(regTeacher.getProvincia().toLowerCase())
                                 .child(mailtoDB(email)).addListenerForSingleValueEvent(new ValueEventListener() {
