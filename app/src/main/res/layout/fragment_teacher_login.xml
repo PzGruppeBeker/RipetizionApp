@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
@@ -15,145 +15,145 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="12dp"
-            android:text="PROFILO PROFESSORE"
-            android:textSize="20dp" />
+            android:text="@string/fragment_teacher_title"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/profile_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:text="Nome"
-            android:textSize="12dp" />
+            android:text="@string/fragment_teacher_name_title"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/profile_name_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:text="NOME"
-            android:textSize="16dp" />
+            android:text="@string/fragment_teacher_name"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/profile_surname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:text="Cognome: "
-            android:textSize="12dp" />
+            android:text="@string/fragment_teacher_surname_title"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/profile_surname_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:text="COGNOME"
-            android:textSize="16dp" />
+            android:text="@string/fragment_teacher_surname"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/profile_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:text="Email: "
-            android:textSize="12dp" />
+            android:text="@string/fragment_teacher_email_title"
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/profile_email_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/profile_place_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:text="Provincia: "
-            android:textSize="12dp" />
+            android:text="@string/fragment_teacher_place_1_title"
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/profile_place_1_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/profile_place_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:text="Comune: "
-            android:textSize="12dp" />
+            android:text="@string/fragment_teacher_place_2_title"
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/profile_place_2_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/profile_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:text="Telefono: "
-            android:textSize="12dp" />
+            android:text="@string/fragment_teacher_number_title"
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/profile_number_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/profile_subjects"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:text="Materie: "
-            android:textSize="12dp" />
+            android:text="@string/fragment_teacher_subjects_title"
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/profile_subjects_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/profile_hours"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:text="Orari: "
-            android:textSize="12dp" />
+            android:text="@string/fragment_teacher_hours_title"
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/profile_hours_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/profile_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:text="Password: "
-            android:textSize="12dp" />
+            android:text="@string/fragment_teacher_password"
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/profile_password_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -166,16 +166,16 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="12dp"
-                android:text="CONFERMA MODIFICHE"
-                android:textSize="16dp" />
+                android:text="@string/fragment_teacher_modify"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="12dp"
-                android:text="RECENSIONI:"
-                android:textSize="20dp" />
+                android:text="@string/fragment_teacher_review_title"
+                android:textSize="20sp" />
 
             <include
                 layout="@layout/fragment_recyclerview_review"

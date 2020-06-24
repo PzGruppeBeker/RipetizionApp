@@ -24,5 +24,35 @@
     <string name="fragment_search_name">Nome</string>
     <string name="fragment_search_surname">Cognome</string>
     <string name="fragment_search_subjects">Materie</string>
+    <string name="fragment_login_remember">Remember me</string>
+    <string name="fragment_registration_hours">Orari</string>
+    <string name="teacher_icon">teacher icon</string>
+    <string name="fragment_teacher_title">PROFILO PROFESSORE</string>
+    <string name="fragment_teacher_name_title">Nome:</string>
+    <string name="fragment_teacher_name">NOME</string>
+    <string name="fragment_teacher_surname_title">Cognome:</string>
+    <string name="fragment_teacher_surname">COGNOME</string>
+    <string name="fragment_teacher_email_title">Email:</string>
+    <string name="fragment_teacher_email">EMAIL</string>
+    <string name="fragment_teacher_place_1_title">Provincia:</string>
+    <string name="fragment_teacher_place_1">PROVINCIA</string>
+    <string name="fragment_teacher_place_2_title">Comune:</string>
+    <string name="fragment_teacher_place_2">COMUNE</string>
+    <string name="fragment_teacher_number_title">Telefono:</string>
+    <string name="fragment_teacher_number">TELEFONO</string>
+    <string name="fragment_teacher_subjects_title">Materie:</string>
+    <string name="fragment_teacher_subjects">MATERIE</string>
+    <string name="fragment_teacher_hours_title">Orari:</string>
+    <string name="fragment_teacher_hours">ORARI</string>
+    <string name="fragment_teacher_review_hint">Scrivi qui la tua recensione...</string>
+    <string name="fragment_teacher_review_button">LASCIA UNA RECENSIONE</string>
+    <string name="fragment_teacher_password">Password:</string>
+    <string name="fragment_teacher_modify">CONFERMA MODIFICHE</string>
+    <string name="fragment_teacher_review_title">RECENSIONI:</string>
+    <string name="review_item_placeholder">Recensione qui</string>
+    <string name="trash_bin">trash bin</string>
+    <string name="profile_icon">profile icon</string>
+    <string name="teacher_item_name_placeholder">Nome e Cognome</string>
+    <string name="teacher_item_subjects_placeholder">Materie</string>
 
 </resources>

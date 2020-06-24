@@ -14,144 +14,144 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:gravity="center"
-            android:text="PROFILO PROFESSORE" />
+            android:text="@string/fragment_teacher_title" />
 
         <TextView
             android:id="@+id/profile_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:textSize="12dp"
-            android:text="Nome: " />
+            android:textSize="12sp"
+            android:text="@string/fragment_teacher_name_title" />
 
         <TextView
             android:id="@+id/profile_name_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:textSize="16dp"
-            android:text="NOME" />
+            android:textSize="16sp"
+            android:text="@string/fragment_teacher_name" />
 
         <TextView
             android:id="@+id/profile_surname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:textSize="12dp"
-            android:text="Cognome: " />
+            android:textSize="12sp"
+            android:text="@string/fragment_teacher_surname_title" />
 
         <TextView
             android:id="@+id/profile_surname_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:textSize="16dp"
-            android:text="COGNOME" />
+            android:textSize="16sp"
+            android:text="@string/fragment_teacher_surname" />
 
         <TextView
             android:id="@+id/profile_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:textSize="12dp"
-            android:text="Email: " />
+            android:textSize="12sp"
+            android:text="@string/fragment_teacher_email_title" />
 
         <TextView
             android:id="@+id/profile_email_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:textSize="16dp"
-            android:text="EMAIL" />
+            android:textSize="16sp"
+            android:text="@string/fragment_teacher_email" />
 
         <TextView
             android:id="@+id/profile_place_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:textSize="12dp"
-            android:text="Provincia: " />
+            android:textSize="12sp"
+            android:text="@string/fragment_teacher_place_1_title" />
 
         <TextView
             android:id="@+id/profile_place_1_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:textSize="16dp"
-            android:text="PROVINCIA" />
+            android:textSize="16sp"
+            android:text="@string/fragment_teacher_place_1" />
 
         <TextView
             android:id="@+id/profile_place_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:textSize="12dp"
-            android:text="Comune: " />
+            android:textSize="12sp"
+            android:text="@string/fragment_teacher_place_2_title" />
 
         <TextView
             android:id="@+id/profile_place_2_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:textSize="16dp"
-            android:text="COMUNE" />
+            android:textSize="16sp"
+            android:text="@string/fragment_teacher_place_2" />
 
         <TextView
             android:id="@+id/profile_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:textSize="12dp"
-            android:text="Telefono: " />
+            android:textSize="12sp"
+            android:text="@string/fragment_teacher_number_title" />
 
         <TextView
             android:id="@+id/profile_number_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:textSize="16dp"
-            android:text="TELEFONO" />
+            android:textSize="16sp"
+            android:text="@string/fragment_teacher_number" />
 
         <TextView
             android:id="@+id/profile_subjects"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:textSize="12dp"
-            android:text="Materie: " />
+            android:textSize="12sp"
+            android:text="@string/fragment_teacher_subjects_title" />
 
         <TextView
             android:id="@+id/profile_subjects_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:textSize="16dp"
-            android:text="MATERiE" />
+            android:textSize="16sp"
+            android:text="@string/fragment_teacher_subjects" />
 
         <TextView
             android:id="@+id/profile_hours"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:text="Orari: "
-            android:textSize="12dp" />
+            android:text="@string/fragment_teacher_hours_title"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/profile_hours_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:textSize="16dp"
-            android:text="ORARI" />
+            android:textSize="16sp"
+            android:text="@string/fragment_teacher_hours" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="RECENSIONI:"
+            android:text="@string/fragment_teacher_review_title"
             android:padding="12dp"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:layout_gravity="center"/>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -165,7 +165,7 @@
              <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Scrivi qui la tua recensione..."
+                android:hint="@string/fragment_teacher_review_hint"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -176,8 +176,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="12dp"
-            android:textSize="16dp"
-            android:text="LASCIA UNA RECENSIONE"/>
+            android:textSize="16sp"
+            android:text="@string/fragment_teacher_review_button"/>
 
         <include
             android:layout_width="match_parent"

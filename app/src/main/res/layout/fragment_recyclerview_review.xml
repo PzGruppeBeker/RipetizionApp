@@ -11,7 +11,7 @@
 
     <TextView
         android:id="@+id/text_not_found"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true" />

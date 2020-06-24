@@ -16,16 +16,17 @@
             android:layout_height="wrap_content"
             android:padding="4dp"
             android:layout_gravity="start"
-            android:text="Recensione qui"
+            android:text="@string/review_item_placeholder"
             android:textSize="16sp" />
 
         <ImageView
             android:id="@+id/image_view_delete_review"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:padding="4dp"
-            android:src="@drawable/ic_delete_red_24dp" />
+            android:src="@drawable/ic_delete_red_24dp"
+            android:contentDescription="@string/trash_bin" />
 
     </RelativeLayout>
 

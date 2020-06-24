@@ -15,12 +15,13 @@
             android:gravity="center"
             android:padding="16dp"
             android:text="@string/fragment_registration_title"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="170dp"
-            android:src="@drawable/teacher_icon" />
+            android:src="@drawable/teacher_icon"
+            android:contentDescription="@string/teacher_icon" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_input_name"
@@ -132,7 +133,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Orari"
+                android:hint="@string/fragment_registration_hours"
                 android:inputType="textMultiLine"
                 android:scrollbars="vertical"
                 android:scrollHorizontally="false" />
@@ -144,7 +145,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:text="@string/fragment_registration_button" />
     </LinearLayout>
 
