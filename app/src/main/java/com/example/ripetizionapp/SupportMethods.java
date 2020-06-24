@@ -327,41 +327,6 @@ public class SupportMethods {
                 });
     }
 
-
-    //Da terminare.
-    public static void loginAdmin(String givenEmail, String password) {
-        final String email = mailtoDB(givenEmail);
-        final String percorsoAdmin = "administrators";
-
-        FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.hasChild(percorsoAdmin)) {
-                            FirebaseDatabase.getInstance().getReference().child(percorsoAdmin)
-                                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                        }
-                                    });
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                }
-        );
-    }
-
-
     public static void hideKeyboardFrom(Context context, View view) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
