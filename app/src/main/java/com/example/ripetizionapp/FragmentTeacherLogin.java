@@ -108,28 +108,34 @@ public class FragmentTeacherLogin extends Fragment {
                 if (!newProvincia.equals(place_1) & !newProvincia.isEmpty() || !newLocalita.equals(place_2) & !newLocalita.isEmpty() || !newMail.equals(email) || !newTel.equals(telephone) || !stringMaterie.equals(subjects) & !stringMaterie.isEmpty()||
                         !newPassword.equals(password) || !newOrario.equals(hours)) {
 
+                    String percorsoReg = "insegnanti";
+
                     if (!newMail.equals(email)) {
-                        String percorsoReg = "insegnanti";
-                        FirebaseDatabase.getInstance().getReference().child(percorsoReg)
-                                .addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        if (dataSnapshot.hasChild(SupportMethods.mailtoDB(newMail))) {
-                                            Toast.makeText(getContext(), "La nuova e-mail che hai inserito è già in uso.",Toast.LENGTH_LONG).show();
-                                        } else {
-                                            SupportMethods.updateTeacher(email,newMail,newLocalita,newProvincia,newTel,newSubjects, newPassword, newOrario);
-                                            Toast.makeText(getContext(), "Informazioni profilo aggiornate.", Toast.LENGTH_SHORT).show();
+                        if (newMail.isEmpty()){
+                            Toast.makeText(getContext(), "Non puoi lasciare vuoto il campo e-mail.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            FirebaseDatabase.getInstance().getReference().child(percorsoReg)
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            if (dataSnapshot.hasChild(SupportMethods.mailtoDB(newMail))){
+                                                Toast.makeText(getContext(), "La mail indicata è già in uso.", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                SupportMethods.updateTeacher(email,newMail,newLocalita,newProvincia,newTel,newSubjects, newPassword, newOrario);
+                                                Toast.makeText(getContext(), "Informazioni profilo aggiornate.", Toast.LENGTH_SHORT).show();
+                                            }
                                         }
-                                    }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                    }
-                                });
+                                        }
+                                    });
+                        }
+
                     } else {
                         SupportMethods.updateTeacher(email,newMail,newLocalita,newProvincia,newTel,newSubjects, newPassword, newOrario);
-                        Toast.makeText(getContext(), "Informazioni profilo aggiornate 2.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Informazioni profilo aggiornate.", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(getContext(), "Non è stato modificato nulla.", Toast.LENGTH_SHORT).show();
