@@ -75,7 +75,7 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                             notfound.setText("La ricerca non ha prodotto alcun risultato!");
                             // gestire eventualmente il backpressed
 
-                        } else if (finalAdmin.equals("1")){
+                            } else if (finalAdmin.equals("1")) {
 
                             rView = rootView.findViewById(R.id.recyclerview_teacher);
                             rView.setHasFixedSize(true);
@@ -112,6 +112,8 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                                     adapterAdmin.notifyItemRemoved(position);
                                 }
                             });
+
+
 
                         } else {
 
