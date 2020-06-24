@@ -7,8 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="8dp">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/profile_title"
@@ -23,57 +22,129 @@
             android:id="@+id/profile_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:textSize="16dp"
+            android:paddingLeft="12dp"
+            android:textSize="12dp"
             android:text="Nome: " />
+
+        <TextView
+            android:id="@+id/profile_name_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:textSize="16dp"
+            android:text="NOME" />
 
         <TextView
             android:id="@+id/profile_surname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:textSize="16dp"
+            android:paddingLeft="12dp"
+            android:textSize="12dp"
             android:text="Cognome: " />
+
+        <TextView
+            android:id="@+id/profile_surname_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:textSize="16dp"
+            android:text="COGNOME" />
 
         <TextView
             android:id="@+id/profile_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:textSize="16dp"
+            android:paddingLeft="12dp"
+            android:textSize="12dp"
             android:text="Email: " />
+
+        <TextView
+            android:id="@+id/profile_email_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:textSize="16dp"
+            android:text="EMAIL" />
 
         <TextView
             android:id="@+id/profile_place_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:textSize="16dp"
+            android:paddingLeft="12dp"
+            android:textSize="12dp"
             android:text="Provincia: " />
+
+        <TextView
+            android:id="@+id/profile_place_1_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:textSize="16dp"
+            android:text="PROVINCIA" />
 
         <TextView
             android:id="@+id/profile_place_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:textSize="16dp"
+            android:paddingLeft="12dp"
+            android:textSize="12dp"
             android:text="Comune: " />
+
+        <TextView
+            android:id="@+id/profile_place_2_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:textSize="16dp"
+            android:text="COMUNE" />
 
         <TextView
             android:id="@+id/profile_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:textSize="16dp"
+            android:paddingLeft="12dp"
+            android:textSize="12dp"
             android:text="Telefono: " />
+
+        <TextView
+            android:id="@+id/profile_number_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:textSize="16dp"
+            android:text="TELEFONO" />
 
         <TextView
             android:id="@+id/profile_subjects"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:textSize="16dp"
+            android:paddingLeft="12dp"
+            android:textSize="12dp"
             android:text="Materie: " />
+
+        <TextView
+            android:id="@+id/profile_subjects_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:textSize="16dp"
+            android:text="MATERiE" />
+
+        <TextView
+            android:id="@+id/profile_hours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:text="Orari: "
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/profile_hours_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:textSize="16dp"
+            android:text="ORARI" />
 
         <TextView
             android:layout_width="wrap_content"

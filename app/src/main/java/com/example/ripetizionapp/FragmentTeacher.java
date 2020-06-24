@@ -63,18 +63,18 @@ public class FragmentTeacher extends Fragment {
 
         final String finalAdmin = admin;
 
-        profileName = rootView.findViewById(R.id.profile_name);
-        profileName.setText(profileName.getText() + name);
-        profileSurname = rootView.findViewById(R.id.profile_surname);
-        profileSurname.setText(profileSurname.getText() + surname);
-        profilePlace1 = rootView.findViewById(R.id.profile_place_1);
-        profilePlace1.setText(profilePlace1.getText() + place_1);
-        profilePlace2 = rootView.findViewById(R.id.profile_place_2);
-        profilePlace2.setText(profilePlace2.getText() + place_2);
-        profileNumber = rootView.findViewById(R.id.profile_number);
-        profileNumber.setText(profileNumber.getText() + String.valueOf(telephone));
-        profileMail = rootView.findViewById(R.id.profile_email);
-        profileMail.setText(profileMail.getText() + email);
+        profileName = rootView.findViewById(R.id.profile_name_view);
+        profileName.setText(name);
+        profileSurname = rootView.findViewById(R.id.profile_surname_view);
+        profileSurname.setText(surname);
+        profilePlace1 = rootView.findViewById(R.id.profile_place_1_view);
+        profilePlace1.setText(place_1);
+        profilePlace2 = rootView.findViewById(R.id.profile_place_2_view);
+        profilePlace2.setText(place_2);
+        profileNumber = rootView.findViewById(R.id.profile_number_view);
+        profileNumber.setText(telephone);
+        profileMail = rootView.findViewById(R.id.profile_email_view);
+        profileMail.setText(email);
 
         Button add = rootView.findViewById(R.id.add_review_button);
         add.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +98,7 @@ public class FragmentTeacher extends Fragment {
 
         if (reviews == null) {
             notfound = rootView.findViewById(R.id.text_not_found);
-            notfound.setText("Non ci sono recensioni per questo professore al momento.");
+            notfound.setText("Nessuna recensione");
         } else if (finalAdmin.equals("1")){
 
             //da qui
