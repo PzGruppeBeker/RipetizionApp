@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/text_review"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Recensione qui"

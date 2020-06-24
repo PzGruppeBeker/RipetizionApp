@@ -17,7 +17,7 @@
             android:padding="4dp"
             android:layout_gravity="start"
             android:text="Recensione qui"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
         <ImageView
             android:id="@+id/image_view_delete_review"
