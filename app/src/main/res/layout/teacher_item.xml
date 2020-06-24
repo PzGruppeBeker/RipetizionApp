@@ -27,14 +27,14 @@
                 android:id="@+id/text_teacher_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nome e Cognome"
+                android:text="@string/teacher_item_name_placeholder"
                 android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/text_teacher_subjects"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Materie"
+                android:text="@string/teacher_item_subjects_placeholder"
                 android:textSize="16sp" />
 
         </LinearLayout>
