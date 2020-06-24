@@ -97,19 +97,42 @@ public class FragmentTeacherLogin extends Fragment {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String  newMail, newPassword, newLocalita, newOrario, newProvincia, stringMaterie, newTel;
+                final String  newMail, newPassword, newLocalita, newOrario, newProvincia, stringMaterie, newTel;
                 newMail = profileMail.getText().toString();
                 newLocalita = profilePlace2.getText().toString();
                 newProvincia = profilePlace1.getText().toString();
                 newTel = profileNumber.getText().toString();
                 stringMaterie = profileSubjects.getText().toString();
-                ArrayList<String> newSubjects = new ArrayList<String>(Arrays.asList(stringMaterie.split("[,\n]")));
+                newPassword = profilePassword.getText().toString();
+                newOrario = profileHours.getText().toString();
+                final ArrayList<String> newSubjects = new ArrayList<String>(Arrays.asList(stringMaterie.split("[,\n]")));
 
-                if (!newProvincia.equals(place_1) || !newLocalita.equals(place_2) || !newMail.equals(email) || !newTel.equals(telephone) || !stringMaterie.equals(subjects)) {
+                if (!newProvincia.equals(place_1) & !newProvincia.isEmpty() || !newLocalita.equals(place_2) & !newLocalita.isEmpty() || !newMail.equals(email) || !newTel.equals(telephone) || !stringMaterie.equals(subjects) & !stringMaterie.isEmpty()||
+                        !newPassword.equals(password) || !newOrario.equals(hours)) {
 
-                    SupportMethods.updateTeacher(email,newMail,newLocalita,newProvincia,newTel,newSubjects);
+                    if (!newMail.equals(email)) {
+                        String percorsoReg = "insegnanti";
+                        FirebaseDatabase.getInstance().getReference().child(percorsoReg)
+                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.hasChild(SupportMethods.mailtoDB(newMail))) {
+                                            Toast.makeText(getContext(), "La nuova e-mail che hai inserito è già in uso.",Toast.LENGTH_LONG).show();
+                                        } else {
+                                            SupportMethods.updateTeacher(email,newMail,newLocalita,newProvincia,newTel,newSubjects, newPassword, newOrario);
+                                            Toast.makeText(getContext(), "Informazioni profilo aggiornate.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
 
-                    Toast.makeText(getContext(), "Informazioni profilo aggiornate.", Toast.LENGTH_SHORT).show();
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                    } else {
+                        SupportMethods.updateTeacher(email,newMail,newLocalita,newProvincia,newTel,newSubjects, newPassword, newOrario);
+                        Toast.makeText(getContext(), "Informazioni profilo aggiornate 2.", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(getContext(), "Non è stato modificato nulla.", Toast.LENGTH_SHORT).show();
                 }

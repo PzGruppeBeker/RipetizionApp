@@ -278,7 +278,7 @@ public class SupportMethods {
     updateTeacher dev'essere RI-AGGIORNATO con newPassword e newOrario quando saranno inseriti.
     */
 
-    public static void updateTeacher (final String email, final String newEmail, final String newLocalita, final String newProvincia, final String newTel, final ArrayList<String> newMaterie) {
+    public static void updateTeacher (final String email, final String newEmail, final String newLocalita, final String newProvincia, final String newTel, final ArrayList<String> newMaterie, final String newPassword, final String newOrario) {
         final String percorsoReg, percorsoDati;
         percorsoReg = "insegnanti";
         percorsoDati = "province";
@@ -309,6 +309,14 @@ public class SupportMethods {
                                     regTeacher.setProvincia(newProvincia);
                                 }
 
+                                if (!newPassword.isEmpty()){
+                                    regTeacher.setPassword(newPassword);
+                                }
+
+                                if (!newOrario.isEmpty()){
+                                    teacher.setOrario(newOrario);
+                                }
+
                                 if (!newMaterie.isEmpty()){
                                     teacher.setMaterie(newMaterie);
                                 }
@@ -319,10 +327,8 @@ public class SupportMethods {
                                             .addListenerForSingleValueEvent(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                    if (dataSnapshot.hasChild(mailtoDB(newEmail))) {
-                                                        // La nuova mail è già in uso.
+                                                    if (!dataSnapshot.hasChild(mailtoDB(newEmail))) {
 
-                                                    } else {
                                                         // La nuova mail è libera.
 
                                                         FirebaseDatabase.getInstance().getReference().child(percorsoReg)
@@ -339,6 +345,8 @@ public class SupportMethods {
                                                         FirebaseDatabase.getInstance().getReference().child(percorsoDati)
                                                                 .child(teacher.getProvincia().toLowerCase()).child(mailtoDB(newEmail))
                                                                 .setValue(teacher);
+
+
                                                     }
                                                 }
 
