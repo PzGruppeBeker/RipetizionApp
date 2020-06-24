@@ -2,41 +2,37 @@ package com.example.ripetizionapp;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.Task;
-import com.google.common.base.Optional;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.EventListener;
-import java.util.Iterator;
-import java.util.Objects;
+
 
 import androidx.annotation.NonNull;
 
 public class SupportMethods {
 
-    public static String mailtoDB (String s){
-        String n = s.replace('.',':');
+    public static String mailtoDB(String s) {
+        String n = s.replace('.', ':');
         return n;
     }
-    public static String mailfromDB (String s){
-        String n = s.replace(':','.');
+
+    public static String mailfromDB(String s) {
+        String n = s.replace(':', '.');
         return n;
     }
 
 
-    public static void registrazione(String givenemail, String nome, String conome, String provincia, String orari, String password, String materie){
+    public static void registrazione(String givenemail, String nome, String conome, String provincia, String orari, String password, String materie) {
 
         String email = mailtoDB(givenemail);
         String materieLC = materie.toLowerCase();
@@ -47,8 +43,8 @@ public class SupportMethods {
         ArrayList<String> listamaterie = new ArrayList<String>(Arrays.asList(materieLC.split("[,\n]")));
 
         //Creazione oggetti "rins" e "ins" rispettivamente per registrazione password account e dati.
-        RegTeacher rins = new RegTeacher(password,provincia);
-        Teacher ins = new Teacher(givenemail,nome,conome, provincia, orari,"0000",listamaterie);
+        RegTeacher rins = new RegTeacher(password, provincia);
+        Teacher ins = new Teacher(givenemail, nome, conome, provincia, orari, "0000", listamaterie);
 
         //Registrazione rins, usando percorso Reg.
         DatabaseReference regRef = FirebaseDatabase.getInstance().getReference(percorsoReg);
@@ -58,32 +54,29 @@ public class SupportMethods {
         DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference(percorsoDati).child(provincia.toLowerCase());
         dataRef.child(email).setValue(ins);
     }
-    /**
-     * The method "checkTeacher" is useful just when a student need to find a teacher,
-     * NOT for check free-email.
-     */
-    public static boolean checkTeacher (Teacher t, String givenName, String givenSurname, String givenSubject){
 
-        if (t.getNome().toLowerCase().equals(givenName.toLowerCase())){
+    public static boolean checkTeacher(Teacher t, String givenName, String givenSurname, String givenSubject) {
+
+        if (t.getNome().toLowerCase().equals(givenName.toLowerCase())) {
             return true;
         }
-        if (t.getCognome().toLowerCase().equals(givenSurname.toLowerCase())){
+        if (t.getCognome().toLowerCase().equals(givenSurname.toLowerCase())) {
             return true;
         }
 
         ArrayList<String> subjects = t.materie;
 
-        for (String sub : subjects){
-            if (sub.toLowerCase().equals(givenSubject.toLowerCase())){
+        for (String sub : subjects) {
+            if (sub.toLowerCase().equals(givenSubject.toLowerCase())) {
                 return true;
             }
         }
         return false;
     }
 
-    public static String listToString (ArrayList<String> l){
+    public static String listToString(ArrayList<String> l) {
         StringBuilder subjects = new StringBuilder();
-        for (int i = 0; i <= l.size() - 1; i++ ) {
+        for (int i = 0; i <= l.size() - 1; i++) {
             if (i == l.size() - 1) {
                 subjects.append(l.get(i));
             } else {
@@ -94,9 +87,9 @@ public class SupportMethods {
         return s;
     }
 
-    public static String listToString2 (ArrayList<String> l){
+    public static String listToString2(ArrayList<String> l) {
         StringBuilder subjects = new StringBuilder();
-        for (int i = 0; i <= l.size() - 1; i++ ) {
+        for (int i = 0; i <= l.size() - 1; i++) {
             if (i == l.size() - 1) {
                 subjects.append(l.get(i));
             } else {
@@ -107,7 +100,7 @@ public class SupportMethods {
         return s;
     }
 
-    public static void addReview(final String givenEmail, final String provincia, final String recensione){
+    public static void addReview(final String givenEmail, final String provincia, final String recensione) {
         final String percorsoDati = "province"; //Percorso registrazione dati.
         final String email = mailtoDB(givenEmail);
         final String percorsoRecensioni = "recensioni";
@@ -119,14 +112,14 @@ public class SupportMethods {
                         final Teacher teacher;
                         Iterable<DataSnapshot> teachers = dataSnapshot.getChildren();
                         for (DataSnapshot t : teachers) {
-                            if (t.getKey().equals(email)){
+                            if (t.getKey().equals(email)) {
                                 teacher = t.getValue(Teacher.class);
 
                                 FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(provincia.toLowerCase())
                                         .child(SupportMethods.mailtoDB(givenEmail)).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        if (dataSnapshot.hasChild(percorsoRecensioni)){
+                                        if (dataSnapshot.hasChild(percorsoRecensioni)) {
                                             ArrayList<String> recensioni = teacher.getRecensioni();
                                             recensioni.add(recensione);
                                             teacher.setRecensioni(recensioni);
@@ -160,7 +153,7 @@ public class SupportMethods {
 
     }
 
-    public static void removeReview(String givenEmail, String givenProvincia, final int reviewPosition){
+    public static void removeReview(String givenEmail, String givenProvincia, final int reviewPosition) {
         final String percorsoDati = "province"; //Percorso registrazione dati.
         final String provincia = givenProvincia.toLowerCase();
         final String email = mailtoDB(givenEmail);
@@ -188,59 +181,8 @@ public class SupportMethods {
                 });
     }
 
-    /**
-    public static void loginTeacher (final String givenEmail, final String givenPassword) { //ATTENZIONE da ridefinire!
-        final String percorsoReg = "insegnanti"; //Percorso registrazione account.
-        final String percorsoDati = "province"; //Percorso registrazione dati.
-        final String email = mailtoDB(givenEmail);
 
-
-        FirebaseDatabase.getInstance().getReference().child(percorsoReg).getRef().
-                addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        final Iterable <DataSnapshot> RegTeacherMail = dataSnapshot.getChildren();
-
-                        for (DataSnapshot t : RegTeacherMail) {
-                            if (mailfromDB(Objects.requireNonNull(t.getKey())).equals(email)) {
-                                RegTeacher regTeacher = t.getValue(RegTeacher.class);
-                                if (regTeacher.getPassword().equals(givenPassword)){
-                                    String Provincia = regTeacher.getProvincia();
-
-                                    FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(Provincia)
-                                            .child(t.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            Teacher teacher = dataSnapshot.getValue(Teacher.class);
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                        }
-                                    });
-
-                                }
-                                else {
-                                    // Comunicare che la password inserita è errata.
-                                }
-                            }
-
-                            if (!RegTeacherMail.iterator().hasNext()){
-                                // Comunicare che la mail indicata non è registrata.
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-    }
-    */
-
-    public static void deleteTeacher (String givenEmail){
+    public static void deleteTeacher(String givenEmail) {
         final String percorsoReg = "insegnanti"; //Percorso registrazione account.
         final String percorsoDati = "province"; //Percorso registrazione dati.
         final String email = mailtoDB(givenEmail);
@@ -274,11 +216,8 @@ public class SupportMethods {
                 });
     }
 
-    /**
-    updateTeacher dev'essere RI-AGGIORNATO con newPassword e newOrario quando saranno inseriti.
-    */
 
-    public static void updateTeacher (final String email, final String newEmail, final String newLocalita, final String newProvincia, final String newTel, final ArrayList<String> newMaterie, final String newPassword, final String newOrario) {
+    public static void updateTeacher(final String email, final String newEmail, final String newLocalita, final String newProvincia, final String newTel, final ArrayList<String> newMaterie, final String newPassword, final String newOrario) {
         final String percorsoReg, percorsoDati;
         percorsoReg = "insegnanti";
         percorsoDati = "province";
@@ -296,32 +235,32 @@ public class SupportMethods {
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 final Teacher teacher = dataSnapshot.getValue(Teacher.class);
 
-                                if (!newLocalita.isEmpty()){
+                                if (!newLocalita.isEmpty()) {
                                     teacher.setLocalità(newLocalita);
                                 }
 
-                                if (!newTel.isEmpty()){
+                                if (!newTel.isEmpty()) {
                                     teacher.setTel(newTel);
                                 }
 
-                                if (!newProvincia.isEmpty()){
+                                if (!newProvincia.isEmpty()) {
                                     teacher.setProvincia(newProvincia);
                                     regTeacher.setProvincia(newProvincia);
                                 }
 
-                                if (!newPassword.isEmpty()){
+                                if (!newPassword.isEmpty()) {
                                     regTeacher.setPassword(newPassword);
                                 }
 
-                                if (!newOrario.isEmpty()){
+                                if (!newOrario.isEmpty()) {
                                     teacher.setOrario(newOrario);
                                 }
 
-                                if (!newMaterie.isEmpty()){
+                                if (!newMaterie.isEmpty()) {
                                     teacher.setMaterie(newMaterie);
                                 }
 
-                                if (!newEmail.isEmpty() & !newEmail.equals(teacher.getEmail())){
+                                if (!newEmail.isEmpty() & !newEmail.equals(teacher.getEmail())) {
 
                                     FirebaseDatabase.getInstance().getReference().child(percorsoReg)
                                             .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -390,7 +329,7 @@ public class SupportMethods {
 
 
     //Da terminare.
-    public static void loginAdmin(String givenEmail, String password){
+    public static void loginAdmin(String givenEmail, String password) {
         final String email = mailtoDB(givenEmail);
         final String percorsoAdmin = "administrators";
 
@@ -398,7 +337,7 @@ public class SupportMethods {
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.hasChild(percorsoAdmin)){
+                        if (dataSnapshot.hasChild(percorsoAdmin)) {
                             FirebaseDatabase.getInstance().getReference().child(percorsoAdmin)
                                     .addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override

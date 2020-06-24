@@ -4,24 +4,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.accessibility.AccessibilityNodeInfo;
+
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.material.textfield.TextInputEditText;
+
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Objects;
+import com.google.firebase.database.FirebaseDatabase;
+
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -66,8 +60,10 @@ public class FragmentRegistration extends Fragment {
 
                 if (!checkEmail(email) | !checkName(name) | !checkSurname(surname) | !checkPassword(password) | !checkSubjects(subjects) | !checkPlace(place) | !checkHours(hours)) {
                     Toast.makeText(getContext(), "Qualcosa non va, controlla che sia tutto in ordine!", Toast.LENGTH_SHORT).show();
+                    SupportMethods.hideKeyboardFrom(getContext(), rootView);
                 } else {
                     checkReg(email, name, surname, place, password, subjects, hours);
+                    SupportMethods.hideKeyboardFrom(getContext(), rootView);
                 }
 
 
@@ -87,15 +83,16 @@ public class FragmentRegistration extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         String registered;
                         Iterable<DataSnapshot> insegnanti = dataSnapshot.getChildren();
-                        for (DataSnapshot nodo : insegnanti){
-                            registered=nodo.getKey();
+                        for (DataSnapshot nodo : insegnanti) {
+                            registered = nodo.getKey();
                             assert registered != null;
-                            if (registered.equals(email)){
+                            if (registered.equals(email)) {
                                 viewEmail.setError("Esiste già un profilo legato a questa mail");
                                 break;
                             }
-                            if (!insegnanti.iterator().hasNext()){
+                            if (!insegnanti.iterator().hasNext()) {
                                 SupportMethods.registrazione(email, name, surname, place, hours, password, subjects);
+                                Toast.makeText(getContext(), "Registrazione effettuata! Procedi al login per visualizzare il tuo profilo!", Toast.LENGTH_SHORT).show();
 
                                 viewEmail.setError(null);
                                 viewEmail.setErrorEnabled(false);
@@ -110,7 +107,7 @@ public class FragmentRegistration extends Fragment {
     }
 
     private boolean checkEmail(String email) {
-        if (email.isEmpty()){
+        if (email.isEmpty()) {
             viewName.setError("Il campo non può essere lasciato vuoto");
             return false;
         } else {

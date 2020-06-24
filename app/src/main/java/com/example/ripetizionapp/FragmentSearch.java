@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
+
 import com.google.android.material.textfield.TextInputLayout;
 
 public class FragmentSearch extends Fragment {
@@ -25,10 +27,7 @@ public class FragmentSearch extends Fragment {
         String admin = "0";
 
         if (this.getArguments() != null) {
-            //Toast.makeText(getContext(), "Niente da fare!", Toast.LENGTH_SHORT).show();
             admin = "1";
-        } else {
-            //Toast.makeText(getContext(), "EDAIDAIDAI!", Toast.LENGTH_SHORT).show();
         }
 
         final View rootView = inflater.inflate(R.layout.fragment_search, container, false);
@@ -38,7 +37,6 @@ public class FragmentSearch extends Fragment {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(getContext(), "SEARCH INPUT RECEIVED", Toast.LENGTH_SHORT).show();
 
                 viewName = rootView.findViewById(R.id.text_input_name);
                 viewSurname = rootView.findViewById(R.id.text_input_surname);
@@ -54,10 +52,6 @@ public class FragmentSearch extends Fragment {
                     Toast.makeText(getContext(), "Qualcosa non va!", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    //se getArguments() è null vuol dire che siamo studenti e cerchiamo il prof, se invece è pieno
-                    //siamo admin quindi prendiamo questo valore e lo passiamo alla recycler view
-                    //arrivato lì si decide come mostrare i prof, con o senza delete
-
                     FragmentRecyclerViewTeacher fragment = new FragmentRecyclerViewTeacher();
                     Bundle args = new Bundle();
                     args.putString("name", name);
@@ -70,6 +64,7 @@ public class FragmentSearch extends Fragment {
                     } else {
                         args.putString("admin", "0");
                     }
+                    SupportMethods.hideKeyboardFrom(getContext(), rootView);
 
                     fragment.setArguments(args);
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
@@ -80,8 +75,9 @@ public class FragmentSearch extends Fragment {
         return rootView;
     }
 
+
     private boolean checkPlace(String place) {
-        if (place.isEmpty()){
+        if (place.isEmpty()) {
             viewPlace.setError("Questo campo non può essere lasciato vuoto");
             return false;
         } else {

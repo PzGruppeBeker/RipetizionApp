@@ -16,8 +16,9 @@ public class TeacherAdapterAdmin extends RecyclerView.Adapter<TeacherAdapterAdmi
     private OnItemClickListener teacherListener;
     private ArrayList<Teacher> teacherList;
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onItemClick(int position);
+
         void onDeleteClick(int position);
 
     }
@@ -76,7 +77,7 @@ public class TeacherAdapterAdmin extends RecyclerView.Adapter<TeacherAdapterAdmi
     public void onBindViewHolder(@NonNull TeacherViewHolder holder, int position) {
         Teacher currentItem = teacherList.get(position);
         holder.teacherName.setText(currentItem.getNome() + " " + currentItem.getCognome());
-        ArrayList<String> subjectsList  = currentItem.getMaterie();
+        ArrayList<String> subjectsList = currentItem.getMaterie();
         String subjects = SupportMethods.listToString(subjectsList);
         holder.teacherSubjects.setText(subjects);
     }
