@@ -41,6 +41,11 @@ public class SupportMethods {
 
         //Creazione arraylist materie da stringa.
         ArrayList<String> listamaterie = new ArrayList<String>(Arrays.asList(materieLC.split("[,\n]")));
+        int index=0;
+        for (String s : listamaterie) {
+            listamaterie.set(index,s.trim());
+            index++;
+        }
 
         //Creazione oggetti "rins" e "ins" rispettivamente per registrazione password account e dati.
         RegTeacher rins = new RegTeacher(password, provincia);
@@ -257,7 +262,11 @@ public class SupportMethods {
                                 }
 
                                 if (!newMaterie.isEmpty()) {
-                                    teacher.setMaterie(newMaterie);
+                                    ArrayList<String> trimmedNewMaterie = new ArrayList<>();
+                                    for (String s : newMaterie) {
+                                        trimmedNewMaterie.add(s.trim());
+                                    }
+                                    teacher.setMaterie(trimmedNewMaterie);
                                 }
 
                                 if (!newEmail.isEmpty() & !newEmail.equals(teacher.getEmail())) {
