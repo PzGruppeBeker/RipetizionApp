@@ -54,6 +54,10 @@ public class FragmentTeacher extends Fragment {
         final ArrayList subjectsList = this.getArguments().getStringArrayList("subjects");
         final ArrayList reviewsList = this.getArguments().getStringArrayList("reviews");
 
+        //if (subjectsList == null) {
+        //    Toast.makeText(getContext(), "SUBJECT NULL", Toast.LENGTH_SHORT).show();
+        //}
+
         String admin = "0";
 
         if (this.getArguments().getString("admin").equals("1")) {
@@ -80,9 +84,10 @@ public class FragmentTeacher extends Fragment {
         profileHours = rootView.findViewById(R.id.profile_hours_view);
         profileHours.setText(hours);
 
-        final String subjects = SupportMethods.listToString2(subjectsList);
+
+        //final String subjects = SupportMethods.listToString2(subjectsList);
         profileSubjects = rootView.findViewById(R.id.profile_subjects_view);
-        profileSubjects.setText(subjects);
+        //profileSubjects.setText(subjects);
 
         Button add = rootView.findViewById(R.id.add_review_button);
         add.setOnClickListener(new View.OnClickListener() {
@@ -107,6 +112,7 @@ public class FragmentTeacher extends Fragment {
         if (reviewsList == null) {
             notfound = rootView.findViewById(R.id.text_not_found);
             notfound.setText("Nessuna recensione");
+
         } else if (finalAdmin.equals("1")){
 
             //da qui

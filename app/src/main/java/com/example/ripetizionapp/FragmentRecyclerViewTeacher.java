@@ -96,6 +96,11 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                                     args.putString("place_1", match.get(position).getProvincia());
                                     args.putString("place_2", match.get(position).getLocalità());
                                     args.putStringArrayList("subjects", match.get(position).getMaterie());
+                                    if (match.get(position).getMaterie() == null) {
+                                        Toast.makeText(getContext(), "SUBJECT NULL", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(getContext(), "OK", Toast.LENGTH_SHORT).show();
+                                    }
                                     args.putString("email", match.get(position).getEmail());
                                     args.putString("telephone", match.get(position).getTel());
                                     args.putStringArrayList("reviews", match.get(position).getRecensioni());
