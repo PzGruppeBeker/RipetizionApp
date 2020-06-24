@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,17 +54,10 @@ public class FragmentTeacher extends Fragment {
         final ArrayList subjectsList = this.getArguments().getStringArrayList("subjects");
         final ArrayList reviewsList = this.getArguments().getStringArrayList("reviews");
 
-        //if (subjectsList == null) {
-        //    Toast.makeText(getContext(), "SUBJECT NULL", Toast.LENGTH_SHORT).show();
-        //}
-
         String admin = "0";
 
         if (this.getArguments().getString("admin").equals("1")) {
-            Toast.makeText(getContext(), "DAI CHE CI SIAMO", Toast.LENGTH_SHORT).show();
             admin = "1";
-        } else {
-            //Toast.makeText(getContext(), "EDAIDAIDAI!", Toast.LENGTH_SHORT).show();
         }
 
         final String finalAdmin = admin;
@@ -96,8 +89,8 @@ public class FragmentTeacher extends Fragment {
                 editreview = rootView.findViewById(R.id.text_input_review);
                 String review = editreview.getEditText().getText().toString();
                 Toast.makeText(getContext(), review, Toast.LENGTH_SHORT).show();
-                if (!review.isEmpty()){
-                    SupportMethods.addReview(email,place_1,review);
+                if (!review.isEmpty()) {
+                    SupportMethods.addReview(email, place_1, review);
                     editreview.getEditText().setText("");
                     SupportMethods.hideKeyboardFrom(getContext(), rootView);
                     Toast.makeText(getContext(), "Grazie per il tuo tempo, la tua recensione sarà visibile al più presto!", Toast.LENGTH_SHORT).show();
@@ -113,7 +106,7 @@ public class FragmentTeacher extends Fragment {
             notfound = rootView.findViewById(R.id.text_not_found);
             notfound.setText("Nessuna recensione");
 
-        } else if (finalAdmin.equals("1")){
+        } else if (finalAdmin.equals("1")) {
 
             //da qui
 
@@ -129,7 +122,7 @@ public class FragmentTeacher extends Fragment {
 
                 @Override
                 public void onDeleteClickReview(int position) {
-                    SupportMethods.removeReview(email,place_1,position);
+                    SupportMethods.removeReview(email, place_1, position);
                     reviewsList.remove(position);
                     adapterAdmin.notifyItemRemoved(position);
                 }
@@ -144,7 +137,6 @@ public class FragmentTeacher extends Fragment {
 
             rView.setLayoutManager(layoutManager);
             rView.setAdapter(adapter);
-            //creare le risorse text in modo da poter aggiungere "nome: xxxxx"
         }
 
         return rootView;
