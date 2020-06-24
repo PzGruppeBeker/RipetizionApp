@@ -96,11 +96,6 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                                     args.putString("place_1", match.get(position).getProvincia());
                                     args.putString("place_2", match.get(position).getLocalità());
                                     args.putStringArrayList("subjects", match.get(position).getMaterie());
-                                    if (match.get(position).getMaterie() == null) {
-                                        Toast.makeText(getContext(), "SUBJECT NULL", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(getContext(), "OK", Toast.LENGTH_SHORT).show();
-                                    }
                                     args.putString("email", match.get(position).getEmail());
                                     args.putString("telephone", match.get(position).getTel());
                                     args.putStringArrayList("reviews", match.get(position).getRecensioni());
@@ -139,10 +134,11 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                                     args.putString("surname", match.get(position).getCognome());
                                     args.putString("place_1", match.get(position).getProvincia());
                                     args.putString("place_2", match.get(position).getLocalità());
-                                    //args.putString("subject", match.get(position).getMaterie());
+                                    args.putStringArrayList("subjects", match.get(position).getMaterie());
                                     args.putString("email", match.get(position).getEmail());
                                     args.putString("telephone", match.get(position).getTel());
                                     args.putStringArrayList("reviews", match.get(position).getRecensioni());
+                                    args.putString("hours", match.get(position).getOrario());
                                     args.putString("admin", "0");
                                     fragment.setArguments(args);
 

@@ -85,9 +85,9 @@ public class FragmentTeacher extends Fragment {
         profileHours.setText(hours);
 
 
-        //final String subjects = SupportMethods.listToString2(subjectsList);
+        final String subjects = SupportMethods.listToString2(subjectsList);
         profileSubjects = rootView.findViewById(R.id.profile_subjects_view);
-        //profileSubjects.setText(subjects);
+        profileSubjects.setText(subjects);
 
         Button add = rootView.findViewById(R.id.add_review_button);
         add.setOnClickListener(new View.OnClickListener() {
