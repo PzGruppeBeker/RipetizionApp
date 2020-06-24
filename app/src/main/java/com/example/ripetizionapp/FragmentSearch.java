@@ -70,6 +70,7 @@ public class FragmentSearch extends Fragment {
                     } else {
                         args.putString("admin", "0");
                     }
+                    SupportMethods.hideKeyboardFrom(getContext(), rootView);
 
                     fragment.setArguments(args);
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();

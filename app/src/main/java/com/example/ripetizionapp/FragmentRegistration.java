@@ -66,8 +66,10 @@ public class FragmentRegistration extends Fragment {
 
                 if (!checkEmail(email) | !checkName(name) | !checkSurname(surname) | !checkPassword(password) | !checkSubjects(subjects) | !checkPlace(place) | !checkHours(hours)) {
                     Toast.makeText(getContext(), "Qualcosa non va, controlla che sia tutto in ordine!", Toast.LENGTH_SHORT).show();
+                    SupportMethods.hideKeyboardFrom(getContext(), rootView);
                 } else {
                     checkReg(email, name, surname, place, password, subjects, hours);
+                    SupportMethods.hideKeyboardFrom(getContext(), rootView);
                 }
 
 
@@ -96,6 +98,7 @@ public class FragmentRegistration extends Fragment {
                             }
                             if (!insegnanti.iterator().hasNext()){
                                 SupportMethods.registrazione(email, name, surname, place, hours, password, subjects);
+                                Toast.makeText(getContext(), "Registrazione effettuata! Procedi al login per visualizzare il tuo profilo!", Toast.LENGTH_SHORT).show();
 
                                 viewEmail.setError(null);
                                 viewEmail.setErrorEnabled(false);

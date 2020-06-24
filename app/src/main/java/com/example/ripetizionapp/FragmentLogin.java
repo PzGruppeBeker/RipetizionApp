@@ -79,6 +79,7 @@ public class FragmentLogin extends Fragment {
                                                 Bundle args = new Bundle();
                                                 args.putString("admin", "1" );
                                                 fragment.setArguments(args);
+                                                SupportMethods.hideKeyboardFrom(getContext(), rootView);
                                                 //remember me
                                                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
                                                 break;
@@ -114,6 +115,7 @@ public class FragmentLogin extends Fragment {
                                                             saveData("", "");
                                                         }
                                                         saveState();
+                                                        SupportMethods.hideKeyboardFrom(getContext(), rootView);
 
                                                         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
                                                     }
