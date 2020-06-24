@@ -71,7 +71,7 @@ public class FragmentLogin extends Fragment {
 
                                 for (DataSnapshot t : RegTeacherMail) {
                                     if (email.equals(SupportMethods.mailfromDB(t.getKey()))) {
-                                        RegTeacher regTeacher = t.getValue(RegTeacher.class);
+                                        final RegTeacher regTeacher = t.getValue(RegTeacher.class);
                                         if (regTeacher.getPassword().equals(password)){
                                             if (regTeacher.getAdmin().equals("1")){
 
@@ -104,6 +104,8 @@ public class FragmentLogin extends Fragment {
                                                         args.putString("telephone", teacher.getTel());
                                                         args.putStringArrayList("reviews", teacher.getRecensioni());
                                                         args.putString("hours", teacher.getOrario());
+                                                        args.putString("password", regTeacher.getPassword());
+
                                                         fragment.setArguments(args);
 
                                                         if (switch1.isChecked()) {

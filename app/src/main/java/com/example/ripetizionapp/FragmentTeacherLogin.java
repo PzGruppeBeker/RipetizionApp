@@ -33,6 +33,7 @@ public class FragmentTeacherLogin extends Fragment {
     private EditText profileMail;
     private EditText profileSubjects;
     private EditText profileHours;
+    private EditText profilePassword;
 
     private RecyclerView rView;
     private ReviewAdapter adapter;
@@ -57,6 +58,7 @@ public class FragmentTeacherLogin extends Fragment {
         final ArrayList subjectslist = this.getArguments().getStringArrayList("subjects");
         final ArrayList reviewslist = this.getArguments().getStringArrayList("reviews");
         final String hours = this.getArguments().getString("hours");
+        final String password = this.getArguments().getString("password");
 
         profileName = rootView.findViewById(R.id.profile_name_login);
         profileName.setText(name);
@@ -72,6 +74,8 @@ public class FragmentTeacherLogin extends Fragment {
         profileMail.setText(email);
         profileHours = rootView.findViewById(R.id.profile_hours_login);
         profileHours.setText(hours);
+        profilePassword = rootView.findViewById(R.id.profile_password_login);
+        profilePassword.setText(password);
 
         final String subjects = SupportMethods.listToString2(subjectslist);
         profileSubjects = rootView.findViewById(R.id.profile_subjects_login);
