@@ -7,7 +7,7 @@ public class RegTeacher {
 
     public RegTeacher(){}
 
-    RegTeacher(String password, String provincia) {
+    public RegTeacher(String password, String provincia) {
         this.password=password;
         this.provincia=provincia;
     }
