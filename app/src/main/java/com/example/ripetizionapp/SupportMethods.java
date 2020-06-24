@@ -14,10 +14,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EventListener;
+import java.util.Iterator;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
@@ -158,12 +160,32 @@ public class SupportMethods {
 
     }
 
-    public static void removeReview(String givenEmail, String provincia, String recensione, int nReview){
-        String percorsoDati = "province"; //Percorso registrazione dati.
-        String email = mailtoDB(givenEmail);
-        String percorsoRecensioni = "recensioni";
-        FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(provincia.toLowerCase())
-                .child(email).child(percorsoRecensioni).child(String.valueOf(nReview)).removeValue();
+    public static void removeReview(String givenEmail, String givenProvincia, final int reviewPosition){
+        final String percorsoDati = "province"; //Percorso registrazione dati.
+        final String provincia = givenProvincia.toLowerCase();
+        final String email = mailtoDB(givenEmail);
+
+        FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(provincia)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Iterable<DataSnapshot> teachers = dataSnapshot.getChildren();
+                        for (DataSnapshot t : teachers) {
+                            if (t.getKey().equals(email)) {
+                                Teacher teacher = t.getValue(Teacher.class);
+                                teacher.deleteRecensione(reviewPosition);
+                                FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(provincia)
+                                        .child(email).setValue(teacher);
+                                break;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
     }
 
     /**

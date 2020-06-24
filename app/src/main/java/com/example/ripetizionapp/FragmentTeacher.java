@@ -112,8 +112,10 @@ public class FragmentTeacher extends Fragment {
             rView.setAdapter(adapterAdmin);
 
             adapterAdmin.setOnItemClickedListener(new ReviewAdapterAdmin.OnItemClickListener() {
+
                 @Override
                 public void onDeleteClickReview(int position) {
+                    SupportMethods.removeReview(email,place_1,position);
                     reviews.remove(position);
                     adapterAdmin.notifyItemRemoved(position);
                 }

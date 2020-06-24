@@ -71,10 +71,10 @@ public class Teacher {
     public void setRecensioni(ArrayList<String> r){
         recensioni=r;
     }
-    private void addRecensione(String s){
+    public void addRecensione(String s){
         recensioni.add(s);
     }
-    private void deleteRecensione(int i){
+    public void deleteRecensione(int i){
         recensioni.remove(i);
     }
 }
