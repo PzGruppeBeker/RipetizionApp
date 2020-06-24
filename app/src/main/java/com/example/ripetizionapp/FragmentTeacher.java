@@ -31,6 +31,7 @@ public class FragmentTeacher extends Fragment {
 
     private RecyclerView rView;
     private ReviewAdapter adapter;
+    private ReviewAdapterAdmin adapterAdmin;
     private RecyclerView.LayoutManager layoutManager;
     private TextView notfound;
 
@@ -50,6 +51,17 @@ public class FragmentTeacher extends Fragment {
         final String email = this.getArguments().getString("email");
         //final String subject = this.getArguments().getString("subject");
         final ArrayList reviews = this.getArguments().getStringArrayList("reviews");
+
+        String admin = "0";
+
+        if (this.getArguments().getString("admin").equals("1")) {
+            Toast.makeText(getContext(), "DAI CHE CI SIAMO", Toast.LENGTH_SHORT).show();
+            admin = "1";
+        } else {
+            //Toast.makeText(getContext(), "EDAIDAIDAI!", Toast.LENGTH_SHORT).show();
+        }
+
+        final String finalAdmin = admin;
 
         profileName = rootView.findViewById(R.id.profile_name);
         profileName.setText(profileName.getText() + name);
@@ -87,7 +99,27 @@ public class FragmentTeacher extends Fragment {
         if (reviews == null) {
             notfound = rootView.findViewById(R.id.text_not_found);
             notfound.setText("Non ci sono recensioni per questo professore al momento.");
+        } else if (finalAdmin.equals("1")){
+
+            //da qui
+
+            rView = rootView.findViewById(R.id.recyclerview_review);
+            rView.setHasFixedSize(true);
+            layoutManager = new LinearLayoutManager(getContext());
+            adapterAdmin = new ReviewAdapterAdmin(reviews);
+
+            rView.setLayoutManager(layoutManager);
+            rView.setAdapter(adapterAdmin);
+
+            adapterAdmin.setOnItemClickedListener(new ReviewAdapterAdmin.OnItemClickListener() {
+                @Override
+                public void onDeleteClickReview(int position) {
+
+                }
+            });
+
         } else {
+
             rView = rootView.findViewById(R.id.recyclerview_review);
             rView.setHasFixedSize(true);
             layoutManager = new LinearLayoutManager(getContext());
@@ -95,7 +127,6 @@ public class FragmentTeacher extends Fragment {
 
             rView.setLayoutManager(layoutManager);
             rView.setAdapter(adapter);
-            //aggiungere mail e materie scrivendo un metodo di supporto che le renda stringhe
             //creare le risorse text in modo da poter aggiungere "nome: xxxxx"
         }
 

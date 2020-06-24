@@ -113,8 +113,6 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                                 }
                             });
 
-
-
                         } else {
 
                             rView = rootView.findViewById(R.id.recyclerview_teacher);
