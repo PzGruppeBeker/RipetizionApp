@@ -31,7 +31,18 @@ public class SupportMethods {
         return n;
     }
 
-
+    /**
+     * Il metodo "registrazione" prende in carico i parametri obbligatori per la registrazione di un utente "profesore"
+     * e crea due oggetti: RegTeacher e Teacher che identificano univocamente l'insegnante e li scrive su Database.
+     *
+     * @param givenemail
+     * @param nome
+     * @param conome
+     * @param provincia
+     * @param orari
+     * @param password
+     * @param materie
+     */
     public static void registrazione(String givenemail, String nome, String conome, String provincia, String orari, String password, String materie) {
 
         String email = mailtoDB(givenemail);
@@ -60,6 +71,16 @@ public class SupportMethods {
         dataRef.child(email).setValue(ins);
     }
 
+    /**
+     * Il metodo "checkTeacher" verifica che l'insegnante corrisponda ai parametri di ricerca inseriti dall'utente,
+     * ritornando un valore booleano.
+     *
+     * @param t
+     * @param givenName
+     * @param givenSurname
+     * @param givenSubject
+     * @return
+     */
     public static boolean checkTeacher(Teacher t, String givenName, String givenSurname, String givenSubject) {
 
         if (t.getNome().toLowerCase().equals(givenName.toLowerCase())) {
@@ -105,6 +126,13 @@ public class SupportMethods {
         return s;
     }
 
+    /**
+     * "addReview" è il metodo utilizzato per aggiungere una recensione ad un insegnante.
+     *
+     * @param givenEmail
+     * @param provincia
+     * @param recensione
+     */
     public static void addReview(final String givenEmail, final String provincia, final String recensione) {
         final String percorsoDati = "province"; //Percorso registrazione dati.
         final String email = mailtoDB(givenEmail);
@@ -158,6 +186,14 @@ public class SupportMethods {
 
     }
 
+
+    /**
+     * "removeReview" è usato dal'admin per cancellare feedback fuori luogo.
+     *
+     * @param givenEmail
+     * @param givenProvincia
+     * @param reviewPosition
+     */
     public static void removeReview(String givenEmail, String givenProvincia, final int reviewPosition) {
         final String percorsoDati = "province"; //Percorso registrazione dati.
         final String provincia = givenProvincia.toLowerCase();
@@ -186,6 +222,10 @@ public class SupportMethods {
                 });
     }
 
+    /**
+     * "deleteTeacher" è il metodo a disposizione dell'amministratore per eliminare un insegnante.
+     * @param givenEmail
+     */
 
     public static void deleteTeacher(String givenEmail) {
         final String percorsoReg = "insegnanti"; //Percorso registrazione account.
@@ -222,6 +262,19 @@ public class SupportMethods {
     }
 
 
+    /**
+     * Il metodo "updateTeacher" è utilizzato dall'insegnante che una volta che ha eseguito l'accesso volesse cambiare i suoi dati, ad esclusione
+     * di nome e cognome, i quali sono invariabili.
+     *
+     * @param email
+     * @param newEmail
+     * @param newLocalita
+     * @param newProvincia
+     * @param newTel
+     * @param newMaterie
+     * @param newPassword
+     * @param newOrario
+     */
     public static void updateTeacher(final String email, final String newEmail, final String newLocalita, final String newProvincia, final String newTel, final ArrayList<String> newMaterie, final String newPassword, final String newOrario) {
         final String percorsoReg, percorsoDati;
         percorsoReg = "insegnanti";

@@ -75,6 +75,18 @@ public class FragmentRegistration extends Fragment {
         return rootView;
     }
 
+    /**
+     * Il metodo "checkReg" verifica che l'indirizzo e-mail indicato non sia già legato ad un account.
+     * Se è libero procede ad invocare il metodo "registrazione" che eseguirà la registrazione su database.
+     *
+     * @param givenemail
+     * @param name
+     * @param surname
+     * @param place
+     * @param password
+     * @param subjects
+     * @param hours
+     */
     private void checkReg(String givenemail, final String name, final String surname, final String place, final String password, final String subjects, final String hours) {
 
         final String percorsoReg = "insegnanti";

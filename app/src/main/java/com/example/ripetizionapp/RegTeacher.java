@@ -1,5 +1,10 @@
 package com.example.ripetizionapp;
 
+/**
+ * RegTeacher è l'oggetto che contiene la password dell'insegnante, è univocamente riferito
+ * ad un oggetto Teacher.
+ */
+
 public class RegTeacher {
 
     String password,provincia;

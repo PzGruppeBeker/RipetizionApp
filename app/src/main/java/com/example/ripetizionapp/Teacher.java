@@ -2,6 +2,12 @@ package com.example.ripetizionapp;
 
 import java.util.ArrayList;
 
+/**
+ * Questo oggetto contiene tutti i dati dell'insegnante visualizzabili dagli utenti ed è univocamente riferito ad un
+ * oggetto "RegTeacher" tramite l'indirizzo e-mai.
+ *
+ */
+
 public class Teacher {
 
     String email, nome, cognome, località, provincia, orario, tel;
