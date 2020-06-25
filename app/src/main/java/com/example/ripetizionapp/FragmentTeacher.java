@@ -84,6 +84,10 @@ public class FragmentTeacher extends Fragment {
 
         Button add = rootView.findViewById(R.id.add_review_button);
         add.setOnClickListener(new View.OnClickListener() {
+
+            //onClick usato per pubblicare una recensione relativa alla pagina del professore
+            //ma gli admin non possono farlo
+
             @Override
             public void onClick(View v) {
                 editreview = rootView.findViewById(R.id.text_input_review);
@@ -110,7 +114,7 @@ public class FragmentTeacher extends Fragment {
 
         } else if (finalAdmin.equals("1")) {
 
-            //da qui
+            //verificato il permesso admin si crea la lista delle recensioni cancellabili
 
             rView = rootView.findViewById(R.id.recyclerview_review);
             rView.setHasFixedSize(true);
@@ -122,6 +126,8 @@ public class FragmentTeacher extends Fragment {
 
             adapterAdmin.setOnItemClickedListener(new ReviewAdapterAdmin.OnItemClickListener() {
 
+                //onDeleteClick cancella la recensione dalla lista e dal database
+
                 @Override
                 public void onDeleteClickReview(int position) {
                     SupportMethods.removeReview(email, place_1, position);
@@ -131,6 +137,8 @@ public class FragmentTeacher extends Fragment {
             });
 
         } else {
+
+            //verificato che si tratta di un utente si crea la lista delle recensioni
 
             rView = rootView.findViewById(R.id.recyclerview_review);
             rView.setHasFixedSize(true);

@@ -52,6 +52,10 @@ public class FragmentLogin extends Fragment {
         updateViews();
 
         login.setOnClickListener(new View.OnClickListener() {
+
+            //onClick verifica che email e password inserite corrispondano ad un utente registrato in precedenza (admin o professore)
+            //e rende possibile l'accesso
+
             @Override
             public void onClick(View v) {
 
@@ -158,6 +162,8 @@ public class FragmentLogin extends Fragment {
         return rootView;
     }
 
+    //salvataggio di mail e password
+
     public void saveData(String mail, String psw) {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -166,12 +172,16 @@ public class FragmentLogin extends Fragment {
         editor.apply();
     }
 
+    //salvataggio della posizione dello switch per ricordare mail e password
+
     public void saveState() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(SWITCH, switch1.isChecked());
         editor.apply();
     }
+
+    //caricamento dei dati precedentemente salvati se ce ne sono
 
     public void loadData() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
@@ -180,11 +190,15 @@ public class FragmentLogin extends Fragment {
         SWITCHSTORED = sharedPreferences.getBoolean(SWITCH, false);
     }
 
+    //update delle views edittext una volta recuperate eventuali mail e password salvate in precedenza
+
     public void updateViews() {
         viewEmail.getEditText().setText(EMAILSTORED);
         viewPassword.getEditText().setText(PASSWORDSTORED);
         switch1.setChecked(SWITCHSTORED);
     }
+
+    //verifica che il campo mail non sia vuoto
 
     private boolean checkEmail(String email) {
         if (email.isEmpty()) {
@@ -196,6 +210,8 @@ public class FragmentLogin extends Fragment {
             return true;
         }
     }
+
+    //verifica che il campo password non sia vuoto
 
     private boolean checkPassword(String password) {
         if (password.isEmpty()) {

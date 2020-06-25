@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder> {
 
+    //adapter della recyclerview per le recensioni visualizzabili dagli utenti
+
     private ArrayList<String> reviewList;
 
     public static class ReviewViewHolder extends RecyclerView.ViewHolder {

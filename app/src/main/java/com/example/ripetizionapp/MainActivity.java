@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+
+    //onBackPressed per il navigation drawer
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    //onNavigationItemSelected per il navigation drawer
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 

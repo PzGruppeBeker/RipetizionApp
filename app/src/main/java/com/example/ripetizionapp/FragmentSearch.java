@@ -35,6 +35,10 @@ public class FragmentSearch extends Fragment {
 
         final String finalAdmin = admin;
         search.setOnClickListener(new View.OnClickListener() {
+
+            //onClick verifica che il campo provincia non sia vuoto e procede alla ricerca del professore
+            //secondo i paramentri dati (ricordando il permesso admin se c'è)
+
             @Override
             public void onClick(View v) {
 
@@ -75,6 +79,7 @@ public class FragmentSearch extends Fragment {
         return rootView;
     }
 
+    //verifica che il campo provincia non sia vuoto
 
     private boolean checkPlace(String place) {
         if (place.isEmpty()) {

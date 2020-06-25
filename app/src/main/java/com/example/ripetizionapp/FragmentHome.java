@@ -20,6 +20,9 @@ public class FragmentHome extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         FloatingActionButton fab = rootView.findViewById(R.id.fab_home);
         fab.setOnClickListener(new View.OnClickListener() {
+
+            //onClick porta alla pagina di ricerca degli insegnanti
+
             @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentSearch()).addToBackStack(null).commit();

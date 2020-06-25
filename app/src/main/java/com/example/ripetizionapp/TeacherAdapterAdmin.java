@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 public class TeacherAdapterAdmin extends RecyclerView.Adapter<TeacherAdapterAdmin.TeacherViewHolder> {
 
+    //adapter della recyclerview per i professori visualizzabili dagli admin
+
     private OnItemClickListener teacherListener;
     private ArrayList<Teacher> teacherList;
 

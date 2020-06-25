@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,6 +38,10 @@ public class FragmentRegistration extends Fragment {
 
         Button confirm = rootView.findViewById(R.id.button_confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
+
+            //onClick verifica che tutti i campi inseriti siano conformi e che la mail non sia già occupata
+            //in caso positivo viene creato il profilo sul database viene mostrato un toast di conferma
+
             @Override
             public void onClick(View v) {
 
@@ -106,6 +109,8 @@ public class FragmentRegistration extends Fragment {
                 });
     }
 
+    //verifica che il campo email non sia vuoto
+
     private boolean checkEmail(String email) {
         if (email.isEmpty()) {
             viewName.setError("Il campo non può essere lasciato vuoto");
@@ -116,6 +121,8 @@ public class FragmentRegistration extends Fragment {
             return true;
         }
     }
+
+    //verifica che il campo nome non sia vuoto
 
     private boolean checkName(String name) {
         if (name.isEmpty()) {
@@ -128,6 +135,8 @@ public class FragmentRegistration extends Fragment {
         }
     }
 
+    //verifica che il campo cognome non sia vuoto
+
     private boolean checkSurname(String surname) {
         if (surname.isEmpty()) {
             viewSurname.setError("Il campo non può essere lasciato vuoto");
@@ -138,6 +147,8 @@ public class FragmentRegistration extends Fragment {
             return true;
         }
     }
+
+    //verifica che il campo password non sia vuoto
 
     private boolean checkPassword(String password) {
         if (password.isEmpty()) {
@@ -150,6 +161,8 @@ public class FragmentRegistration extends Fragment {
         }
     }
 
+    //verifica che il campo materie non sia vuoto
+
     private boolean checkSubjects(String subjects) {
         if (subjects.isEmpty()) {
             viewSubjects.setError("Il campo non può essere lasciato vuoto");
@@ -161,6 +174,8 @@ public class FragmentRegistration extends Fragment {
         }
     }
 
+    //verifica che il campo provincia non sia vuoto
+
     private boolean checkPlace(String place) {
         if (place.isEmpty()) {
             viewPlace.setError("Il campo non può essere lasciato vuoto");
@@ -171,6 +186,8 @@ public class FragmentRegistration extends Fragment {
             return true;
         }
     }
+
+    //verifica che il campo orari non sia vuoto
 
     private boolean checkHours(String hours) {
         if (hours.isEmpty()) {

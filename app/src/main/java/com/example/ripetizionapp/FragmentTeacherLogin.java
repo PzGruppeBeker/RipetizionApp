@@ -93,6 +93,10 @@ public class FragmentTeacherLogin extends Fragment {
 
         Button confirm = rootView.findViewById(R.id.button_profile);
         confirm.setOnClickListener(new View.OnClickListener() {
+
+            //onClick verifica se ci sono stati dei cambiamenti nelle informazioni del professore e li apporta nel database
+            //nome e cognome non possono essere modificati
+
             @Override
             public void onClick(View v) {
                 final String  newMail, newPassword, newLocalita, newOrario, newProvincia, stringMaterie, newTel;

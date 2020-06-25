@@ -74,6 +74,8 @@ public class FragmentRecyclerViewTeacher extends Fragment {
 
                         } else if (finalAdmin.equals("1")) {
 
+                            //verificato il permesso admin si crea la lista di professori in cui ogni elemento è eliminabile
+
                             rView = rootView.findViewById(R.id.recyclerview_teacher);
                             rView.setHasFixedSize(true);
                             layoutManager = new LinearLayoutManager(getContext());
@@ -83,6 +85,9 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                             rView.setAdapter(adapterAdmin);
 
                             adapterAdmin.setOnItemClickedListener(new TeacherAdapterAdmin.OnItemClickListener() {
+
+                                //onItemClick per entrare nella pagina del professore
+
                                 @Override
                                 public void onItemClick(int position) {
 
@@ -103,6 +108,8 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
                                 }
 
+                                //onDeleteClick per cancellare il professore dalla lista e dal database
+
                                 @Override
                                 public void onDeleteClick(int position) {
                                     SupportMethods.deleteTeacher(match.get(position).getEmail());
@@ -113,6 +120,8 @@ public class FragmentRecyclerViewTeacher extends Fragment {
 
                         } else {
 
+                            //verificato che non è un admin ad accedere si crea la lista dei professori
+
                             rView = rootView.findViewById(R.id.recyclerview_teacher);
                             rView.setHasFixedSize(true);
                             layoutManager = new LinearLayoutManager(getContext());
@@ -122,6 +131,9 @@ public class FragmentRecyclerViewTeacher extends Fragment {
                             rView.setAdapter(adapter);
 
                             adapter.setOnItemClickedListener(new TeacherAdapter.OnItemClickListener() {
+
+                                //onItemClick per entrare nella pagina del professore
+
                                 @Override
                                 public void onItemClick(int position) {
 

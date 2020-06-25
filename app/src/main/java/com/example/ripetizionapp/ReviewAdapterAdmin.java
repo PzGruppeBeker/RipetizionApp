@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 public class ReviewAdapterAdmin extends RecyclerView.Adapter<ReviewAdapterAdmin.ReviewViewHolder> {
 
+    //adapter della recyclerview per le recensioni visualizzabili dagli admin
+
     private ArrayList<String> reviewList;
     private OnItemClickListener reviewListener;
 

@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.TeacherViewHolder> {
 
+    //adapter della recyclerview per i professori visualizzabili dagli utenti
+
     private OnItemClickListener teacherListener;
     private ArrayList<Teacher> teacherList;
 
