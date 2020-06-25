@@ -90,17 +90,16 @@ public class FragmentTeacher extends Fragment {
                 String review = editreview.getEditText().getText().toString();
                 Toast.makeText(getContext(), review, Toast.LENGTH_SHORT).show();
 
-                if (finalAdmin.equals("1")) {
-                    Toast.makeText(getContext(), "Non è possibile lasciare recensioni da amministratore", Toast.LENGTH_SHORT).show();
-                }
 
-                if (!review.isEmpty()) {
+                if (!review.isEmpty() & finalAdmin.equals("0")) {
                     SupportMethods.addReview(email, place_1, review);
                     editreview.getEditText().setText("");
                     SupportMethods.hideKeyboardFrom(getContext(), rootView);
                     Toast.makeText(getContext(), "Grazie per il tuo tempo, la tua recensione sarà visibile al più presto!", Toast.LENGTH_SHORT).show();
                     editreview.setError(null);
                     editreview.setErrorEnabled(false);
+                } else if (!review.isEmpty() & finalAdmin.equals("1")) {
+                    Toast.makeText(getContext(), "Non è possibile lasciare recensioni da amministratore", Toast.LENGTH_SHORT).show();
                 } else {
                     editreview.setError("Questo campo non può essere lasciato vuoto");
                 }
