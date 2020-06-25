@@ -88,8 +88,6 @@ public class FragmentTeacher extends Fragment {
             public void onClick(View v) {
                 editreview = rootView.findViewById(R.id.text_input_review);
                 String review = editreview.getEditText().getText().toString();
-                Toast.makeText(getContext(), review, Toast.LENGTH_SHORT).show();
-
 
                 if (!review.isEmpty() & finalAdmin.equals("0")) {
                     SupportMethods.addReview(email, place_1, review);
