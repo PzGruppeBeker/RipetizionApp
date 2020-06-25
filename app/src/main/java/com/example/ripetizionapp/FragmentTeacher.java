@@ -89,6 +89,11 @@ public class FragmentTeacher extends Fragment {
                 editreview = rootView.findViewById(R.id.text_input_review);
                 String review = editreview.getEditText().getText().toString();
                 Toast.makeText(getContext(), review, Toast.LENGTH_SHORT).show();
+
+                if (finalAdmin.equals("1")) {
+                    Toast.makeText(getContext(), "Non è possibile lasciare recensioni da amministratore", Toast.LENGTH_SHORT).show();
+                }
+
                 if (!review.isEmpty()) {
                     SupportMethods.addReview(email, place_1, review);
                     editreview.getEditText().setText("");
