@@ -163,7 +163,7 @@ public class SupportMethods {
         final String provincia = givenProvincia.toLowerCase();
         final String email = mailtoDB(givenEmail);
 
-        FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(provincia)
+        FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(provincia.toLowerCase())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -172,7 +172,7 @@ public class SupportMethods {
                             if (t.getKey().equals(email)) {
                                 Teacher teacher = t.getValue(Teacher.class);
                                 teacher.deleteRecensione(reviewPosition);
-                                FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(provincia)
+                                FirebaseDatabase.getInstance().getReference().child(percorsoDati).child(provincia.toLowerCase())
                                         .child(email).setValue(teacher);
                                 break;
                             }
@@ -198,7 +198,7 @@ public class SupportMethods {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         RegTeacher rt = dataSnapshot.getValue(RegTeacher.class);
 
-                        FirebaseDatabase.getInstance().getReference(percorsoDati).child(rt.provincia).child(email)
+                        FirebaseDatabase.getInstance().getReference(percorsoDati).child(rt.provincia.toLowerCase()).child(email)
                                 .addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
